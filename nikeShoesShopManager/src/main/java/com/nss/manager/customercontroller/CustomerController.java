@@ -24,7 +24,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "/customerList", method = RequestMethod.GET)
 	public String customerList(@ModelAttribute CustomerVO cvo, Model model) {
-		logger.info("customerList 호출 성공");
+		logger.info("customerList 호출 성공123");
 		
 		System.out.println("customerList 호출 성공");
 
