@@ -15,7 +15,7 @@ import com.nss.manager.customervo.CustomerVO;
 
 
 @Controller
-@RequestMapping(value = "/manager/customer")
+@RequestMapping(value = "/customer")
 public class CustomerController {
 	Logger logger = Logger.getLogger(CustomerController.class);
 

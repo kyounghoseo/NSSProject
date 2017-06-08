@@ -4,8 +4,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+div {
+	text-align: center;
+}
+
+#customer_tb{
+border: 1px solid black;
+}
+
+#customer_tb th{
+border-right: 1px solid black;
+border-bottom: 1px solid black;
+}
+
+
+</style>
 <meta charset="UTF-8">
 <title>고객 목록</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
 	<!-- 상세페이지 이동을 위한 form -->
@@ -13,10 +31,34 @@
 		<input type="hidden" name="customerNo" id="customerNo">
 	</form>
 
-
+	<div id="customerSearch">
+		<form>
+			<label for="keyword">검색어</label> <select>
+				<option>전체</option>
+				<option>이름</option>
+			</select> <input type="text" name="keyword" id="keyword"
+				placeholder="이름을 입력하세요."> <input type="button" value="검색"
+				id="searchData">
+		</form>
+	</div>
+	<div>
+		<table>
+			<tbody>
+				<tr>
+					<td>전체 회원수</td>
+					<td>1명</td>
+					<td>오늘 가입회원</td>
+					<td>1명</td>
+				</tr>
+			</tbody>
+		</table>
+		<input type="radio" name="customer_check" value="전체">전체 <input
+			type="radio" name="customer_check" value="일반회원">일반회원 <input
+			type="radio" name="customer_check" value="탈퇴회원">탈퇴회원
+	</div>
 	<!-- 리스트 시작 -->
 	<div id="customerList">
-		<table cellspacing="0" cellpadding="0" summary="고객 리스트">
+		<table id="customer_tb" cellspacing="5" cellpadding="5" summary="고객 리스트">
 			<thead>
 				<tr>
 					<th><marquee>회원번호</marquee></th>
