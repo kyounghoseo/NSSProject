@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nss.manager.customerdao.CustomerDao;
 import com.nss.manager.customervo.CustomerVO;
 
-
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
@@ -25,6 +24,18 @@ public class CustomerServiceImpl implements CustomerService {
 		List<CustomerVO> myList = null;
 		myList = customerDao.customerList(cvo);
 		return myList;
+	}
+
+	@Override
+	public int customerTotalCnt(CustomerVO cvo) {
+		// TODO Auto-generated method stub
+		return customerDao.customerTotalCnt(cvo);
+	}
+
+	@Override
+	public int customerTodayCnt(CustomerVO cvo) {
+		// TODO Auto-generated method stub
+		return customerDao.customerTodayCnt(cvo);
 	}
 
 }

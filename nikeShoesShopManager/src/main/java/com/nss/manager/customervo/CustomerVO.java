@@ -1,6 +1,8 @@
 package com.nss.manager.customervo;
 
-public class CustomerVO {
+import com.nss.manager.common.PagingVO;
+
+public class CustomerVO extends PagingVO {
 
 	private int customerNo;
 	private String customerId;
@@ -13,6 +15,13 @@ public class CustomerVO {
 	private String customerAccept;
 	private String customerDate;
 	private String customerCheck;
+
+	// 라디오버튼 검색시 필드
+	private String customer_check = "";
+
+	// 조건 검색시 필드
+	private String keyword = "";
+	private String search = "";
 
 	public int getCustomerNo() {
 		return customerNo;
@@ -100,6 +109,30 @@ public class CustomerVO {
 
 	public void setCustomerCheck(String customerCheck) {
 		this.customerCheck = customerCheck;
+	}
+
+	public String getCustomer_check() {
+		return customer_check;
+	}
+
+	public void setCustomer_check(String customer_check) {
+		this.customer_check = customer_check;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 }

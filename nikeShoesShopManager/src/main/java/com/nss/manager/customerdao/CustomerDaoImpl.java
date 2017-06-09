@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.nss.manager.customervo.CustomerVO;
 
-
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 
@@ -20,4 +19,17 @@ public class CustomerDaoImpl implements CustomerDao {
 		// TODO Auto-generated method stub
 		return session.selectList("customerList", cvo);
 	}
+
+	@Override
+	public int customerTotalCnt(CustomerVO cvo) {
+		// TODO Auto-generated method stub
+		return (Integer) session.selectOne("customerTotalCnt", cvo);
+	}
+
+	@Override
+	public int customerTodayCnt(CustomerVO cvo) {
+		// TODO Auto-generated method stub
+		return (Integer) session.selectOne("customerTodayCnt", cvo);
+	}
+
 }

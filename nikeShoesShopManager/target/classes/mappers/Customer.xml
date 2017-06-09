@@ -4,12 +4,69 @@
 
 <mapper namespace="com.nss.manager.customerdao.CustomerDao">
 
-	<select id="customerList" parameterType="com.nss.manager.customervo.CustomerVO"
-		resultType="com.nss.manager.customervo.CustomerVO">
+	<select id="customerList" parameterType="Customer" resultType="Customer">
 		SELECT customerNo, customerId, customerName,
-		customerCellphone, customerEmail, customerGender, customerDate,
-		customerCheck
-		from customer_tb order by customerNo
+		customerCellphone,
+		customerEmail, customerGender, customerDate,
+		customerCheck FROM (select
+		list.*, rownum as rnum from(SELECT customerNo, customerId,
+		customerName,
+		customerCellphone,
+		customerEmail, customerGender,
+		customerDate,
+		customerCheck FROM customer_tb
+		<trim prefix="where">
+			<if test="search=='name'">
+		<![CDATA[customerName LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test="customer_check=='일반회원'">
+		<![CDATA[CUSTOMERCHECK = '일반회원']]>
+			</if>
+			<if test="customer_check=='탈퇴회원'">
+		<![CDATA[CUSTOMERCHECK = '탈퇴회원']]>
+			</if>
+		</trim>
+		order by customerNo desc)list
+		)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<select id="customerTotalCnt" parameterType="Customer"
+		resultType="int">
+		select nvl(count(1),0) FROM (select list.*, rownum as rnum from
+		(SELECT customerNo, customerId,
+		customerName,
+		customerCellphone,
+		customerEmail, customerGender,
+		customerDate,
+		customerCheck FROM
+		customer_tb
+		<trim prefix="where">
+			<if test="search=='name'">
+		<![CDATA[customerName LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test="customer_check=='일반회원'">
+		<![CDATA[CUSTOMERCHECK = '일반회원']]>
+			</if>
+			<if test="customer_check=='탈퇴회원'">
+		<![CDATA[CUSTOMERCHECK = '탈퇴회원']]>
+			</if>
+		</trim>
+		order by customerNo desc)list
+		)
+	</select>
+
+	<select id="customerTodayCnt" parameterType="Customer"
+		resultType="int">
+		select nvl(count(1),0) FROM customer_tb where
+		to_char(CUSTOMERDATE,
+		'yyyymmdd') = to_char(sysdate, 'yyyymmdd')
 	</select>
 
 </mapper>
