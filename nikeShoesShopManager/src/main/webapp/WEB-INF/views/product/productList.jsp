@@ -15,7 +15,7 @@
 	$(document).ready(function() {
 
 		$("#productInsert").click(function() {
-			location.href = "/product/insertForm.do";
+			location.href = "/manager/product/insertForm.do";
 
 		});
 
@@ -25,7 +25,7 @@
 
 			$("#detailForm").attr({
 				"method" : "get",
-				"action" : "/product/productDetail.do"
+				"action" : "/manager/product/productDetail.do"
 			});
 			$("#detailForm").submit();
 		});
@@ -42,7 +42,7 @@
 		$("#page").val(page);
 
 		$("#searchForm").attr("method", "get");
-		$("#searchForm").attr("action", "/product/productList.do");
+		$("#searchForm").attr("action", "/manager/product/productList.do");
 		$("#searchForm").submit();
 
 	}
@@ -105,7 +105,7 @@ input[type="button"] {
 						<tr data-num="${product.productNo }">
 							<td>${count-(status.count-1) }</td>
 							<td width="20%"><img width="40%" id="mainImage"
-								src="/uploadStorage/${product.productMainImage}"></td>
+								src="/manager/uploadStorage/${product.productMainImage}"></td>
 
 							<td>${product.productCode }</td>
 							<td><span class="goDetail" style="cursor: pointer;">${product.productName }</span></td>

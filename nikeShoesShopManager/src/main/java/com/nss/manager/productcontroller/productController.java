@@ -37,11 +37,11 @@ public class productController {
 	
 	@RequestMapping(value="/productList" , method=RequestMethod.GET)
 	public String boardList(@ModelAttribute ProductVO pvo, Model model){
-		System.out.println("productList 호출 성공");
+		System.out.println("productList 들어옴");
 		
 		Paging.setPage(pvo);
 		System.out.println("페이지="+pvo.getPage());
-		System.out.println("페이지사이즈="+pvo.getPageSize());
+		System.out.println("페이지 사이즈="+pvo.getPageSize());
 		int total = productService.productListCnt(pvo);
 		System.out.println("total="+total);
 		int count = total-(Util.nvl(pvo.getPage())-1)*Util.nvl(pvo.getPageSize());
@@ -62,7 +62,7 @@ public class productController {
 	@RequestMapping(value="/insertForm")
 	public String productForm(HttpSession session){
 		
-		System.out.println("insertForm 호출 성공");
+		System.out.println("insertForm 드러오니");
 		
 		session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
 		logger.info("CSRF_TOKEN :" + UUID.randomUUID().toString());
@@ -75,14 +75,8 @@ public class productController {
 	
 	@RequestMapping(value="/productInsert",method=RequestMethod.POST)
 	public String boardInsert(@ModelAttribute ProductVO pvo, HttpServletRequest request) throws IOException,IllegalStateException{
-		System.out.println("productinsert호출!!!!!");
-		logger.info("productinsert 호출 성공");
-		System.out.println("상품명~~:"+pvo.getProductName());
-		System.out.println("파일1!!!!"+pvo.getFile());
-		System.out.println("ㅁㅔ인이미지"+pvo.getMainImage());
-		System.out.println("ㅁㅔ인이미지"+pvo.getMainImage().getOriginalFilename());
-		System.out.println("디테일1"+pvo.getDetailImage1().getOriginalFilename());
-		System.out.println("디테일2"+pvo.getDetailImage2().getOriginalFilename());
+		System.out.println("productinsert!!!!!");
+		logger.info("productinsert 들어오니");
 		String mainImage= FileUploadUtil.FileUpload(pvo.getMainImage(), request);
 		String detailImage1= FileUploadUtil.FileUpload(pvo.getDetailImage1(), request);
 		String detailImage2= FileUploadUtil.FileUpload(pvo.getDetailImage2(), request);
@@ -106,7 +100,7 @@ public class productController {
 	
 	@RequestMapping(value="/productDetail",method=RequestMethod.GET)
 	public String boardDetail(@ModelAttribute ProductVO pvo,Model model){
-		logger.info("productDetail 호출 성공");
+		logger.info("productDetail 드러오니");
 		
 		logger.info("productNo="+pvo.getProductNo());
 		ProductVO detail = new ProductVO();
@@ -125,7 +119,7 @@ public class productController {
 	
 	@RequestMapping(value="/updateForm",method=RequestMethod.POST)
 	public String updateForm(@ModelAttribute ProductVO pvo , Model model){
-		System.out.println("updateForm 호출 성공");
+		System.out.println("updateForm 드러오니");
 		System.out.println(pvo.getProductNo());
 		ProductVO updateData = new ProductVO();
 		updateData = productService.productDetail(pvo);
@@ -139,11 +133,11 @@ public class productController {
 	@RequestMapping(value="/productUpdate",method=RequestMethod.POST)
 	public String boardUpdate(@ModelAttribute ProductVO pvo,HttpServletRequest request)throws IllegalStateException,IOException{
 		
-		System.out.println("productUpdate 호출 성공");
+		System.out.println("productUpdate 드러오니");
 		
 		int result = 0;
 		String url = "";
-		System.out.println("업데이트"+pvo.getProductFile());
+		System.out.println("파일"+pvo.getProductFile());
 		
 		
 		
@@ -201,7 +195,7 @@ public class productController {
 	@RequestMapping(value="/productDelete")
 	public String boardDelete(@ModelAttribute ProductVO pvo,HttpServletRequest request)throws IOException{
 		
-		System.out.println("딜리트컨트롤러"+pvo.getProductNo());
+		System.out.println("딜리트넘버"+pvo.getProductNo());
 		
 		int result = 0;
 		String url = "";
