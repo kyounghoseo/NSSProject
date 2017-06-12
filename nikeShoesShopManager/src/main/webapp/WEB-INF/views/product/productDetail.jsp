@@ -363,26 +363,26 @@ cursor: pointer;
 		$("#productUpdateBtn").click(function() {
 
 			$("#updateForm").attr("method", "POST");
-			$("#updateForm").attr("action", "/product/updateForm.do");
+			$("#updateForm").attr("action", "/manager/product/updateForm.do");
 			$("#updateForm").submit();
 		});
 
 		$("#productListBtn").click(function() {
-			location.href = "/product/productList.do";
+			location.href = "/manager/product/productList.do";
 
 		});
 
 		$("#productDeleteBtn").click(function() {
 
 			$("#updateForm").attr("method", "POST");
-			$("#updateForm").attr("action", "/product/productDelete.do");
+			$("#updateForm").attr("action", "/manager/product/productDelete.do");
 			$("#updateForm").submit();
 
 		});
 		
 	 	$("#detailMain").on({
 	 		"click" : function() {
-	 			$("#mainImage").attr("src","/uploadStorage/${detail.productMainImage }");
+	 			$("#mainImage").attr("src","/manager/uploadStorage/${detail.productMainImage }");
 				
 			}
 	 		
@@ -390,14 +390,14 @@ cursor: pointer;
 	 	});
 	 	$("#detailImg1").on({
 	 		"click" : function() {
-	 			$("#mainImage").attr("src","/uploadStorage/${detail.productDetailImage1 }");
+	 			$("#mainImage").attr("src","/manager/uploadStorage/${detail.productDetailImage1 }");
 				
 			}
 	 
 	 	});
 	 	$("#detailImg2").on({
 	 		"click" : function() {
-	 			$("#mainImage").attr("src","/uploadStorage/${detail.productDetailImage2 }");
+	 			$("#mainImage").attr("src","/manager/uploadStorage/${detail.productDetailImage2 }");
 				
 			}
 	 		
@@ -524,7 +524,7 @@ cursor: pointer;
 					<!-- 상품이미지  -->
 
 					<img id="mainImage"
-						src="/uploadStorage/${detail.productMainImage }">
+						src="/manager/uploadStorage/${detail.productMainImage }">
 
 
 				</div>
@@ -544,9 +544,9 @@ cursor: pointer;
 						<li id="liCode"><small>스타일-컬러</small> #${detail.productCode
 							}-${color}</li>
 						<li id="detailImg">
-						<img id="detailMain"  src="/uploadStorage/${detail.productMainImage }" >
-						<img id="detailImg1" src="/uploadStorage/${detail.productDetailImage1 }" >
-						<img id="detailImg2" src="/uploadStorage/${detail.productDetailImage2 }" >
+						<img id="detailMain"  src="/manager/uploadStorage/${detail.productMainImage }" >
+						<img id="detailImg1" src="/manager/uploadStorage/${detail.productDetailImage1 }" >
+						<img id="detailImg2" src="/manager/uploadStorage/${detail.productDetailImage2 }" >
 						 </li>
 				
 						<br>
@@ -592,7 +592,7 @@ cursor: pointer;
 				<h3>상품 정보</h3>
 				<p>${detail.productInfo }</p>
 				<h3>상세이미지</h3>
-				<img id="detailFile" src="/uploadStorage/${detail.productFile }">
+				<img id="detailFile" src="/manager/uploadStorage/${detail.productFile }">
 			</div>
 
 

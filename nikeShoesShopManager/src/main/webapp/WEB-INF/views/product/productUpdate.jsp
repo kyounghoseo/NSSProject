@@ -13,12 +13,12 @@
 		$("#productUpdateBtn").click(function() {
 
 			$("#f_productForm").attr("method", "POST");
-			$("#f_productForm").attr("action", "/product/productUpdate.do");
+			$("#f_productForm").attr("action", "/manager/product/productUpdate.do");
 			$("#f_productForm").submit();
 		});
 
 		$("#productListBtn").click(function() {
-			location.href = "/product/productList.do";
+			location.href = "/manager/product/productList.do";
 
 		});
 		

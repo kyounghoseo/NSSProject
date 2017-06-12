@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.nss.manager.common.Paging;
 import com.nss.manager.customerservice.CustomerService;
@@ -24,9 +25,9 @@ public class CustomerController {
 
 	@RequestMapping(value = "/customerList", method = RequestMethod.GET)
 	public String customerList(@ModelAttribute CustomerVO cvo, Model model) {
-		logger.info("customerList 호출 성공");
+		logger.info("customerList 들어옴");
 
-		System.out.println("customerList 호출 성공");
+		System.out.println("customerList 들어옴");
 		System.out.println(cvo.getKeyword());
 		System.out.println(cvo.getSearch());
 		System.out.println(cvo.getCustomer_check());
@@ -37,7 +38,7 @@ public class CustomerController {
 		Paging.setPage(cvo);
 
 		List<CustomerVO> customerList = customerService.customerList(cvo);
-
+		
 		model.addAttribute("customerList", customerList);
 		model.addAttribute("totalCustomer", totalCustomer);
 		model.addAttribute("todayCustomer", todayCustomer);

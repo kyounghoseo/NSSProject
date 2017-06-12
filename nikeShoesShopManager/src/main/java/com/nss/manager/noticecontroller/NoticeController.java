@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nss.manager.noticeservice.NoticeService;
 import com.nss.manager.noticevo.NoticeVO;
@@ -20,6 +21,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 
+	@RequestMapping(value = "/noticeList", method = RequestMethod.GET)
 	public String noticeList(@ModelAttribute NoticeVO nvo, Model model) {
 		logger.info("noticeList 호출성공");
 

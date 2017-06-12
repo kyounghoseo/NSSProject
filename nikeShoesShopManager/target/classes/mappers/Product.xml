@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.nss.manager.productdao.ProductDao">
+
+	<sql id="boardCommon">
+		select b_num,b_name,b_title,b_date from spring_board
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="search=='b_title'">
+		<![CDATA[
+		b_title like '%'||#{keyword}||'%'
+		]]>
+			</if>
+			<if test="search=='b_content'">
+		<![CDATA[
+		AND b_content like '%'||#{keyword}||'%'
+		]]>
+			</if>
+			<if test="search=='b_name'">
+		<![CDATA[
+		AND b_name like '%'||#{keyword}||'%'
+		]]>
+
+			</if>
+
+		</trim>
+
+	</sql>
+
+	<select id="ProductList" parameterType="com.nss.manager.productvo.ProductVO"
+		resultType="com.nss.manager.productvo.ProductVO">
+		SELECT
+		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
+		productdetailimage1,productdetailimage2,productinfo,productfile
+
+		FROM (select lst.*, rownum as rnum from(SELECT
+		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
+		productdetailimage1,productdetailimage2,productinfo,productfile
+
+		FROM product_tb
+
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="search=='productName'">
+		<![CDATA[
+		productName like '%'||#{keyword}||'%'
+		]]>
+			</if>
+		</trim>
+
+		order by productno desc
+
+
+
+		) lst)
+
+		<where>
+			<if test="start_row!=null and start_row!=''">
+				<if test="end_row!=null and end_row!=''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+
+			</if>
+
+		</where>
+
+
+	</select>
+
+
+	<select id="productListCnt" parameterType="com.nss.manager.productvo.ProductVO"
+		resultType="int">
+
+		select nvl(count(1),0) from
+		( select lst.*,rownum as rnum
+		from (select
+
+		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
+		productdetailimage1,productdetailimage2,productinfo,productfile
+
+		FROM product_tb
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="search=='productName'">
+		<![CDATA[
+		productName like '%'||#{keyword}||'%'
+		]]>
+			</if>
+
+		</trim>
+
+
+		)lst
+
+		)
+
+
+	</select>
+
+
+	<select id="ProductDetail" parameterType="int"
+		resultType="com.nss.manager.productvo.ProductVO">
+		SELECT
+		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
+		productdetailimage1,productdetailimage2,productinfo,productfile
+
+		FROM product_tb
+		where productNo=#{productNo}
+	</select>
+
+
+
+
+	<insert id="ProductInsert" parameterType="com.nss.manager.productdao.ProductDao">
+		<selectKey keyProperty="productNo" resultType="int" order="BEFORE">
+			select product_no_seq.nextval from dual
+		</selectKey>
+		INSERT INTO product_tb
+		(productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
+		productdetailimage1,productdetailimage2,productinfo,productfile )
+		VALUES(#{productNo},#{productName},#{productCategory},#{productCode},#{productPrice},#{productColor},#{productMainImage},
+		#{productDetailImage1},#{productDetailImage2},#{productInfo},#{productFile})
+	</insert>
+
+	<update id="productUpdate" parameterType="com.nss.manager.productvo.ProductVO">
+		UPDATE product_tb
+		SET
+		productname=#{productName},
+		productcategory=#{productCategory},
+		productCode= #{productCode},
+		productPrice= #{productPrice},
+		productColor= #{productColor},
+		productMainImage= #{productMainImage},
+		productDetailImage1 =
+		#{productDetailImage1},
+		productDetailImage2 = #{productDetailImage2},
+		productInfo = #{productInfo},
+		productFile = #{productFile}
+
+		WHERE
+		productNo = #{productNo}
+	</update>
+
+	<delete id="productDelete" parameterType="com.nss.manager.productvo.ProductVO">
+		DELETE FROM product_tb
+		WHERE
+		productno = #{productNo}
+	</delete>
+
+</mapper>

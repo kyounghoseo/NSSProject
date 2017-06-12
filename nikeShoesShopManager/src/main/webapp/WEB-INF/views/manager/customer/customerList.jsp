@@ -93,6 +93,7 @@
 </script>
 </head>
 <body>
+
 	<!-- 상단 헤더 -->
 	<div id="header">
 		<nav>
@@ -102,7 +103,8 @@
 				<li><a href="#">매출관리</a></li>
 				<li><a href="#">상품관리</a></li>
 				<li><a href="/manager/customer/customerList.do">고객관리</a></li>
-				<li><a href="#">고객센터관리</a></li>
+				<li><a href="/manager/notice/noticeList.do">공지사항</a></li>
+				<li><a href="#">QnA</a></li>
 				<li><a href="#">쇼핑몰이동</a></li>
 			</ul>
 		</nav>
@@ -144,8 +146,7 @@
 	</div>
 	<!-- 리스트 시작 -->
 	<div id="customerList">
-		<table id="customer_tb" cellspacing="0" cellpadding="0"
-			summary="고객 리스트">
+		<table id="list_tb" cellspacing="0" cellpadding="0" summary="고객 리스트">
 			<thead>
 				<tr>
 					<th><marquee>회원번호</marquee></th>

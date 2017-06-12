@@ -26,14 +26,14 @@ div {
 	text-align: center;
 }
 
-#customer_tb {
+#list_tb {
 	width: 100%;
 	padding: 0px;
 	border: 1px solid #000000;
 	border-bottom: 0px;
 }
 
-#customer_tb th {
+#list_tb th {
 	border-bottom: 1px solid #000000;
 	border-right: 1px solid white;
 	padding: 5px;
@@ -41,13 +41,17 @@ div {
 	color: white;
 }
 
-#customer_tb td {
+#list_tb td {
 	padding: 5px;
 	border-bottom: 1px solid #000000;
 }
 
-#customer_tb .borcle {
+#list_tb .borcle {
 	border-right: 0px;
+}
+
+#insert{
+	text-align: right;
 }
 
 #f_radio {
