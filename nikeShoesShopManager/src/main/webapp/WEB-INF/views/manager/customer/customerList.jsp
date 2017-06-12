@@ -6,58 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-@CHARSET "utf-8";
-
-body, td, input, select {
-	font-family: '돋움';
-	font-size: 12px;
-}
-
-#header{
-background-color: black;
-color: white;
-}
-
-#header nav ul li {
-	display: inline-block;
-	margin: 3%;
-}
-
-div {
-	text-align: center;
-}
-
-#customer_tb {
-	width: 100%;
-	padding: 0px;
-	border: 1px solid #000000;
-	border-bottom: 0px;
-}
-
-#customer_tb th {
-	border-bottom: 1px solid #000000;
-	border-right: 1px solid white;
-	padding: 5px;
-	background-color: black;
-	color: white;
-}
-
-#customer_tb td {
-	padding: 5px;
-	border-bottom: 1px solid #000000;
-}
-
-#customer_tb .borcle {
-	border-right: 0px;
-}
-
-#f_radio {
-	text-align: right;
-}
-</style>
 <meta charset="UTF-8">
 <title>고객 목록</title>
+<link rel="stylesheet" type="text/css"
+	href="../resources/include/css/common.css">
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -141,16 +93,19 @@ div {
 </script>
 </head>
 <body>
+
 	<!-- 상단 헤더 -->
 	<div id="header">
 		<nav>
 			<ul>
-				<li>주문관리</li>
-				<li>매출관리</li>
-				<li>상품관리</li>
-				<li>고객관리</li>
-				<li>고객센터관리</li>
-				<li>쇼핑몰이동</li>
+				<img id="banner" src="../resources/images/nss_banner.jpg">
+				<li><a href="#">주문관리</a></li>
+				<li><a href="#">매출관리</a></li>
+				<li><a href="#">상품관리</a></li>
+				<li><a href="/manager/customer/customerList.do">고객관리</a></li>
+				<li><a href="/manager/notice/noticeList.do">공지사항</a></li>
+				<li><a href="#">QnA</a></li>
+				<li><a href="#">쇼핑몰이동</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -191,8 +146,7 @@ div {
 	</div>
 	<!-- 리스트 시작 -->
 	<div id="customerList">
-		<table id="customer_tb" cellspacing="0" cellpadding="0"
-			summary="고객 리스트">
+		<table id="list_tb" cellspacing="0" cellpadding="0" summary="고객 리스트">
 			<thead>
 				<tr>
 					<th><marquee>회원번호</marquee></th>

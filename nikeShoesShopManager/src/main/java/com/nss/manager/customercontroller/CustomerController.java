@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.nss.manager.common.Paging;
 import com.nss.manager.customerservice.CustomerService;
@@ -37,7 +38,7 @@ public class CustomerController {
 		Paging.setPage(cvo);
 
 		List<CustomerVO> customerList = customerService.customerList(cvo);
-
+		
 		model.addAttribute("customerList", customerList);
 		model.addAttribute("totalCustomer", totalCustomer);
 		model.addAttribute("todayCustomer", todayCustomer);

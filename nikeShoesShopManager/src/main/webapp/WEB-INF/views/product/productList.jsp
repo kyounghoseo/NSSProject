@@ -108,10 +108,7 @@ input[type="button"] {
 				<td>상품명</td>
 				<td>색상</td>
 				<td>분류</td>
-
 				<td>상품가격</td>
-
-
 			</tr>
 			<c:choose>
 				<c:when test="${not empty productList }">

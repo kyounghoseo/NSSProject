@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias type="com.nss.manager.customervo.CustomerVO"
 			alias="Customer" />
+		<typeAlias type="com.nss.manager.noticevo.NoticeVO" alias="Notice" />
 	</typeAliases>
 </configuration>
