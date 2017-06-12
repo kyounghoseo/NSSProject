@@ -48,6 +48,7 @@
 	}
 </script>
 <style type="text/css">
+
 input[type="button"] {
 	background-color: #555555; /* Black */
 	border: none;
@@ -62,6 +63,19 @@ input[type="button"] {
 </style>
 </head>
 <body>
+	<!-- 상단 헤더 -->
+	<div id="header">
+		<nav>
+			<ul>
+				<li>주문관리</li>
+				<li>매출관리</li>
+				<li>상품관리</li>
+				<li>고객관리</li>
+				<li>고객센터관리</li>
+				<li>쇼핑몰이동</li>
+			</ul>
+		</nav>
+	</div>
 	<div style="width: 100%; height: 100px; border: 1px solid black;">
 
 		<form id="searchForm" style="margin: 5%">

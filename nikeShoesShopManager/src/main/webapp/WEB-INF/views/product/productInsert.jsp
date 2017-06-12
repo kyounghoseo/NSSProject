@@ -5,16 +5,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="../resources/include/js/common.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
 		$("#productInsertBtn").click(function() {
-
+			if(!chkSubmit($('#productName'),"상품명을"))
+				return;
+			else if(!chkSubmit($('#productCategory'),"상품 분류를"))
+				return;
+			else if(!chkSubmit($('#productCode'),"상품 코드를"))
+				return;
+			else if(!chkSubmit($('#productPrice'),"상품 가격을"))
+				return;
+			else if(!chkSubmit($('#productColor'),"상품 색상을"))
+				return;
+			else if(!chkSubmit($('#productInfo'),"상품 정보를"))
+				return;
+			else{
 			$("#f_productForm").attr("method", "POST");
 			$("#f_productForm").attr("action", "/manager/product/productInsert.do");
 			$("#f_productForm").submit();
+			 } 
 		});
 
 		$("#productListBtn").click(function() {
@@ -25,48 +38,7 @@
 </script>
 </head>
 <body>
-<!-- 	<form id="f_productForm" name="f_productForm" >
-		<p>
-			<label>상품명 :</label><input type="text" id="productName"
-				name="productName" />
-		</p>
-		<p>
-			<label>상품분류 :</label><input type="text" id="productCategory"
-				name="productCategory" />
-		</p>
-		<p>
-			<label>상품코드 :</label><input type="text" id="productCode"
-				name="productCode" />
-		</p>
-		<p>
-			<label>상품가격 :</label><input type="text" id="productPrice"
-				name="productPrice" />
-		</p>
-		<p>
-			<label>상품색상 :</label><input type="text" id="productColor"
-				name="productColor" />
-		</p>
-		<p>
-			<label>상품이미지 :</label><input type="text" id="productMainImage"
-				name="productMainImage" />
-		</p>
-		<p>
-			<label>상품상세이미지1 :</label><input type="text" id="productDetailImage1"
-				name="productDetailImage1" />
-		</p>
-		<p>
-			<label>상품상제이미지2 :</label><input type="text" id="productDetailImage2"
-				name="productDetailImage2" />
-		</p>
-		<p>
-			<label>상품정보 :</label><input type="text" id="productInfo"
-				name="productInfo" />
-		</p>
-		<p>
-			<label>상품파일 :</label><input type="text" id="productFile" name="productFile" />
-		</p>
 
-	</form>  -->
 	<form id="f_productForm" name="f_productForm" enctype="multipart/form-data">
 		<table style="height: 451px;" width="100%" border="1">
 

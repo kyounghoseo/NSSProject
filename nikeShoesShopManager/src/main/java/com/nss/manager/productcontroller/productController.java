@@ -105,6 +105,7 @@ public class productController {
 		logger.info("productNo="+pvo.getProductNo());
 		ProductVO detail = new ProductVO();
 		detail = productService.productDetail(pvo);
+		
 		String color = detail.getProductColor().substring(0,3);
 	/*	if(detail!=null){
 			detail.setB_content(detail.getB_content().toString().replaceAll("\n", "<br>"));

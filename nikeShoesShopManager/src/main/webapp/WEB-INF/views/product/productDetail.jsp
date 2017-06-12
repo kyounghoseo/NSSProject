@@ -373,10 +373,14 @@ cursor: pointer;
 		});
 
 		$("#productDeleteBtn").click(function() {
-
+			if(confirm("상품을 삭제하시겠습니까?")){
+			
 			$("#updateForm").attr("method", "POST");
 			$("#updateForm").attr("action", "/manager/product/productDelete.do");
 			$("#updateForm").submit();
+			}else{
+				return false;
+			}
 
 		});
 		
