@@ -5,7 +5,7 @@
 
 <mapper namespace="com.nss.manager.productdao.ProductDao">
 
-	<sql id="boardCommon">
+	<!-- <sql id="boardCommon">
 		select b_num,b_name,b_title,b_date from spring_board
 		<trim prefix="WHERE" prefixOverrides="AND">
 			<if test="search=='b_title'">
@@ -27,7 +27,7 @@
 
 		</trim>
 
-	</sql>
+	</sql> -->
 
 	<select id="ProductList" parameterType="com.nss.manager.productvo.ProductVO"
 		resultType="com.nss.manager.productvo.ProductVO">
@@ -35,11 +35,13 @@
 		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
 		productdetailimage1,productdetailimage2,productinfo,productfile
 
-		FROM (select lst.*, rownum as rnum from(SELECT
+		FROM
+		(select lst.*, rownum as rnum from(SELECT
 		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
 		productdetailimage1,productdetailimage2,productinfo,productfile
 
-		FROM product_tb
+		FROM
+		product_tb
 
 		<trim prefix="WHERE" prefixOverrides="AND">
 			<if test="search=='productName'">
@@ -79,7 +81,8 @@
 		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
 		productdetailimage1,productdetailimage2,productinfo,productfile
 
-		FROM product_tb
+		FROM
+		product_tb
 		<trim prefix="WHERE" prefixOverrides="AND">
 			<if test="search=='productName'">
 		<![CDATA[
@@ -104,7 +107,8 @@
 		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
 		productdetailimage1,productdetailimage2,productinfo,productfile
 
-		FROM product_tb
+		FROM
+		product_tb
 		where productNo=#{productNo}
 	</select>
 
@@ -116,10 +120,18 @@
 			select product_no_seq.nextval from dual
 		</selectKey>
 		INSERT INTO product_tb
-		(productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
-		productdetailimage1,productdetailimage2,productinfo,productfile )
-		VALUES(#{productNo},#{productName},#{productCategory},#{productCode},#{productPrice},#{productColor},#{productMainImage},
-		#{productDetailImage1},#{productDetailImage2},#{productInfo},#{productFile})
+		(productno,productname,productcategory,productcode,productprice,productcolor,
+		<if test="productMainImage !=null and productMainImage !=''">productmainimage,</if>
+		<if test="productDetailImage1 !=null and productDetailImage1 !=''">productdetailimage1,</if>
+		<if test="productDetailImage2 !=null and productDetailImage2 !=''">productdetailimage2,</if>
+		
+		<if test="productFile !=null and productFile !=''">productfile,</if>productinfo
+		)
+		VALUES(#{productNo},#{productName},#{productCategory},#{productCode},#{productPrice},#{productColor},
+		<if test="productMainImage !=null and productMainImage !=''">#{productMainImage},</if>
+		<if test="productDetailImage1 !=null and productDetailImage1 !=''">#{productDetailImage1},</if>
+		<if test="productDetailImage2 !=null and productDetailImage2 !=''">#{productDetailImage2},</if>
+		<if test="productFile !=null and productFile !=''">#{productFile},</if>#{productInfo})
 	</insert>
 
 	<update id="productUpdate" parameterType="com.nss.manager.productvo.ProductVO">
@@ -133,9 +145,11 @@
 		productMainImage= #{productMainImage},
 		productDetailImage1 =
 		#{productDetailImage1},
-		productDetailImage2 = #{productDetailImage2},
+		productDetailImage2 =
+		#{productDetailImage2},
 		productInfo = #{productInfo},
-		productFile = #{productFile}
+		productFile =
+		#{productFile}
 
 		WHERE
 		productNo = #{productNo}
