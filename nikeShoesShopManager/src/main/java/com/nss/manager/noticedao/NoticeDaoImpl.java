@@ -20,4 +20,22 @@ public class NoticeDaoImpl implements NoticeDao {
 		return session.selectList("noticeList", nvo);
 	}
 
+	@Override
+	public int noticeListCnt(NoticeVO nvo) {
+		// TODO Auto-generated method stub
+		return (Integer) session.selectOne("noticeListCnt", nvo);
+	}
+
+	@Override
+	public int noticeInsert(NoticeVO nvo) {
+		// TODO Auto-generated method stub
+		return session.insert("noticeInsert", nvo);
+	}
+
+	@Override
+	public NoticeVO noticeDetail(NoticeVO nvo) {
+		// TODO Auto-generated method stub
+		return (NoticeVO) session.selectOne("noticeDetail", nvo);
+	}
+
 }

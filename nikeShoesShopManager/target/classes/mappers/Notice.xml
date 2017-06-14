@@ -5,7 +5,62 @@
 <mapper namespace="com.nss.manager.noticedao.NoticeDao">
 
 	<select id="noticeList" parameterType="Notice" resultType="Notice">
-		select noticeno, noticedate, noticetitle, noticewriter from notice_tb
+		select noticeNo, noticeDate, noticeTitle, noticeWriter from
+		(select
+		list.*, rownum as rnum from(SELECT noticeNo, noticeDate, noticeTitle,
+		noticeWriter
+		FROM notice_tb
+		<trim prefix="where">
+			<if test="search=='title'">
+		<![CDATA[noticeTitle LIKE '%'||#{keyword}||'%']]>
+			</if>
+		</trim>
+		order by noticeNo desc)list
+		)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<select id="noticeListCnt" parameterType="Notice" resultType="int">
+		select nvl(count(1),0) FROM (select list.*, rownum as rnum from
+		(SELECT noticeNo, noticeDate, noticeTitle,
+		noticeWriter
+		FROM notice_tb
+		<trim prefix="where">
+			<if test="search=='title'">
+		<![CDATA[noticeTitle LIKE '%'||#{keyword}||'%']]>
+			</if>
+		</trim>
+		order by noticeNo desc)list
+		)
+	</select>
+
+	<insert id="noticeInsert" parameterType="Notice">
+		<selectKey keyProperty="noticeNo" resultType="int" order="BEFORE">
+			select notice_no_seq.nextval from dual
+		</selectKey>
+		insert into NOTICE_TB (noticeNo, managerNo, noticeWriter, noticeTitle,
+		noticeContents
+		<if test="noticeFile != null and noticeFile != ''">
+			, noticeFile
+		</if>
+		)
+		VALUES(#{noticeNo},#{managerNo},#{noticeWriter},#{noticeTitle},#{noticeContents}
+		<if test="noticeFile != null and noticeFile != ''">
+			,#{noticeFile}
+		</if>
+		)
+	</insert>
+
+	<select id="noticeDetail" parameterType="Notice" resultType="Notice">
+		select
+		noticeno, noticedate, noticewriter, noticetitle, noticecontents,
+		noticefile from notice_tb where noticeNO = #{noticeNo}
 	</select>
 
 </mapper>

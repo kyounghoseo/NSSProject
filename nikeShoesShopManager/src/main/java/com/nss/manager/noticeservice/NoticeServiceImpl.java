@@ -25,4 +25,26 @@ public class NoticeServiceImpl implements NoticeService {
 		return ntList;
 	}
 
+	@Override
+	public int noticeListCnt(NoticeVO nvo) {
+		// TODO Auto-generated method stub
+		return noticeDao.noticeListCnt(nvo);
+	}
+
+	@Override
+	public int noticeInsert(NoticeVO nvo) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = noticeDao.noticeInsert(nvo);
+		return result;
+	}
+
+	@Override
+	public NoticeVO noticeDetail(NoticeVO nvo) {
+		// TODO Auto-generated method stub
+		NoticeVO detail = null;
+		detail = noticeDao.noticeDetail(nvo);
+		return detail;
+	}
+
 }
