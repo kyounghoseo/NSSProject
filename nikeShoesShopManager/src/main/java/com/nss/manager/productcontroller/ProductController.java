@@ -26,9 +26,9 @@ import com.nss.manager.productvo.ProductVO;
 
 @Controller
 @RequestMapping(value="/product")
-public class productController {
+public class ProductController {
 	
-	Logger logger = Logger.getLogger(productController.class);
+	Logger logger = Logger.getLogger(ProductController.class);
 	
 	@Autowired
 	private ProductService productService;
@@ -54,7 +54,7 @@ public class productController {
 		model.addAttribute("count",count);
 		model.addAttribute("data",pvo);
 		model.addAttribute("total",total);
-		return "product/productList";
+		return "manager/product/productList";
 		
 	}
 	
@@ -68,7 +68,7 @@ public class productController {
 		logger.info("CSRF_TOKEN :" + UUID.randomUUID().toString());
 		
 		
-		return "product/productInsert";
+		return "manager/product/productInsert";
 		
 	}
 	
@@ -91,7 +91,7 @@ public class productController {
 		
 		result = productService.productInsert(pvo);
 		if(result ==1){
-			url = "productList.do";
+			url = "/product/productList.do";
 		}
 		
 		return "redirect:"+url;
@@ -113,7 +113,7 @@ public class productController {
 		model.addAttribute("color",color);
 		model.addAttribute("detail",detail);
 		
-		return "product/productDetail";
+		return "manager/product/productDetail";
 		
 		
 	}
@@ -126,7 +126,7 @@ public class productController {
 		updateData = productService.productDetail(pvo);
 		System.out.println(updateData.getProductName());
 		model.addAttribute("updateData" , updateData);
-		return "product/productUpdate";
+		return "manager/product/productUpdate";
 	
 	}
 	

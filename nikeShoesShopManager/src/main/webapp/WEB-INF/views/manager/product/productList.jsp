@@ -47,6 +47,8 @@
 
 	}
 </script>
+<link rel="stylesheet" type="text/css"
+	href="../resources/include/css/common.css">
 <style type="text/css">
 
 input[type="button"] {
@@ -67,18 +69,20 @@ input[type="button"] {
 	<div id="header">
 		<nav>
 			<ul>
-				<li>주문관리</li>
-				<li>매출관리</li>
-				<li>상품관리</li>
-				<li>고객관리</li>
-				<li>고객센터관리</li>
-				<li>쇼핑몰이동</li>
+				<img id="banner" src="../resources/images/nss_banner.jpg">
+				<li><a href="/manager/order/orderList.do">주문관리</a></li>
+				<li><a href="#">매출관리</a></li>
+				<li><a href="/manager/product/productList.do">상품관리</a></li>
+				<li><a href="/manager/customer/customerList.do">고객관리</a></li>
+				<li><a href="/manager/notice/noticeList.do">공지사항</a></li>
+				<li><a href="#">QnA</a></li>
+				<li><a href="#">쇼핑몰이동</a></li>
 			</ul>
 		</nav>
 	</div>
-	<div style="width: 100%; height: 100px; border: 1px solid black;">
+	<div >
 
-		<form id="searchForm" style="margin: 5%">
+		<form id="searchForm" >
 			<input type="hidden" name="page" id="page" value="${data.page }">
 			<input type="hidden" name="pageSize" id="pageSize"
 				value="${data.pageSize }"> <label for="searchName">검색어</label>
@@ -98,17 +102,17 @@ input[type="button"] {
 
 		</form>
 	</div>
-	<table style="height: 100%;" width="100%" cellspacing="0"
+	<table id="list_tb" style="height: 100%;" width="100%" cellspacing="0"
 		cellpadding="0">
 		<tbody>
 			<tr>
-				<td>상품번호</td>
-				<td>이미지</td>
-				<td>상품코드</td>
-				<td>상품명</td>
-				<td>색상</td>
-				<td>분류</td>
-				<td>상품가격</td>
+				<th>상품번호</th>
+				<th>이미지</th>
+				<th>상품코드</th>
+				<th>상품명</th>
+				<th>색상</th>
+				<th>분류</th>
+				<th class="borcle">상품가격</th>
 			</tr>
 			<c:choose>
 				<c:when test="${not empty productList }">
@@ -150,7 +154,7 @@ input[type="button"] {
 	<div style="float: right;">
 		<input type="button" value="상품등록" id="productInsert">
 	</div>
-	<div id="productPage" style="margin-left: 50%">
+	<div id="productPage">
 		<tag:paging page="${param.page }" total="${total }"
 			list_size="${data.pageSize }"></tag:paging>
 	</div>

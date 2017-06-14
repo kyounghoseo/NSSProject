@@ -5,7 +5,7 @@
 
 <mapper namespace="com.nss.manager.productdao.ProductDao">
 
-	<sql id="boardCommon">
+	<!-- <sql id="boardCommon">
 		select b_num,b_name,b_title,b_date from spring_board
 		<trim prefix="WHERE" prefixOverrides="AND">
 			<if test="search=='b_title'">
@@ -27,7 +27,7 @@
 
 		</trim>
 
-	</sql>
+	</sql> -->
 
 	<select id="ProductList" parameterType="com.nss.manager.productvo.ProductVO"
 		resultType="com.nss.manager.productvo.ProductVO">

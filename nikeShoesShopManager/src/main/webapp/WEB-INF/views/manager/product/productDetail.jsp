@@ -462,7 +462,7 @@ cursor: pointer;
 	<header class="main_header" id="main_header">
 		<div class="main_logo">
 			<h1>
-				<a href="#"><img src="/resources/images/logo.jpg" alt="NSS"></a>
+				<a href="#"><img src="../resources/images/logo.jpg" alt="NSS"></a>
 			</h1>
 			<!-- <h2 class="main_title">나이키 슈즈 샵</h2> -->
 		</div>
@@ -473,7 +473,7 @@ cursor: pointer;
 				type="button" value="삭제" id="productDeleteBtn"> <a
 				class="account_register" href="#">로그인/회원가입</a> <a
 				class="customercenter" href="#">고객센터</a> <a class="cart" href="#"><img
-				src="/resources/images/cart.jpg" width="25px" height="20px"
+				src="../resources/images/cart.jpg" width="25px" height="20px"
 				alt="장바구니"></a>
 		</div>
 
@@ -484,7 +484,7 @@ cursor: pointer;
 					<p>
 						<input type="text" name="keyword" id="keyword" title="검색어입력"
 							placeholder="상품을 입력하세요" /> <input type="image"
-							src="/resources/images/search_icon.jpg" width="20px"
+							src="../resources/images/search_icon.jpg" width="20px"
 							height="20px" alt="검색" />
 					</p>
 				</form>
