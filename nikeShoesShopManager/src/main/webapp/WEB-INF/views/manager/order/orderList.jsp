@@ -193,7 +193,7 @@ input[type="button"] {
 				<c:otherwise>
 
 					<tr>
-						<td colspan="4" class="tac">등록된 주문건이 존재하지 않습니다.</td>
+						<td colspan="12" class="tac">등록된 주문건이 존재하지 않습니다.</td>
 					</tr>
 
 				</c:otherwise>
