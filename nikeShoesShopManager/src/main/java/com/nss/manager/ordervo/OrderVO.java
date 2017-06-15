@@ -1,6 +1,8 @@
 package com.nss.manager.ordervo;
 
-public class OrderVO {
+import com.nss.manager.common.PagingVO;
+
+public class OrderVO extends PagingVO{
 
 	private int orderNO;
 	private int productNO;

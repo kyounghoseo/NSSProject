@@ -27,7 +27,7 @@
 				"method" : "get",
 				"action" : "/manager/product/productDetail.do"
 			});
-			$("#detailForm").submit();
+			$("#detailForm").submit(); 
 		});
 
 		$("#searchData").click(function() {

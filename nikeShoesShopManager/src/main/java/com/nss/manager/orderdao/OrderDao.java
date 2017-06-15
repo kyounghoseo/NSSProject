@@ -16,4 +16,6 @@ public interface OrderDao {
 	public int shipCount(OrderVO ovo);
 	
 	public int cancleCount(OrderVO ovo);
+	
+	public int orderListCnt(OrderVO ovo);
 }

@@ -33,7 +33,7 @@
 			});
 			$("#f_check").submit();
 
-
+			goPage(1);
 
 		}); 
 		
@@ -61,10 +61,19 @@
 					$("#detailForm").submit();
 				}
 			});
-
+			goPage(1);
 		});
 
 	});
+	function goPage(page) {
+
+		$("#page").val(page);
+
+		$("#searchForm").attr("method", "get");
+		$("#searchForm").attr("action", "/manager/order/orderList.do");
+		$("#searchForm").submit();
+
+	}
 </script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -88,6 +97,8 @@ input[type="button"] {
 <body>
 	<form id="f_check" name="f_check">
 		<input type="hidden" name="order_check" id="order_check" value="${check }">
+		<input type="hidden" name="page" id="page" value="${data.page }"> 
+			<input type="hidden" name="pageSize" id="pageSize" value="${data.pageSize }">
 	</form>
 	<!-- 상단 헤더 -->
 <%@ include file="../header.jsp"%>
@@ -208,8 +219,8 @@ input[type="button"] {
 		
 			<input type="hidden" name="orderNO" id="orderNO"> 
 			<input type="hidden" name="order_check" id="order_check" value="${check }">
-			<%-- <input type="hidden" name="page" id="page" value="${data.page }"> 
-			<input type="hidden" name="pageSize" value="${data.pageSize }">  --%>
+			<input type="hidden" name="page" id="page" value="${data.page }"> 
+			<input type="hidden" name="pageSize" value="${data.pageSize }">
 			<input type="text" id="orderShipno" name="orderShipno"> 
 			<input type="button" id="shipInsert" name="shipInsert" value="확인"> 
 			<input type="button" id="cancle" value="취소">
@@ -217,9 +228,8 @@ input[type="button"] {
 		</form>
 
 	</div>
-	<div id="productPage">
-		<tag:paging page="${param.page }" total="${total }"
-			list_size="${data.pageSize }"></tag:paging>
+	<div id="orderPage">
+		<tag:paging page="${param.page }" total="${total }"	list_size="${data.pageSize }"></tag:paging>
 	</div>
 </body>
 </html>

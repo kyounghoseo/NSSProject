@@ -10,8 +10,12 @@
 		SELECT
 		orderno,productno,customerno,ordercsid,orderprname,ordercount,orderprice,ordersize,ordercolor,ordercsname,
 		ordercellphone,orderaddress,orderstatus,orderpayment,orderdate,ordershipno,ordershipdate
+		from(select lst.*, rownum as rnum from(SELECT
+		
+		orderno,productno,customerno,ordercsid,orderprname,ordercount,orderprice,ordersize,ordercolor,ordercsname,
+		ordercellphone,orderaddress,orderstatus,orderpayment,orderdate,ordershipno,ordershipdate
 		from
-		order_tb 
+		order_tb
 		
 			<trim prefix="WHERE" prefixOverrides="AND">
 			<if test="order_check != '전체'">
@@ -24,6 +28,21 @@
 		</trim>
 		
 		order by orderno desc
+
+
+
+		) lst)
+
+		<where>
+			<if test="start_row!=null and start_row!=''">
+				<if test="end_row!=null and end_row!=''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+
+			</if>
+
+		</where>
+
 
 	</select>
 	
@@ -51,27 +70,26 @@
 		where orderStatus = '주문취소' or orderStatus = '주문반품' 
 
 	</select>
-<!-- 
-
-	<select id="productListCnt" parameterType="com.nss.manager.productvo.ProductVO"
+	
+	
+	<select id="orderListCnt" parameterType="com.nss.manager.ordervo.OrderVO"
 		resultType="int">
 
 		select nvl(count(1),0) from
 		( select lst.*,rownum as rnum
-		from (select
-
-		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
-		productdetailimage1,productdetailimage2,productinfo,productfile
-
-		FROM
-		product_tb
+		from (SELECT
+		orderno,productno,customerno,ordercsid,orderprname,ordercount,orderprice,ordersize,ordercolor,ordercsname,
+		ordercellphone,orderaddress,orderstatus,orderpayment,orderdate,ordershipno,ordershipdate
+		from
+		order_tb
 		<trim prefix="WHERE" prefixOverrides="AND">
-			<if test="search=='productName'">
-		<![CDATA[
-		productName like '%'||#{keyword}||'%'
-		]]>
+			<if test="order_check != '전체'">
+				<if test="order_check != null">
+				<![CDATA[
+					orderStatus = #{order_check}
+				]]>
 			</if>
-
+		</if>
 		</trim>
 
 
@@ -81,41 +99,8 @@
 
 
 	</select>
+	
 
-
-	<select id="ProductDetail" parameterType="int"
-		resultType="com.nss.manager.productvo.ProductVO">
-		SELECT
-		productno,productname,productcategory,productcode,productprice,productcolor,productmainimage,
-		productdetailimage1,productdetailimage2,productinfo,productfile
-
-		FROM
-		product_tb
-		where productNo=#{productNo}
-	</select>
-
-
-
-
-	<insert id="ProductInsert" parameterType="com.nss.manager.productdao.ProductDao">
-		<selectKey keyProperty="productNo" resultType="int" order="BEFORE">
-			select product_no_seq.nextval from dual
-		</selectKey>
-		INSERT INTO product_tb
-		(productno,productname,productcategory,productcode,productprice,productcolor,
-		<if test="productMainImage !=null and productMainImage !=''">productmainimage,</if>
-		<if test="productDetailImage1 !=null and productDetailImage1 !=''">productdetailimage1,</if>
-		<if test="productDetailImage2 !=null and productDetailImage2 !=''">productdetailimage2,</if>
-		
-		<if test="productFile !=null and productFile !=''">productfile,</if>productinfo
-		)
-		VALUES(#{productNo},#{productName},#{productCategory},#{productCode},#{productPrice},#{productColor},
-		<if test="productMainImage !=null and productMainImage !=''">#{productMainImage},</if>
-		<if test="productDetailImage1 !=null and productDetailImage1 !=''">#{productDetailImage1},</if>
-		<if test="productDetailImage2 !=null and productDetailImage2 !=''">#{productDetailImage2},</if>
-		<if test="productFile !=null and productFile !=''">#{productFile},</if>#{productInfo})
-	</insert>
--->
 	<update id="orderUpdate" parameterType="com.nss.manager.ordervo.OrderVO">
 		UPDATE order_tb
 		SET
@@ -124,11 +109,5 @@
 		WHERE
 		orderNO = #{orderNO}
 	</update>
-<!--
-	<delete id="productDelete" parameterType="com.nss.manager.productvo.ProductVO">
-		DELETE FROM product_tb
-		WHERE
-		productno = #{productNo}
-	</delete> -->
 
 </mapper>

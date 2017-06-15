@@ -50,4 +50,11 @@ public class OrderDaoImpl implements OrderDao{
 		return sqlSession.selectOne("cancleCount", ovo);
 	}
 
+
+	@Override
+	public int orderListCnt(OrderVO ovo) {
+		// TODO Auto-generated method stub
+		return (Integer)sqlSession.selectOne("orderListCnt",ovo);
+	}
+
 }
