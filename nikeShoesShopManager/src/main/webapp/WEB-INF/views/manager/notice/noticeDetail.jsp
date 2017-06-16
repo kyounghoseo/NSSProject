@@ -39,21 +39,25 @@
 														.attr(
 																{
 																	"method" : "post",
-																	"action" : "/notice/updateForm.do?page=${param.page}&pageSize=${param.pageSize}"
+																	"action" : "/manager/notice/updateForm.do?page=${param.page}&pageSize=${param.pageSize}"
 																});
 												$("#f_data").submit();
 											}
 										});
 
-						$("#noticeDeleteBtn").click(function() {
-							if (confirm('수정을 진행할까요?')) {
-								$("#f_data").attr({
-									"method" : "post",
-									"action" : "manager/notice/noticeDelete.do"
-								});
-								$("#f_data").submit();
-							}
-						});
+						$("#noticeDeleteBtn")
+								.click(
+										function() {
+											if (confirm('삭제를 진행할까요?')) {
+												$("#f_data")
+														.attr(
+																{
+																	"method" : "post",
+																	"action" : "/manager/notice/noticeDelete.do"
+																});
+												$("#f_data").submit();
+											}
+										});
 
 						$("#noticeListBtn")
 								.click(

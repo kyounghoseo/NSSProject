@@ -38,4 +38,16 @@ public class NoticeDaoImpl implements NoticeDao {
 		return (NoticeVO) session.selectOne("noticeDetail", nvo);
 	}
 
+	@Override
+	public int noticeUpdate(NoticeVO nvo) {
+		// TODO Auto-generated method stub
+		return session.update("noticeUpdate", nvo);
+	}
+
+	@Override
+	public int noticeDelete(int noticeNo) {
+		// TODO Auto-generated method stub
+		return session.delete("noticeDelete", noticeNo);
+	}
+
 }

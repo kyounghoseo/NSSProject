@@ -105,4 +105,68 @@ public class NoticeController {
 		return "manager/notice/noticeDetail";
 	}
 
+	@RequestMapping(value = "/updateForm", method = RequestMethod.POST)
+	public String updateForm(@ModelAttribute NoticeVO nvo, Model model) {
+		logger.info("updateForm 호출!");
+
+		NoticeVO updateData = new NoticeVO();
+		updateData = noticeService.noticeDetail(nvo);
+
+		model.addAttribute("updateData", updateData);
+
+		return "manager/notice/noticeUpdate";
+
+	}
+
+	@RequestMapping(value = "/noticeUpdate", method = RequestMethod.POST)
+	public String noticeUpdate(@ModelAttribute NoticeVO nvo, HttpServletRequest request)
+			throws IllegalStateException, IOException {
+		logger.info("noticeUpdate 호출 성공");
+
+		int result = 0;
+		String url = "";
+		String noticeFile = "";
+
+		System.out.println("noticeNo : " + nvo.getNoticeNo());
+		System.out.println("page : " + nvo.getPage());
+		System.out.println("pageSize : " + nvo.getPageSize());
+
+		if (!nvo.getFile().isEmpty()) {
+			logger.info("============noticefile = " + nvo.getNoticeFile());
+			FileUploadUtil.fileDelete(nvo.getNoticeFile(), request);
+			noticeFile = FileUploadUtil.fileUpload(nvo.getFile(), request);
+			nvo.setNoticeFile(noticeFile);
+		} else {
+			logger.info("첨부파일 없음");
+			nvo.setNoticeFile("");
+		}
+
+		logger.info("===========noticeFile = " + nvo.getNoticeFile());
+		result = noticeService.noticeUpdate(nvo);
+
+		if (result == 1) {
+			url = "/notice/noticeDetail.do?noticeNo=" + nvo.getNoticeNo() + "&page=" + nvo.getPage() + "&pageSize="
+					+ nvo.getPageSize();
+		}
+
+		return "redirect:" + url;
+	}
+
+	@RequestMapping(value = "/noticeDelete", method = RequestMethod.POST)
+	public String noticeDelete(@ModelAttribute NoticeVO nvo, HttpServletRequest request) throws IOException {
+		logger.info("noticeDelete 호출 성공");
+
+		int result = 0;
+		String url = "";
+
+		FileUploadUtil.fileDelete(nvo.getNoticeFile(), request);
+		result = noticeService.noticeDelete(nvo.getNoticeNo());
+
+		if (result == 1) {
+			url = "/notice/noticeList.do"; // 삭제후 목록
+		}
+
+		return "redirect:" + url;
+	}
+
 }

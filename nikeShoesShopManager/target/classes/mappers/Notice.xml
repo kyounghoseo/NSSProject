@@ -63,4 +63,22 @@
 		noticefile from notice_tb where noticeNO = #{noticeNo}
 	</select>
 
+	<update id="noticeUpdate" parameterType="Notice">
+		UPDATE notice_tb
+		SET
+		noticeTitle=#{noticeTitle},
+		noticeContents=#{noticeContents}, noticeDate=sysdate
+		<if test="noticeFile != ''">
+			, noticeFile=#{noticeFile}
+		</if>
+		WHERE
+		noticeNo = #{noticeNo}
+	</update>
+
+	<delete id="noticeDelete" parameterType="Notice">
+		DELETE FROM notice_tb
+		WHERE
+		noticeNo = #{noticeNo}
+	</delete>
+
 </mapper>
