@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<c:if test="${empty sessionScope.managerid }">
+ <script>
+ alert("잘못된 접근경로입니다. 관리자 로그인페이지로 이동합니다.");
+ location.href="/manager/login/loginForm.do";
+ </script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>

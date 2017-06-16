@@ -8,10 +8,10 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class PagingTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
 
-	private int page = 1;
-	private int total = 1;
-	private int list_size = 10;
-	private int page_size = 10;
+	private int page = 1; //현재 페이지번호
+	private int total = 1; //전체 조회된 row수
+	private int list_size = 10; //페이지에 보여주는 레코드수
+	private int page_size = 5; //페이지 네비게이터에 표시되는 버튼의 갯수
 
 	@Override
 	public int doStartTag() throws JspException {

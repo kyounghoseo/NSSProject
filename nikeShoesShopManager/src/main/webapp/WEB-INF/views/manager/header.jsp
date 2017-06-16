@@ -20,7 +20,7 @@
 				<li><a href="/manager/customer/customerList.do">고객관리</a></li>
 				<li><a href="/manager/notice/noticeList.do">공지사항</a></li>
 				<li><a href="#">QnA</a></li>
-				<li><a href="#">쇼핑몰이동</a></li>
+				<li><a href="/">쇼핑몰이동</a></li>
 			</ul>
 		</nav>
 	</div>

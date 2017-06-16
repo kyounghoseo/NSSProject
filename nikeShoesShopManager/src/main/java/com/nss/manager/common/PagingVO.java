@@ -1,10 +1,10 @@
 package com.nss.manager.common;
 
 public class PagingVO {
-	private String page;
-	private String pageSize;
-	private String start_row;
-	private String end_row;
+	private String page; // 페이지 번호
+	private String pageSize; // 페이지에 보여주는 줄수
+	private String start_row; // 시작 레코드번호
+	private String end_row; // 종료 레코드번호
 
 	// 조건 검색시 필드
 	private String search = "";

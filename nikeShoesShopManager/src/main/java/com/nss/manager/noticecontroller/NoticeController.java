@@ -32,9 +32,9 @@ public class NoticeController {
 	public String noticeList(@ModelAttribute NoticeVO nvo, Model model) {
 		logger.info("noticeList 호출성공");
 
-		int total = noticeService.noticeListCnt(nvo);
-
 		Paging.setPage(nvo);
+
+		int total = noticeService.noticeListCnt(nvo);
 
 		List<NoticeVO> noticeList = noticeService.noticeList(nvo);
 
@@ -43,6 +43,8 @@ public class NoticeController {
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("total", total);
 		model.addAttribute("data", nvo);
+
+		System.out.println("noticeList : " + noticeList);
 
 		return "manager/notice/noticeList";
 

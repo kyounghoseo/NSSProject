@@ -58,13 +58,15 @@
 		) lst)
 
 		<where>
+		
 			<if test="start_row!=null and start_row!=''">
 				<if test="end_row!=null and end_row!=''">
+				
 					rnum between #{start_row} and #{end_row}
 				</if>
 
 			</if>
-
+			
 		</where>
 
 
