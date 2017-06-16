@@ -59,4 +59,10 @@ public class OrderServiceImpl implements OrderService {
 		return result;
 	}
 
+	@Override
+	public int orderListCnt(OrderVO ovo) {
+		// TODO Auto-generated method stub
+		return orderDao.orderListCnt(ovo);
+	}
+
 }

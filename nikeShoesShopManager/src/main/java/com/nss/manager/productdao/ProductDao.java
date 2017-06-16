@@ -2,6 +2,7 @@ package com.nss.manager.productdao;
 
 import java.util.List;
 
+import com.nss.manager.ordervo.OrderVO;
 import com.nss.manager.productvo.ProductVO;
 
 public interface ProductDao {
@@ -17,5 +18,7 @@ public interface ProductDao {
 	public int productDelete(int productNo);
 	
 	public int productListCnt(ProductVO pvo);
+	
+	
 
 }

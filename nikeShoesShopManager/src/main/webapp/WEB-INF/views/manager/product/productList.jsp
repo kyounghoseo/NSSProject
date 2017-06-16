@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tag" uri="/WEB-INF/tld/custom_tag.tld"%>
+<c:if test="${empty sessionScope.managerid }">
+ <script>
+ alert("잘못된 접근경로입니다. 관리자 로그인페이지로 이동합니다.");
+ location.href="/manager/login/loginForm.do";
+ </script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +33,7 @@
 				"method" : "get",
 				"action" : "/manager/product/productDetail.do"
 			});
-			$("#detailForm").submit();
+			$("#detailForm").submit(); 
 		});
 
 		$("#searchData").click(function() {

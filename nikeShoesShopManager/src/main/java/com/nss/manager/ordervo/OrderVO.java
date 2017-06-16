@@ -1,6 +1,8 @@
 package com.nss.manager.ordervo;
 
-public class OrderVO {
+import com.nss.manager.common.PagingVO;
+
+public class OrderVO extends PagingVO{
 
 	private int orderNO;
 	private int productNO;
@@ -21,8 +23,27 @@ public class OrderVO {
 	private String orderSize;
 	
 	private String order_check;
+	private String s_startDate;
+	private String s_endDate;
 	
 	
+	
+	public String getS_startDate() {
+		return s_startDate;
+	}
+
+	public void setS_startDate(String s_startDate) {
+		this.s_startDate = s_startDate;
+	}
+
+	public String getS_endDate() {
+		return s_endDate;
+	}
+
+	public void setS_endDate(String s_endDate) {
+		this.s_endDate = s_endDate;
+	}
+
 	public int getOrderNO() {
 		return orderNO;
 	}
