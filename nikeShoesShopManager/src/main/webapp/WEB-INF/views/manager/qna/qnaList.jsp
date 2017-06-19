@@ -10,7 +10,7 @@
 <title>공지사항 목록</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
-<script type="text/javascript" src="../resources/include/js/common.js"></script>
+<script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
@@ -45,13 +45,13 @@
 
 		//제목 클릭시 상세페이지 이동
 		$(".goDetail").click(function() {
-			var noticeNo = $(this).parents("tr").attr("data-num");
-			$("#noticeNo").val(noticeNo);
-			console.log("글번호 : " + noticeNo);
+			var qnaNO = $(this).parents("tr").attr("data-num");
+			$("#qnaNO").val(qnaNO);
+			console.log("글번호 : " + qnaNO);
 			//상세페이지로 이동하기위해 form 추가 (id : detailForm)
 			$("#detailForm").attr({
 				"method" : "get",
-				"action" : "/manager/notice/noticeDetail.do"
+				"action" : "/manager/qna/qnaDetail.do"
 			});
 			$("#detailForm").submit();
 		});
@@ -91,7 +91,7 @@ session.setAttribute("id", id);
 
 	<!-- 상세페이지 이동을 위한 form -->
 	<form name="detailForm" id="detailForm">
-		<input type="hidden" name="noticeNo" id="noticeNo"> <input
+		<input type="hidden" name="qnaNO" id="qnaNO"> <input
 			type="hidden" name="page" value="${data.page }"> <input
 			type="hidden" name="pageSize" value="${data.pageSize }">
 	</form>
@@ -110,25 +110,31 @@ session.setAttribute("id", id);
 	<p>
 
 		<!-- 리스트 시작 -->
-	<div id="noticeList">
+	<div id="qnaList">
 		<table id="list_tb" cellspacing="0" cellpadding="0" summary="공지사항 목록">
+		<colgroup>
+				<col width="10%" />
+				<col width="30%" />
+				<col width="40%" />
+				<col width="20%" />
+			</colgroup>
 			<thead>
 				<tr>
-					<th><marquee>공지번호</marquee></th>
-					<th>작성자</th>
+					<th><marquee>QnA번호</marquee></th>
+					<th>등록날짜</th>
 					<th>제목</th>
-					<th class="borcle">등록날짜</th>
+					<th class="borcle">작성자</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${not empty noticeList}">
-						<c:forEach var="notice" items="${noticeList}" varStatus="status">
-							<tr data-num="${notice.noticeNo}">
-								<td>${notice.noticeNo}</td>
-								<td>${notice.noticeWriter}</td>
-								<td><span class="goDetail">${notice.noticeTitle}</span></td>
-								<td>${notice.noticeDate}</td>
+					<c:when test="${not empty qnaList}">
+						<c:forEach var="qna" items="${qnaList}" varStatus="status">
+							<tr data-num="${qna.qnaNO}">
+								<td>${qna.qnaNO }</td>
+								<td>${qna.qnaDate}</td>
+								<td><span class="goDetail">${qna.qnaTitle}</span></td>
+								<td>${qna.qnaWriter}</td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -142,12 +148,10 @@ session.setAttribute("id", id);
 		</table>
 	</div>
 	<p>
-	<form id="insert">
-		<input type="button" id="insertButton" value="공지등록">
-	</form>
+	
 
 	<!-- 페이지 네비게이션 -->
-	<div id="boardPage">
+	<div id="qnaPage">
 		<tag:paging page="${param.page}" total="${total}"
 			list_size="${data.pageSize}"></tag:paging>
 	</div>

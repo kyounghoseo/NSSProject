@@ -18,11 +18,16 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		
-		
+	
 		if(!$("#order_check").val()){
 			$("#order_check").val('전체');
 		}
+		if($("#order_check").val()){
+			var check = $("#order_check").val();
+			
+		 	$('input:radio[name=order]:input[value=' + check + ']').attr("checked", true); 
+		}
+		
 		 $("#s_startDate,#s_endDate").datepicker({
 			 showOn: "both", 
 		     buttonImage: "../resources/images/calendar-symbol.png", 
@@ -44,17 +49,13 @@
 		    resizable: false,
 		  });
 		
-		if($("#order_check").val()){
-		var check = $("#order_check").val();
 		
-	 	$('input:radio[name=order]:input[value=' + check + ']').attr("checked", true); 
-		}
 		
 		
 		$("input[type='radio']").click(function() {
 
 			  var check = $("input:radio[name=order]:checked").val();
-			  $("#order_check").val(check);
+			  $(".order_check").val(check);
 			
 
 			goPage(1);
@@ -70,7 +71,9 @@
 		});
 		
 		$("#search").click(function() {
-			
+			if(!$(".order_check").val()){
+				$(".order_check").val($("#order_check").val());
+				}
 			$("#f_search").attr({
 				"method" : "get",
 				"action" : "/manager/order/orderList.do"
@@ -89,11 +92,9 @@
 			$('#dialog').dialog('open');
 
 			$("#shipInsert").click(function() {
-				
 
 				if ($("#orderShipno").val()) {
 					$("#orderNO").val(orderNO);
-					alert($("#orderNO").val());
 					$("#detailForm").attr({
 						"method" : "get",
 						"action" : "/manager/order/orderInfo.do"
@@ -108,6 +109,9 @@
 	function goPage(page) {
 
 		$("#page").val(page);
+		if(!$(".order_check").val()){
+		$(".order_check").val($("#order_check").val());
+		}
 		
 		$("#f_check").attr({
 			"method" : "get",
@@ -149,7 +153,7 @@ input[type="button"] {
 </head>
 <body>
 	<form id="f_check" name="f_check">
-		<input type="hidden" name="order_check" id="order_check" value="${data.order_check }">
+		 <input type="hidden" name="order_check" class="order_check" value="${data.order_check }"> 
 		<input type="hidden" name="page" id="page" value="${data.page }"> 
 			<input type="hidden" name="pageSize" id="pageSize" value="${data.pageSize }">
 			<input type="hidden" name="s_startDate" value="${data.s_startDate }"> 
@@ -192,6 +196,7 @@ input[type="button"] {
 			<input type="button" id="search" value="검색">
 		<input type="hidden" name="page" id="page" value="${data.page }"> 
 			<input type="hidden" name="pageSize" id="pageSize" value="${data.pageSize }">
+		<input type="hidden" name="order_check" class="order_check" value="${data.order_check }" >  
 			
 			</form>
 		</div>
@@ -275,7 +280,9 @@ input[type="button"] {
 		<form name="detailForm" id="detailForm">
 			
 			<input type="hidden" name="orderNO" id="orderNO"> 
-			<input type="hidden" name="order_check" id="order_check" value="${data.order_check }">
+			<input type="hidden" name="s_startDate" value="${data.s_startDate }">
+			<input type="hidden" name="s_endDate" value="${data.s_endDate }">
+			<input type="hidden" name="order_check" id="order_check" value="${data.order_check }" >
 			<input type="hidden" name="page" id="page" value="${data.page }"> 
 			<input type="hidden" name="pageSize" value="${data.pageSize }">
 			<input type="text" id="orderShipno" name="orderShipno"> 

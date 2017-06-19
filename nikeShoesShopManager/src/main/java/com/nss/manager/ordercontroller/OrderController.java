@@ -94,10 +94,13 @@ public class OrderController {
 		if(result ==1){
 			url = "/order/orderList.do";
 		}
+		System.out.println(ovo.getOrder_check()+"오더체크");
 		model.addAttribute("order_check",ovo.getOrder_check());
-		model.addAttribute("s_startDate", ovo.getS_startDate());
+		model.addAttribute("s_startDate",ovo.getS_startDate());
 		model.addAttribute("s_endDate",ovo.getS_endDate());
 		return "redirect:"+url;
 		
 	}
+	
+	
 }
