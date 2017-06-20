@@ -7,6 +7,15 @@
 <title>header</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#sessionOut").click(function() {
+
+			location.href = "/manager/login/logOut.do";
+
+		});
+	});
+</script>
 </head>
 <body>
 	<!-- 상단 헤더 -->
@@ -19,8 +28,9 @@
 				<li><a href="/manager/product/productList.do">상품관리</a></li>
 				<li><a href="/manager/customer/customerList.do">고객관리</a></li>
 				<li><a href="/manager/notice/noticeList.do">공지사항</a></li>
-				<li><a href="#">QnA</a></li>
+				<li><a href="/manager/qna/qnaList.do">QnA</a></li>
 				<li><a href="/customer">쇼핑몰이동</a></li>
+				<li><input type="button" value="로그아웃" id="sessionOut"></li>
 			</ul>
 		</nav>
 	</div>

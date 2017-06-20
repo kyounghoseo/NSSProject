@@ -29,6 +29,11 @@
 
 			$("#loginForm").submit();
 		});
+		
+		$("#home").click(function() {
+
+			location.href = '/customer';
+		});
 	});
 </script>
 <style type="text/css">
@@ -226,6 +231,9 @@ a {
 				<tr>
 					<td><input type="button" value="로그인" name="loginInsert"
 						id="loginInsert"></td>
+						<td><input type="button" value="홈" name="home"
+						id="home"></td>
+						
 				</tr>
 			</tbody>
 		</table>

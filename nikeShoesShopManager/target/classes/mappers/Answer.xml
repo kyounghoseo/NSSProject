@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nss.manager.answerdao.AnswerDao">
+	
+	
+	<select id="answerList" parameterType="com.nss.manager.answervo.AnswerVO" resultType="com.nss.manager.answervo.AnswerVO">
+		SELECT
+		answerNO,
+		qnaNO,
+		managerNO,
+		answerWriter,
+		answerContents,
+		to_char(answerDate,'YYYY-MM-DD HH24:MI:SS') as answerDate
+		FROM answer_tb
+		where qnaNO = #{qnaNO}
+		order by answerNO desc
+	</select>
+	
+		
+	<insert id="answerInsert" parameterType="com.nss.manager.answervo.AnswerVO">
+	<selectKey keyProperty="answerNO" resultType="int" order="BEFORE">
+	select answer_no_seq.nextval from dual
+	</selectKey>
+		INSERT INTO answer_tb (answerNO,qnaNO, managerNO, answerWriter,answerContents)
+		
+		VALUES(#{answerNO},#{qnaNO},#{managerNO},#{answerWriter},#{answerContents})
+		
+	</insert>
+	
+
+	<update id="answerUpdate" parameterType="com.nss.manager.answervo.AnswerVO">
+		UPDATE answer_tb
+		SET
+		answerContents = #{answerContents},
+		answerDate = sysdate
+		WHERE
+		answerNO = #{answerNO}
+	</update>
+
+	<delete id="answerDelete" parameterType="com.nss.manager.answervo.AnswerVO">
+		DELETE FROM answer_tb WHERE
+		answerNO = #{answerNO}
+	</delete>
+
+</mapper>

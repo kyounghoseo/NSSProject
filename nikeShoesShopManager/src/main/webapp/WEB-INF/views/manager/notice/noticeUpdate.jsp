@@ -18,11 +18,8 @@
 					function() {
 						//이미지 호버 이벤트
 						var img = $("<img>");
-						$('#imgView')
-								.hover(
-										function() {
-											img
-													.attr({
+						$('#imgView').hover(function() {
+											img.attr({
 														src : "/manager/noticeStorage/${updateData.noticeFile}",
 														width : "450px",
 														height : "200px"

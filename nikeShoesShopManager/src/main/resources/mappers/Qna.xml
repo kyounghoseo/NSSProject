@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nss.manager.qnadao.QnaDao">
+
+	<select id="qnaList" parameterType="com.nss.manager.qnavo.QnaVO" resultType="com.nss.manager.qnavo.QnaVO">
+		select qnano, qnadate, qnatitle, qnawriter 
+		FROM qna_tb
+		
+	</select>
+	
+
+	<select id="qnaDetail" parameterType="com.nss.manager.qnavo.QnaVO" resultType="com.nss.manager.qnavo.QnaVO">
+		select
+		qnano, qnadate, qnawriter, qnatitle, qnacontents
+		from qna_tb where qnaNO = #{qnaNO}
+	</select>
+
+
+	<delete id="qnaDelete" parameterType="com.nss.manager.qnavo.QnaVO">
+		DELETE FROM qna_tb
+		WHERE
+		qnaNo = #{qnaNO}
+	</delete>
+
+</mapper>
