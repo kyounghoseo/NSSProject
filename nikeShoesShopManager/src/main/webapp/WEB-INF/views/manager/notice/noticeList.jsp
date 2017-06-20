@@ -140,16 +140,17 @@ session.setAttribute("id", id);
 				</c:choose>
 			</tbody>
 		</table>
-	</div>
-	<p>
-	<form id="insert">
-		<input type="button" id="insertButton" value="공지등록">
-	</form>
+		<p>
+		<form id="insert">
+			<input type="button" id="insertButton" value="공지등록">
+		</form>
 
-	<!-- 페이지 네비게이션 -->
-	<div id="boardPage">
-		<tag:paging page="${param.page}" total="${total}"
-			list_size="${data.pageSize}"></tag:paging>
+		<!-- 페이지 네비게이션 -->
+		<div id="boardPage">
+			<tag:paging page="${param.page}" total="${total}"
+				list_size="${data.pageSize}"></tag:paging>
+		</div>
+
 	</div>
 </body>
 </html>

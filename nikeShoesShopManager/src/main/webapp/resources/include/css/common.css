@@ -26,6 +26,21 @@ div {
 	text-align: center;
 }
 
+span {
+	cursor: pointer;
+}
+
+input[type="button"] {
+	background-color: #555555; /* Black */
+	border: none;
+	color: white;
+	text-align: center;
+	/* text-decoration: none; */
+	/* display: inline-block; */
+	font-size: 1em;
+	cursor: pointer;
+}
+
 #list_tb {
 	width: 100%;
 	padding: 0px;
@@ -50,7 +65,7 @@ div {
 	border-right: 0px;
 }
 
-#insert{
+#insert {
 	text-align: right;
 }
 
