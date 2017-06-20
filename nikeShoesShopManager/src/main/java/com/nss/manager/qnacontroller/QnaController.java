@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.nss.manager.productfileupload.FileUploadUtil;
+import com.nss.manager.productvo.ProductVO;
 import com.nss.manager.qnaservice.QnaService;
 import com.nss.manager.qnavo.QnaVO;
 
@@ -23,8 +25,10 @@ public class QnaController {
 	private QnaService qnaService;
 	
 	
+	
+	
 	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
-	public String noticeList(@ModelAttribute QnaVO qvo, Model model) {
+	public String qnaList(@ModelAttribute QnaVO qvo, Model model) {
 
 
 
@@ -41,7 +45,7 @@ public class QnaController {
 	
 
 	@RequestMapping(value = "/qnaDetail", method = RequestMethod.GET)
-	public String noticeDetail(@ModelAttribute QnaVO qvo, Model model) {
+	public String qnaDetail(@ModelAttribute QnaVO qvo, Model model) {
 		System.out.println("디테일~~!!qna");
 
 
@@ -57,9 +61,26 @@ public class QnaController {
 	
 	
 	@RequestMapping(value = "/qnaDelete" ,method = RequestMethod.POST)
-	public String boardDelete(@ModelAttribute QnaVO qvo, HttpServletRequest request) throws IOException {
+	public String qnaDelete(@ModelAttribute QnaVO qvo, HttpServletRequest request) throws IOException {
 
 		System.out.println("딜리트넘버" + qvo.getQnaNO());
+
+		int result = 0;
+		String url = "";
+
+		result = qnaService.qnaDelete(qvo.getQnaNO());
+		System.out.println(result);
+		if (result == 1) {
+			url = "/qna/qnaList.do";
+		}
+		return "redirect:" + url;
+
+	}
+	
+	@RequestMapping(value = "/qnaUpdate" ,method = RequestMethod.POST)
+	public String qnaUpdate(@ModelAttribute QnaVO qvo, HttpServletRequest request) throws IOException {
+
+		System.out.println("업" + qvo.getQnaNO());
 
 		int result = 0;
 		String url = "";

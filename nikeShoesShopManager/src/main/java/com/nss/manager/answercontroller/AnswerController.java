@@ -44,7 +44,7 @@ public class AnswerController {
 		System.out.println("insert 호출 성공");
 		ResponseEntity<String> entity = null;
 		int result;
-		avo.setManagerNO("1");
+		System.out.println(avo.getManagerNO()+"매니저넘버");
 		try {
 			result = answerService.answerInsert(avo);
 			if (result == 1) {

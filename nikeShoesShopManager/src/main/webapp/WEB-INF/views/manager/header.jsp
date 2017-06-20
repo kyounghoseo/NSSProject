@@ -7,6 +7,16 @@
 <title>header</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#sessionOut").click(function() {
+		
+		location.href = "/manager/login/logOut.do";
+		
+	});
+});
+
+</script>
 </head>
 <body>
 	<!-- 상단 헤더 -->
@@ -24,5 +34,6 @@
 			</ul>
 		</nav>
 	</div>
+	<input type="button" value="로그아웃" id="sessionOut">
 </body>
 </html>

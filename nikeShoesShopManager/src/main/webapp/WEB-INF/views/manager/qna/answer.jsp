@@ -20,7 +20,12 @@ $(function() {
 		$("#answerWriter").attr("disabled",true);
 	}
 	var qnaNO = "<c:out value='${detail.qnaNO}' />";
+	var qnaTitle = "<c:out value='${detail.qnaTitle}+" [답변완료] "' />";
 	listAll(qnaNO);
+	
+	if($("#answerWriter").val()=='관리자'){
+		var managerNO = "<c:out value='1' />"
+	}
 	
 	$("#answerInsert").click(function() {
 		if(!chkSubmit($("#answerWriter"),"작성자"))
@@ -29,6 +34,7 @@ $(function() {
 			return;
 		else{
 			var insertUrl = "/manager/answer/answerInsert.do";
+			
 			
 			$.ajax({
 				url : insertUrl,
@@ -41,6 +47,7 @@ $(function() {
 				data : JSON.stringify({
 					
 					qnaNO:qnaNO,
+					managerNO:managerNO,
 					answerWriter:$("#answerWriter").val(),
 					answerContents:$("#answerContents").val(),
 					r_cont:$("#r_content").val()
@@ -171,10 +178,20 @@ function listAll(qnaNO) {
 			addNewItem(answerNO,answerWriter,answerContents,answerDate);
 			
 		});
+		var url = "/manager/qna/qnaUpdate.do";
+	}).done(url,function(data) {
+	   var qnaNO = this.qnaNO;
+	   var qnaTitle = this.qnaTitle;
 		
-	}).fail(function() {
-		alert("덧글 목록을 불러오는데 실패하였습니다. 잠시후에 다시 시도해 주세요.");
-	});
+		
+		
+	  }).fail(function() {
+			alert("덧글 목록을 불러오는데 실패하였습니다. 잠시후에 다시 시도해 주세요.");
+		});
+	
+	
+	
+	
 	
 	
 }
