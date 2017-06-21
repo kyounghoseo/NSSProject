@@ -28,19 +28,19 @@ public class SalesController {
 	public String salesList(@ModelAttribute OrderVO ovo, Model model) {
 		logger.info("noticeList 호출성공");
 
-		/* Paging.setPage(nvo); */
+		int total = salesService.salesTotalCnt(ovo);
 
-		/* int total = noticeService.noticeListCnt(nvo); */
+		Paging.setPage(ovo);
 
-		/*List<OrderVO> salesList = salesService.salesList(ovo);*/
+		List<OrderVO> salesList = salesService.salesList(ovo);
 
-		/* logger.info("total = " + total); */
+		logger.info("total = " + total);
 
-		/*model.addAttribute("salesList", salesList);
-		 model.addAttribute("total", total); 
+		model.addAttribute("salesList", salesList);
+		model.addAttribute("total", total);
 		model.addAttribute("data", ovo);
 
-		System.out.println("salesList : " + salesList);*/
+		System.out.println("salesList : " + salesList);
 
 		return "manager/sales/salesList";
 	}

@@ -6,5 +6,7 @@ import com.nss.manager.ordervo.OrderVO;
 
 public interface SalesService {
 
-	public List<OrderVO> salesList (OrderVO ovo);
+	public List<OrderVO> salesList(OrderVO ovo);
+
+	public int salesTotalCnt(OrderVO ovo);
 }

@@ -13,11 +13,17 @@ public class SalesDaoImpl implements SalesDao {
 
 	@Autowired
 	private SqlSession session;
-	
+
 	@Override
 	public List<OrderVO> salesList(OrderVO ovo) {
 		// TODO Auto-generated method stub
 		return session.selectList("salesList", ovo);
 	}
-	
+
+	@Override
+	public int salesTotalCnt(OrderVO ovo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("salesTotalCnt", ovo);
+	}
+
 }

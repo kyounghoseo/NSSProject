@@ -16,6 +16,14 @@
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+
+		//한페이지에 보여줄 레코드 수 조회후 값 유지
+		if ("<c:out value='${data.pageSize}' />" != "") {
+			$("#pageSize").val("<c:out value = '${data.pageSize}' />");
+		}
+	});
+
 	google.charts.load('current', {
 		'packages' : [ 'corechart' ]
 	});
@@ -26,14 +34,17 @@
 	function drawChart() {
 		var data = google.visualization.arrayToDataTable([
 				[ 'day', '매출금액', '환불금액' ],
-				[ (date.getUTCMonth() + 1) + '/' + (date.getUTCDate() - 3),
-						100000, 40000 ],
-				[ (date.getUTCMonth() + 1) + '/' + (date.getUTCDate() - 2),
-						117000, 46000 ],
-				[ (date.getUTCMonth() + 1) + '/' + (date.getUTCDate() - 1),
-						66000, 112000 ],
-				[ (date.getUTCMonth() + 1) + '/' + date.getUTCDate(), 103000,
-						54000 ] ]);
+				[
+						'0' + (date.getUTCMonth() + 1) + '/'
+								+ (date.getUTCDate() - 3), 100000, 40000 ],
+				[
+						'0' + (date.getUTCMonth() + 1) + '/'
+								+ (date.getUTCDate() - 2), 117000, 46000 ],
+				[
+						'0' + (date.getUTCMonth() + 1) + '/'
+								+ (date.getUTCDate() - 1), 66000, 112000 ],
+				[ '0' + (date.getUTCMonth() + 1) + '/' + date.getUTCDate(),
+						103000, 54000 ] ]);
 
 		var options = {
 			title : 'Nike Shoes Shop Performance',
@@ -47,6 +58,21 @@
 				.getElementById('curve_chart'));
 
 		chart.draw(data, options);
+	}
+
+	//검색과 한페이지에 보여줄 레코드수 처리 및 페이징을 위한 실질적인 처리함수
+	function goPage(page) {
+		if ($("#search").val() == "all") {
+			$("#keyword").val("");
+		}
+
+		$("#page").val(page);
+
+		$("#f_search").attr({
+			"method" : "get",
+			"action" : "/manager/sales/salesList.do"
+		});
+		$("#f_search").submit();
 	}
 </script>
 </head>
@@ -73,13 +99,14 @@
 				id="searchButton">
 		</form>
 	</div>
+	<p>
 	<div>
 		<table>
 			<tbody>
 				<tr>
 					<td>매출현황</td>
 					<td><input type="button" value="엑셀다운로드"></td>
-					<td>총 매출금액</td>
+					<td>&nbsp;총 매출금액</td>
 					<td>[550,000원]</td>
 					<td>총 환불금액</td>
 					<td>[100,000원]</td>
@@ -92,8 +119,8 @@
 		</form>
 	</div>
 
-	<!-- 리스트 시작 -->
-	<div id="slaesList" style="width: 100%">
+
+	<div id="slaesList">
 		<div style="width: 70%; float: left;">
 			<table id="list_tb" cellspacing="0" cellpadding="0" summary="매출 목록">
 				<thead>
@@ -110,8 +137,8 @@
 					<c:choose>
 						<c:when test="${not empty salesList}">
 							<c:forEach var="sales" items="${salesList}" varStatus="status">
-								<tr data-num="${sales.orderNo}">
-									<td>${sales.orderNo}</td>
+								<tr data-num="${sales.orderNO}">
+									<td>${sales.orderNO}</td>
 									<td>${sales.orderPrname}</td>
 									<td>${sales.orderCount}</td>
 									<td>${sales.orderPrice}</td>
@@ -129,14 +156,15 @@
 				</tbody>
 			</table>
 		</div>
-		<div id="curve_chart" style="width: 30%; height: 50%; float: right;"></div>
 
+		<div id="curve_chart"
+			style="width: 30%; float: right; margin-bottom: 30%;"></div>
 
-		<%-- <!-- 페이지 네비게이션 -->
+	</div>
+
 	<div id="boardPage">
 		<tag:paging page="${param.page}" total="${total}"
 			list_size="${data.pageSize}"></tag:paging>
-	</div> --%>
 	</div>
 </body>
 </html>

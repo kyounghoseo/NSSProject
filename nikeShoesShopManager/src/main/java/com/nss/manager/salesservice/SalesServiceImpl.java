@@ -25,4 +25,10 @@ public class SalesServiceImpl implements SalesService {
 		return saList;
 	}
 
+	@Override
+	public int salesTotalCnt(OrderVO ovo) {
+		// TODO Auto-generated method stub
+		return salesDao.salesTotalCnt(ovo);
+	}
+
 }
