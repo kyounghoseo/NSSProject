@@ -15,7 +15,7 @@
 		to_char(answerDate,'YYYY-MM-DD HH24:MI:SS') as answerDate
 		FROM answer_tb
 		where qnaNO = #{qnaNO}
-		order by answerNO desc
+		order by answerNO asc
 	</select>
 	
 		

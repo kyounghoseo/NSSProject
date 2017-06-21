@@ -5,8 +5,44 @@
 <mapper namespace="com.nss.manager.qnadao.QnaDao">
 
 	<select id="qnaList" parameterType="com.nss.manager.qnavo.QnaVO" resultType="com.nss.manager.qnavo.QnaVO">
-		select qnano, qnadate, qnatitle, qnawriter 
-		FROM qna_tb
+		select qnano, qnadate, qnatitle, qnawriter ,qnaAnswer, qnaCsid
+		FROM 
+		(select lst.*,rownum as rnum from
+		(select qnano, qnadate, qnatitle, qnawriter ,qnaAnswer, qnaCsid
+		from		
+		qna_tb
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="search=='id'">
+		<![CDATA[
+		qnaCsid like '%'||#{keyword}||'%'
+		]]>
+			</if>
+				<if test="search=='title'">
+		<![CDATA[
+		qnaTitle like '%'||#{keyword}||'%'
+		]]>
+			</if>
+		<if test="qna_check != '전체'">
+				<if test="qna_check != null">
+				<![CDATA[
+					qnaAnswer = #{qna_check}
+				]]>
+				</if>
+			</if>
+		</trim>
+		order by qnano desc
+		
+		)lst)
+		<where>
+			<if test="start_row!=null and start_row!=''">
+				<if test="end_row!=null and end_row!=''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+
+			</if>
+			
+		</where>
+		
 		
 	</select>
 	
@@ -24,4 +60,39 @@
 		qnaNo = #{qnaNO}
 	</delete>
 
+<update id="qnaUpdate" parameterType="com.nss.manager.qnavo.QnaVO">
+		UPDATE qna_tb
+		SET
+		qnaAnswer=#{qnaAnswer}
+		WHERE
+		qnaNO =#{qnaNO}
+	</update>
+	
+	<select id="qnaListCnt" parameterType="com.nss.manager.ordervo.OrderVO"
+		resultType="int">
+
+		select nvl(count(1),0) from
+		( select lst.*,rownum as rnum
+		from (SELECT
+		qnano, qnadate, qnawriter, qnatitle, qnacontents
+		from
+		qna_tb
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="qna_check != '전체'">
+				<if test="qna_check != null">
+				<![CDATA[
+					qnaAnswer = #{qna_check}
+				]]>
+				</if>
+			</if>
+		</trim>
+
+
+		)lst
+
+		)
+
+		
+
+	</select>
 </mapper>

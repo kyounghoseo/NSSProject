@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.nss.manager.common.Paging;
+import com.nss.manager.common.Util;
 import com.nss.manager.productfileupload.FileUploadUtil;
 import com.nss.manager.productvo.ProductVO;
 import com.nss.manager.qnaservice.QnaService;
@@ -31,12 +33,20 @@ public class QnaController {
 	public String qnaList(@ModelAttribute QnaVO qvo, Model model) {
 
 
-
+		System.out.println("check"+qvo.getQna_check());
+		
+		Paging.setPage(qvo);
+		int total = qnaService.qnaListCnt(qvo);
+		System.out.println("total=" + total);
+		int count = total - (Util.nvl(qvo.getPage()) - 1) * Util.nvl(qvo.getPageSize());
 		List<QnaVO> qnaList = qnaService.qnaList(qvo);
+		System.out.println("count=" + count);
 
 
 		model.addAttribute("qnaList", qnaList);
-
+		model.addAttribute("data",qvo);
+		model.addAttribute("count", count);
+		model.addAttribute("total", total);
 
 		return "manager/qna/qnaList";
 
@@ -77,20 +87,5 @@ public class QnaController {
 
 	}
 	
-	@RequestMapping(value = "/qnaUpdate" ,method = RequestMethod.POST)
-	public String qnaUpdate(@ModelAttribute QnaVO qvo, HttpServletRequest request) throws IOException {
-
-		System.out.println("업" + qvo.getQnaNO());
-
-		int result = 0;
-		String url = "";
-
-		result = qnaService.qnaDelete(qvo.getQnaNO());
-		System.out.println(result);
-		if (result == 1) {
-			url = "/qna/qnaList.do";
-		}
-		return "redirect:" + url;
-
-	}
+	
 }

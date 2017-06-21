@@ -32,4 +32,16 @@ public class QnaDaoImpl implements QnaDao{
 		return sqlSession.delete("qnaDelete",qnaNO);
 	}
 
+	@Override
+	public int qnaUpdate(QnaVO qvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("qnaUpdate",qvo);
+	}
+
+	@Override
+	public int qnaListCnt(QnaVO qvo) {
+		// TODO Auto-generated method stub
+		return (Integer)sqlSession.selectOne("qnaListCnt",qvo);
+	}
+
 }

@@ -35,6 +35,18 @@ public class QnaServiceImpl implements QnaService{
 		result = qnaDao.qnaDelete(qnaNO);
 		return result;
 	}
+
+	@Override
+	public int qnaUpdate(QnaVO qvo) {
+		// TODO Auto-generated method stub
+		return qnaDao.qnaUpdate(qvo);
+	}
+
+	@Override
+	public int qnaListCnt(QnaVO qvo) {
+		// TODO Auto-generated method stub
+		return qnaDao.qnaListCnt(qvo);
+	}
 	
 
 }

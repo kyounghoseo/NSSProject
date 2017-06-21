@@ -59,8 +59,7 @@
 		SELECT
 		count(orderStatus) orderStatus
 		from order_tb
-		where orderStatus =
-		'입금완료'
+		where orderStatus =	'입금완료'
 		<if test="s_startDate!=null and s_startDate!=''">
 			<if test="s_endDate!=null and s_endDate!=''">
 				and orderdate between to_date(#{s_startDate}, 'YYYY-MM-DD') and

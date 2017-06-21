@@ -20,7 +20,7 @@ $(function() {
 		$("#answerWriter").attr("disabled",true);
 	}
 	var qnaNO = "<c:out value='${detail.qnaNO}' />";
-	var qnaTitle = "<c:out value='${detail.qnaTitle}+" [답변완료] "' />";
+	var qnaAnswer ="<c:out value='답변완료' />";
 	listAll(qnaNO);
 	
 	if($("#answerWriter").val()=='관리자'){
@@ -60,6 +60,37 @@ $(function() {
 				success : function(resultData) {
 					if(resultData=="SUCCESS"){
 						alert("댓글 등록이 완료되었습니다.");
+						var comment_list = $("#comment_list").children('li').attr('data-num');
+						if(comment_list==null){
+							var insertUrl = "/manager/answer/qnaUpdate.do";
+						$.ajax({
+							url : insertUrl,
+							type : "put",
+							headers : {
+								"Content-Type":"application/json",
+								"X-HTTP-Method-Override":"PUT"
+							},
+							dataType:"text",
+							data : JSON.stringify({
+								
+								qnaNO:qnaNO,
+								qnaAnswer:qnaAnswer
+							}),
+							error : function() {
+								
+								alert('시스템 오류 입니다. 관리자에게 문의 하세요.');
+								
+							},
+							success : function(resultData) {
+								if(resultData=="SUCCESS"){
+									console.log('답변완료 텍스트추가');
+								}
+								
+							}
+							
+							
+						});
+						}
 						dataReset();
 						listAll(qnaNO);
 						if(${not empty sessionScope.managerid}){
@@ -179,13 +210,7 @@ function listAll(qnaNO) {
 			
 		});
 		var url = "/manager/qna/qnaUpdate.do";
-	}).done(url,function(data) {
-	   var qnaNO = this.qnaNO;
-	   var qnaTitle = this.qnaTitle;
-		
-		
-		
-	  }).fail(function() {
+	}).fail(function() {
 			alert("덧글 목록을 불러오는데 실패하였습니다. 잠시후에 다시 시도해 주세요.");
 		});
 	

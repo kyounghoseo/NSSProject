@@ -19,12 +19,24 @@
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		if ("<c:out value='${data.keyword}' />" != "") {
+			$("#keyword").val("<c:out value='${data.keyword}' />");
+			$("#search").val("<c:out value='${data.search}' />");
+		}
 
 		$("#productInsert").click(function() {
 			location.href = "/manager/product/insertForm.do";
 
 		});
 
+		$("#search").change(function() {
+			if ($("#search").val() == "all") {
+				$("#keyword").val("전체 상품");
+			} else if ($("#search").val() != "all") {
+				$("#keyword").val("");
+				$("#keyword").focus();
+			}
+		});
 		$(".goDetail").click(function() {
 			var productNo = $(this).parents("tr").attr("data-num");
 			$("#productNo").val(productNo);
@@ -37,6 +49,9 @@
 		});
 
 		$("#searchData").click(function() {
+			if ($("#search").val() == "all") {
+				$("#keyword").val("전체 상품");
+			}
 			goPage(1);
 
 		});
@@ -78,7 +93,7 @@ input[type="button"] {
 		<form id="searchForm" >
 			<input type="hidden" name="page" id="page" value="${data.page }">
 			<input type="hidden" name="pageSize" id="pageSize"
-				value="${data.pageSize }"> <label for="searchName">검색어</label>
+				value="${data.pageSize }"> <label for="keyword">검색어</label>
 			<select id="search" name="search">
 				<option value="all">전체</option>
 				<option value="productName">상품명</option>
