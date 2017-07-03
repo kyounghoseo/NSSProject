@@ -29,7 +29,7 @@
 				<li><a href="/manager/customer/customerList.do">고객관리</a></li>
 				<li><a href="/manager/notice/noticeList.do">공지사항</a></li>
 				<li><a href="/manager/qna/qnaList.do">QnA</a></li>
-				<li><a href="/customer">쇼핑몰이동</a></li>
+				<li><a href="/customer/home.do">쇼핑몰이동</a></li>
 				<li><input type="button" value="로그아웃" id="sessionOut"></li>
 			</ul>
 		</nav>

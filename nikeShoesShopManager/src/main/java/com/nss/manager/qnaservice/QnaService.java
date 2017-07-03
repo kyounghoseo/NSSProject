@@ -11,4 +11,10 @@ public interface QnaService {
 	public QnaVO qnaDetail(QnaVO qvo);
 
 	public int qnaDelete(int qnaNO);
+	
+	public int qnaUpdate(QnaVO qvo);
+	
+	public int qnaListCnt(QnaVO qvo);
+	
+	
 }

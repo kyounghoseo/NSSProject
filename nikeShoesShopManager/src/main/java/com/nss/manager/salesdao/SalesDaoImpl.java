@@ -26,4 +26,22 @@ public class SalesDaoImpl implements SalesDao {
 		return session.selectOne("salesTotalCnt", ovo);
 	}
 
+	@Override
+	public int salesTotalMoney(OrderVO ovo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("salesTotalMoney", ovo);
+	}
+
+	@Override
+	public int salesRefundMoney(OrderVO ovo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("salesRefundMoney", ovo);
+	}
+
+	@Override
+	public List<OrderVO> chartList(OrderVO ovo) {
+		// TODO Auto-generated method stub
+		return session.selectList("chartList", ovo);
+	}
+
 }

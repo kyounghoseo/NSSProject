@@ -9,8 +9,8 @@ public class OrderVO extends PagingVO {
 	private int customerNO;
 	private String orderPrname;
 	private String orderCsid;
-	private int orderCount;
-	private int orderPrice;
+	private String orderCount;
+	private String orderPrice;
 	private String orderSize;
 	private String orderColor;
 	private String orderCsname;
@@ -25,6 +25,16 @@ public class OrderVO extends PagingVO {
 	private String order_check;
 	private String s_startDate;
 	private String s_endDate;
+
+	// 조건 검색시 필드
+	private String keyword = "";
+	private String search = "";
+	private String sales_check;
+
+	// 차트 검색시 필드
+	private String chartDate;
+	private int chartSales;
+	private int chartRefund;
 
 	public String getS_startDate() {
 		return s_startDate;
@@ -74,19 +84,19 @@ public class OrderVO extends PagingVO {
 		this.orderPrname = orderPrname;
 	}
 
-	public int getOrderCount() {
+	public String getOrderCount() {
 		return orderCount;
 	}
 
-	public void setOrderCount(int orderCount) {
+	public void setOrderCount(String orderCount) {
 		this.orderCount = orderCount;
 	}
 
-	public int getOrderPrice() {
+	public String getOrderPrice() {
 		return orderPrice;
 	}
 
-	public void setOrderPrice(int orderPrice) {
+	public void setOrderPrice(String orderPrice) {
 		this.orderPrice = orderPrice;
 	}
 
@@ -186,24 +196,57 @@ public class OrderVO extends PagingVO {
 		this.order_check = order_check;
 	}
 
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getSales_check() {
+		return sales_check;
+	}
+
+	public void setSales_check(String sales_check) {
+		this.sales_check = sales_check;
+	}
+
+	public String getChartDate() {
+		return chartDate;
+	}
+
+	public void setChartDate(String chartDate) {
+		this.chartDate = chartDate;
+	}
+
+	public int getChartSales() {
+		return chartSales;
+	}
+
+	public void setChartSales(int chartSales) {
+		this.chartSales = chartSales;
+	}
+
+	public int getChartRefund() {
+		return chartRefund;
+	}
+
+	public void setChartRefund(int chartRefund) {
+		this.chartRefund = chartRefund;
+	}
+
 	@Override
 	public String toString() {
-		return "OrderVO [orderNO=" + orderNO + ", productNO=" + productNO + ", customerNO=" + customerNO
-				+ ", orderPrname=" + orderPrname + ", orderCsid=" + orderCsid + ", orderCount=" + orderCount
-				+ ", orderPrice=" + orderPrice + ", orderColor=" + orderColor + ", orderCsname=" + orderCsname
-				+ ", orderCellphone=" + orderCellphone + ", orderAddress=" + orderAddress + ", orderStatus="
-				+ orderStatus + ", orderPayment=" + orderPayment + ", orderDate=" + orderDate + ", orderShipno="
-				+ orderShipno + ", orderShipdate=" + orderShipdate + ", orderSize=" + orderSize + ", order_check="
-				+ order_check + ", getOrderNO()=" + getOrderNO() + ", getProductNO()=" + getProductNO()
-				+ ", getCustomerNO()=" + getCustomerNO() + ", getOrderPrname()=" + getOrderPrname()
-				+ ", getOrderCount()=" + getOrderCount() + ", getOrderPrice()=" + getOrderPrice() + ", getOrderColor()="
-				+ getOrderColor() + ", getOrderCsname()=" + getOrderCsname() + ", getOrderCellphone()="
-				+ getOrderCellphone() + ", getOrderAddress()=" + getOrderAddress() + ", getOrderStatus()="
-				+ getOrderStatus() + ", getOrderPayment()=" + getOrderPayment() + ", getOrderDate()=" + getOrderDate()
-				+ ", getOrderShipno()=" + getOrderShipno() + ", getOrderShipdate()=" + getOrderShipdate()
-				+ ", getOrderSize()=" + getOrderSize() + ", getOrderCsid()=" + getOrderCsid() + ", getOrder_check()="
-				+ getOrder_check() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+		return "OrderVO [chartDate=" + chartDate + ", chartSales=" + chartSales + ", chartRefund=" + chartRefund + "]";
 	}
 
 }

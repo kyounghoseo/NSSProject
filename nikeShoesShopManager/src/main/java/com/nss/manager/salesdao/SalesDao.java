@@ -9,4 +9,10 @@ public interface SalesDao {
 	public List<OrderVO> salesList(OrderVO ovo);
 
 	public int salesTotalCnt(OrderVO ovo);
+	
+	public int salesTotalMoney(OrderVO ovo);
+	
+	public int salesRefundMoney(OrderVO ovo);
+	
+	public List<OrderVO> chartList(OrderVO ovo);
 }

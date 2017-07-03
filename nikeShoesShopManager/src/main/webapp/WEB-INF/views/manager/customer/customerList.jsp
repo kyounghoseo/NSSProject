@@ -3,65 +3,93 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> --%>
 <%@ taglib prefix="tag" uri="/WEB-INF/tld/custom_tag.tld"%>
+<c:if test="${empty sessionScope.managerid }">
+	<script>
+		alert("잘못된 접근경로입니다. 관리자 로그인페이지로 이동합니다.");
+		location.href = "/manager/login/loginForm.do";
+	</script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>고객 목록</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
+	<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+   href="../resources/bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+<link rel="stylesheet"
+   href="../resources/bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
 <script type="text/javascript">
-	$(document).ready(function() {
-		if ("<c:out value='${data.keyword}' />" != "") {
-			$("#keyword").val("<c:out value='${data.keyword}' />");
-			$("#search").val("<c:out value='${data.search}' />");
-		}
+	$(document).ready(
+			function() {
+				if ("<c:out value='${data.keyword}' />" != "") {
+					$("#keyword").val("<c:out value='${data.keyword}' />");
+					$("#search").val("<c:out value='${data.search}' />");
+				}
 
-		//한페이지에 보여줄 레코드 수 조회후 값 유지
-		if ("<c:out value='${data.pageSize}' />" != "") {
-			$("#pageSize").val("<c:out value = '${data.pageSize}' />");
-		}
+				//한페이지에 보여줄 레코드 수 조회후 값 유지
+				if ("<c:out value='${data.pageSize}' />" != "") {
+					$("#pageSize").val("<c:out value = '${data.pageSize}' />");
+				}
 
-		$("#search").change(function() {
-			if ($("#search").val() == "all") {
-				$("#keyword").val("고객 목록 전체");
-			} else if ($("#search").val() != "all") {
-				$("#keyword").val("");
-				$("#keyword").focus();
-			}
-		});
+				//검색버튼
+				$("#search").change(function() {
+					if ($("#search").val() == "all") {
+						$("#keyword").val("고객 목록 전체");
+					} else if ($("#search").val() != "all") {
+						$("#keyword").val("");
+						$("#keyword").focus();
+					}
+				});
 
-		$("#searchButton").click(function() {
-			if ($("#search").val() != "all") {
+				$("#searchButton").click(function() {
+					if ($("#search").val() != "all") {
 
-				if (!chkSubmit($("#keyword"), "검색어를 "))
-					return;
-			}
-			goPage(1);
-		});
+						if (!chkSubmit($("#keyword"), "검색어를 "))
+							return;
+					}
+					goPage(1);
+				});
 
-		$("#customer_all").click(function() {
-			if ($("#customer_all").val() == "전체") {
-				goRadio(1);
-			}
-		});
+				//라디오버튼 값에 따라 체크
 
-		$("#customer_normal").click(function() {
-			if ($("#customer_normal").val() == "일반회원") {
-				goRadio(1);
-			}
-		});
+				if ("<c:out value='${data.customer_check}' />" != "") {
+					var check = ("<c:out value='${data.customer_check}' />");
 
-		$("#customer_out").click(function() {
-			if ($("#customer_out").val() == "탈퇴회원") {
-				goRadio(1);
-			}
-		});
+					$(
+							'input:radio[name=customer_check]:input[value='
+									+ check + ']').attr("checked", true);
+				} else {
+					$("#customer_all").attr("checked", true);
+				}
 
-	});
+				//라디오 버튼
+				$("#customer_all").click(function() {
+					if ($("#customer_all").val() == "전체") {
+						goRadio(1);
+					}
+				});
+
+				$("#customer_normal").click(function() {
+					if ($("#customer_normal").val() == "일반회원") {
+						goRadio(1);
+					}
+				});
+
+				$("#customer_out").click(function() {
+					if ($("#customer_out").val() == "탈퇴회원") {
+						goRadio(1);
+					}
+				});
+
+			});
 
 	//검색과 한페이지에 보여줄 레코드수 처리 및 페이징을 위한 실질적인 처리함수
 	function goPage(page) {
@@ -118,9 +146,9 @@
 			<tbody>
 				<tr>
 					<td>전체 회원수</td>
-					<td>[${totalCustomer}명]</td>
+					<td style="color: blue;">[${totalCustomer}명]</td>
 					<td>오늘 가입회원</td>
-					<td>[${todayCustomer}명]</td>
+					<td style="color: red;">[${todayCustomer}명]</td>
 				</tr>
 			</tbody>
 		</table>
@@ -133,7 +161,8 @@
 	</div>
 	<!-- 리스트 시작 -->
 	<div id="customerList">
-		<table id="list_tb" cellspacing="0" cellpadding="0" summary="고객 리스트">
+		<!-- <table id="list_tb" cellspacing="0" cellpadding="0" summary="고객 리스트"> -->
+		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th><marquee>회원번호</marquee></th>

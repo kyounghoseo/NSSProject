@@ -1,10 +1,14 @@
 package com.nss.manager.answercontroller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nss.manager.answerservice.AnswerService;
 import com.nss.manager.answervo.AnswerVO;
+import com.nss.manager.qnaservice.QnaService;
+import com.nss.manager.qnavo.QnaVO;
 
 @RestController
 @RequestMapping(value = "/answer")
@@ -21,6 +27,9 @@ public class AnswerController {
 	
 	@Autowired
 	private AnswerService answerService;
+	
+	@Autowired
+	private QnaService qnaService;
 	
 	@RequestMapping(value = "/all/{qnaNO}.do", method = RequestMethod.GET)
 	public ResponseEntity<List<AnswerVO>> list(@PathVariable("qnaNO") Integer qnaNO) {
@@ -92,6 +101,26 @@ public class AnswerController {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "/qnaUpdate" , method = { RequestMethod.PUT, RequestMethod.PATCH })
+	public ResponseEntity<String> qnaUpdate(@RequestBody QnaVO qvo) throws IOException {
+		ResponseEntity<String> entity = null;
+
+		System.out.println("업데이트 넘" + qvo.getQnaNO());
+
+
+		try {
+			qnaService.qnaUpdate(qvo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
 		return entity;
 
 	}
