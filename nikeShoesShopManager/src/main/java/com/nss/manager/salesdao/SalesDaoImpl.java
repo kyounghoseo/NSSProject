@@ -44,4 +44,10 @@ public class SalesDaoImpl implements SalesDao {
 		return session.selectList("chartList", ovo);
 	}
 
+	@Override
+	public List<OrderVO> chartMonth(OrderVO ovo) {
+		// TODO Auto-generated method stub
+		return session.selectList("chartMonth", ovo);
+	}
+
 }

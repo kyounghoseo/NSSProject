@@ -16,7 +16,7 @@
 <title>고객 목록</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
-<script type="text/javascript" src="/resources/include/js/common.js"></script>
+<script type="text/javascript" src="../resources/include/js/common.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 	<!-- 부트스트랩 -->

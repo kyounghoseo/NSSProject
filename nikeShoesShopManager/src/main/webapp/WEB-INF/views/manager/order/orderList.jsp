@@ -347,7 +347,7 @@ table.list td {
 							<td>${order.orderColor }</td>
 							<td>${order.orderSize }</td>
 							<td>${order.orderCount }</td>
-							<td>${order.orderPayment }</td>
+							<td>${order.orderPrice }</td>
 							<td class="ad">${order.orderAddress }</td>
 							<td>${order.orderStatus }</td>
 							<td>${fn:substring(order.orderShipdate,0,10) }

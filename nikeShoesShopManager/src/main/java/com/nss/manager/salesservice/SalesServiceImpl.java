@@ -49,4 +49,10 @@ public class SalesServiceImpl implements SalesService {
 		return salesDao.chartList(ovo);
 	}
 
+	@Override
+	public List<OrderVO> chartMonth(OrderVO ovo) {
+		// TODO Auto-generated method stub
+		return salesDao.chartMonth(ovo);
+	}
+
 }

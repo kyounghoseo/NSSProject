@@ -15,4 +15,6 @@ public interface SalesService {
 	public int salesRefundMoney(OrderVO ovo);
 	
 	public List<OrderVO> chartList(OrderVO ovo);
+	
+	public List<OrderVO> chartMonth(OrderVO ovo);
 }
