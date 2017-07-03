@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nss.manager.salesdao.SalesDao">
+
+	<select id="salesList" parameterType="com.nss.manager.ordervo.OrderVO"
+		resultType="com.nss.manager.ordervo.OrderVO">
+		SELECT orderNo, orderPrname, orderCount, orderPrice,
+		orderStatus,
+		orderShipdate FROM (select
+		list.*, rownum as rnum from(SELECT orderNo,
+		orderPrname, orderCount, orderPrice,
+		orderStatus, orderShipdate FROM
+		order_tb where (orderStatus = '배송완료' or orderStatus = '주문취소' or
+		orderStatus = '주문반품')
+		<trim prefix="and">
+			<if test="search=='productName'">
+		<![CDATA[orderPrname LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<!-- <if test="customer_check=='일반회원'"> <![CDATA[CUSTOMERCHECK = '일반회원']]> 
+				</if> <if test="customer_check=='탈퇴회원'"> <![CDATA[CUSTOMERCHECK = '탈퇴회원']]> 
+				</if> -->
+		</trim>
+		<if test="s_startDate != null and s_startDate != ''">
+			<if test="s_endDate != null and s_endDate != ''">
+				and orderShipdate between to_date(#{s_startDate},
+				'YYYY-MM-DD') and
+				to_date(#{s_endDate}, 'YYYY-MM-DD') + 1
+			</if>
+		</if>
+		order by orderNo desc)list
+		)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<!-- 매출 목록 개수 -->
+	<select id="salesTotalCnt" parameterType="com.nss.manager.ordervo.OrderVO"
+		resultType="int">
+		select nvl(count(1),0) FROM (select list.*, rownum as rnum from
+		(SELECT orderNo, orderPrname, orderCount, orderPrice,
+		orderStatus,
+		orderShipdate FROM
+		order_tb where orderstatus in ('배송완료' , '주문취소',
+		'주문반품')
+		<trim prefix="and">
+			<if test="search=='productName'">
+		<![CDATA[orderPrname LIKE '%'||#{keyword}||'%']]>
+			</if>
+		</trim>
+		order by orderNo desc)list
+		)
+		<where>
+			<if test="s_startDate != null and s_startDate != ''">
+				<if test="s_endDate != null and s_endDate != ''">
+					orderShipdate between to_date(#{s_startDate},
+					'YYYY-MM-DD') and
+					to_date(#{s_endDate}, 'YYYY-MM-DD') + 1
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<!-- 총 매출금액 -->
+	<select id="salesTotalMoney" parameterType="com.nss.manager.ordervo.OrderVO"
+		resultType="int">
+		select nvl(sum(orderPrice),0) from (select list.*, rownum as rnum from
+		(SELECT orderPrice FROM
+		order_tb where orderStatus ='배송완료'
+		<trim prefix="and">
+			<if test="search=='productName'">
+		<![CDATA[orderPrname LIKE '%'||#{keyword}||'%']]>
+			</if>
+		</trim>
+		<if test="s_startDate != null and s_startDate != ''">
+			<if test="s_endDate != null and s_endDate != ''">
+				and orderShipdate between to_date(#{s_startDate},
+				'YYYY-MM-DD') and
+				to_date(#{s_endDate}, 'YYYY-MM-DD') + 1
+			</if>
+		</if>
+		order by orderNo desc)list
+		)
+	</select>
+	<!-- 총 환불금액 -->
+	<select id="salesRefundMoney" parameterType="com.nss.manager.ordervo.OrderVO"
+		resultType="int">
+		select nvl(sum(orderPrice),0) from (select list.* from
+		(SELECT
+		orderPrice FROM
+		order_tb where (orderStatus ='주문취소' or
+		ORDERSTATUS =
+		'주문반품')
+		<trim prefix="and">
+			<if test="search=='productName'">
+		<![CDATA[orderPrname LIKE '%'||#{keyword}||'%']]>
+			</if>
+		</trim>
+		<if test="s_startDate != null and s_startDate != ''">
+			<if test="s_endDate != null and s_endDate != ''">
+				and orderShipdate between to_date(#{s_startDate},
+				'YYYY-MM-DD') and
+				to_date(#{s_endDate}, 'YYYY-MM-DD') + 1
+			</if>
+		</if>
+		order by orderNo desc)list
+		)
+	</select>
+
+	<!-- 차트 매출, 환불정보 -->
+	<select id="chartList" parameterType="com.nss.manager.ordervo.OrderVO"
+		resultType="com.nss.manager.ordervo.OrderVO">
+		select to_char(ordershipdate, 'YYYY-MM-DD') as chartDate,
+		sum(case when orderStatus ='배송완료' THEN orderprice else '0' end) as
+		chartSales,
+		sum(case when orderStatus in ('주문취소','주문반품') THEN
+		orderprice else '0'
+		end) as chartRefund
+		from order_tb where
+		to_char(ordershipdate, 'YYYY-MM-DD') between
+		to_char((sysdate -3),
+		'YYYY-MM-DD') and to_char(sysdate, 'YYYY-MM-DD')
+		group by
+		to_char(ordershipdate, 'YYYY-MM-DD') order by chartdate
+	</select>
+
+</mapper>
