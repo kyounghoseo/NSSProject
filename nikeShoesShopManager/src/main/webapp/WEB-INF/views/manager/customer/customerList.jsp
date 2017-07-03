@@ -20,11 +20,11 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 	<!-- 부트스트랩 -->
-<script src="../resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
-   href="../resources/bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+   href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
 <link rel="stylesheet"
-   href="../resources/bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+   href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
 <!-- 부트스트랩 -->
 <script type="text/javascript">
 	$(document).ready(
