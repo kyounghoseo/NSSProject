@@ -4,6 +4,7 @@ package com.nss.manager.ordercontroller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -85,19 +86,21 @@ public class OrderController {
 	@RequestMapping(value="/orderInfo")
 	public String orderInfo(@ModelAttribute OrderVO ovo, Model model ){
 		System.out.println(ovo.getOrder_check());
+		System.out.println(ovo.getOrderShipno());
 		System.out.println("오더인포");
 		int result=0;
 		String url = "";
-		System.out.println(ovo.getOrderNO());
 		result  = orderService.orderUpdate(ovo);
-		
-		if(result ==1){
+		System.out.println("컨트롤러에서 리절트"+result);
+		if(result >=1){
 			url = "/order/orderList.do";
 		}
 		System.out.println(ovo.getOrder_check()+"오더체크");
 		model.addAttribute("order_check",ovo.getOrder_check());
+		model.addAttribute("page",ovo.getPage());
 		model.addAttribute("s_startDate",ovo.getS_startDate());
 		model.addAttribute("s_endDate",ovo.getS_endDate());
+		
 		return "redirect:"+url;
 		
 	}

@@ -5,6 +5,7 @@ import com.nss.manager.common.PagingVO;
 public class OrderVO extends PagingVO {
 
 	private int orderNO;
+	private String orderGroup;
 	private int productNO;
 	private int customerNO;
 	private String orderPrname;
@@ -247,6 +248,14 @@ public class OrderVO extends PagingVO {
 	@Override
 	public String toString() {
 		return "OrderVO [chartDate=" + chartDate + ", chartSales=" + chartSales + ", chartRefund=" + chartRefund + "]";
+	}
+
+	public String getOrderGroup() {
+		return orderGroup;
+	}
+
+	public void setOrderGroup(String orderGroup) {
+		this.orderGroup = orderGroup;
 	}
 
 }

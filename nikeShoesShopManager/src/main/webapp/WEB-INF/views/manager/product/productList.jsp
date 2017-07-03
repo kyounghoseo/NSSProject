@@ -14,7 +14,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../resources/css/booking2.css?var=25" />
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
@@ -110,8 +117,7 @@ input[type="button"] {
 
 		</form>
 	</div>
-	<table id="list_tb" style="height: 100%;" width="100%" cellspacing="0"
-		cellpadding="0">
+	<table class="table table-hover">
 		<tbody>
 			<tr>
 				<th>상품번호</th>

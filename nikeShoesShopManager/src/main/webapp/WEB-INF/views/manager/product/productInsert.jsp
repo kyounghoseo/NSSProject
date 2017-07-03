@@ -45,7 +45,8 @@
 </script>
 </head>
 <body>
-
+<!-- 상단 헤더 -->
+	<%@ include file="../header.jsp"%>
 	<form id="f_productForm" name="f_productForm" enctype="multipart/form-data">
 		<table style="height: 451px;" width="100%" border="1">
 

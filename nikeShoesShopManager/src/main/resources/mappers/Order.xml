@@ -8,15 +8,15 @@
 	<select id="orderList" parameterType="com.nss.manager.ordervo.OrderVO"
 		resultType="com.nss.manager.ordervo.OrderVO">
 		SELECT
-		orderno,productno,customerno,ordercsid,orderprname,ordercount,orderprice,ordersize,ordercolor,ordercsname,
+		orderno,ordergroup,productno,customerno,ordercsid,orderprname,ordercount,orderprice,ordersize,ordercolor,ordercsname,
 		ordercellphone,orderaddress,orderstatus,orderpayment,to_char(orderdate,'YYYY-MM-DD
-		hh24') as orderdate,ordershipno,ordershipdate
+		hh24') as orderdate,ordershipno,ordershipdate,ROW_NUMBER()OVER(ORDER BY orderGroup DESC) AS ROW_NUM , COUNT(*)OVER(PARTITION BY orderGroup) AS PARTCNT
 		from(select lst.*, rownum
 		as rnum from(SELECT
 
-		orderno,productno,customerno,ordercsid,orderprname,ordercount,orderprice,ordersize,ordercolor,ordercsname,
+		orderno,ordergroup,productno,customerno,ordercsid,orderprname,ordercount,orderprice,ordersize,ordercolor,ordercsname,
 		ordercellphone,orderaddress,orderstatus,orderpayment,
-		orderdate,ordershipno,ordershipdate
+		orderdate,ordershipno,ordershipdate,ROW_NUMBER()OVER(ORDER BY orderGroup DESC) AS ROW_NUM , COUNT(*)OVER(PARTITION BY orderGroup) AS PARTCNT
 		from
 		order_tb
 
@@ -155,8 +155,8 @@
 		orderShipno = #{orderShipno},
 		orderStatus = '배송중'
 		WHERE
-		orderNO =
-		#{orderNO}
+		orderGroup =
+		#{orderGroup}
 	</update>
 
 </mapper>

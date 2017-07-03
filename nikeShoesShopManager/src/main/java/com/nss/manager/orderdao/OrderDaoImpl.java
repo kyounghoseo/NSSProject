@@ -25,8 +25,9 @@ public class OrderDaoImpl implements OrderDao{
 	@Override
 	public int orderUpdate(OrderVO ovo) {
 		// TODO Auto-generated method stub
-		System.out.println("다오의의넘버"+ovo.getOrderNO());
-		return sqlSession.update("orderUpdate",ovo);
+		int result = (Integer)sqlSession.update("orderUpdate",ovo);
+		System.out.println(result);
+		return result;
 	}
 
 
