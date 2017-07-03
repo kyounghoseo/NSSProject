@@ -18,7 +18,7 @@
 <title>매출 목록</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
-<script type="text/javascript" src="/resources/include/js/common.js"></script>
+<script type="text/javascript" src="../resources/include/js/common.js"></script>
 
 <!-- DatePicker -->
 <script src="//code.jquery.com/jquery.min.js"></script>
@@ -29,73 +29,182 @@
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		//검색어와 search값 초기화
-		if ("<c:out value='${data.keyword}' />" != "") {
-			$("#keyword").val("<c:out value='${data.keyword}' />");
-			$("#search").val("<c:out value='${data.search}' />");
-		}
+	$(document)
+			.ready(
+					function() {
 
-		//한페이지에 보여줄 레코드 수 조회후 값 유지
-		if ("<c:out value='${data.pageSize}' />" != "") {
-			$("#pageSize").val("<c:out value = '${data.pageSize}' />");
-		}
+						//매출 일간 차트
+						var date1 = "<c:out value='${chartList[0].chartDate}' />" == "" ? "x"
+								: "<c:out value='${chartList[0].chartDate}' />";
+						$("#date1").val(date1);
 
-		// 검색버튼 클릭시 
-		$("#search").change(function() {
-			if ($("#search").val() == "all") {
-				$("#keyword").val("매출 목록 전체");
-			} else if ($("#search").val() != "all") {
-				$("#keyword").val("");
-				$("#keyword").focus();
-			}
-		});
+						var date2 = "<c:out value='${chartList[1].chartDate}' />" == "" ? "x"
+								: "<c:out value='${chartList[1].chartDate}' />";
+						$("#date2").val(date2);
 
-		$("#searchButton").click(function() {
-			if ($("#search").val() != "all") {
+						var date3 = "<c:out value='${chartList[2].chartDate}' />" == "" ? "x"
+								: "<c:out value='${chartList[2].chartDate}' />";
+						$("#date3").val(date3);
 
-				if (!chkSubmit($("#keyword"), "검색어를 "))
-					return;
-			}
-			goPage(1);
-		});
+						var date4 = "<c:out value='${chartList[3].chartDate}' />" == "" ? "x"
+								: "<c:out value='${chartList[3].chartDate}' />";
+						$("#date4").val(date4);
 
-		//기본 월별 체크, 일자별은 숨겨놓음
-		$("#sales_month").attr("checked", true);
-		$("#curve_chart_day").hide();
+						var sales1 = "<c:out value='${chartList[0].chartSales}' />" == "" ? 0
+								: "<c:out value='${chartList[0].chartSales}' />";
+						/* sales1 *= 1; */
+						$("#sales1").val(sales1);
 
-		//월별, 일자별 라디오버튼
-		$("#sales_month").click(function() {
-			if ($("#sales_month").val() == "월별") {
-				alert('월별로 확인합니다.');
-				$("#curve_chart_day").hide();
-				$("#curve_chart_month").show();
-			}
-		});
+						var sales2 = "<c:out value='${chartList[1].chartSales}' />" == "" ? 0
+								: "<c:out value='${chartList[1].chartSales}' />";
+						$("#sales2").val(sales2);
 
-		$("#sales_day").click(function() {
-			if ($("#sales_day").val() == "일자별") {
-				alert('일자별로 확인합니다.');
-				$("#curve_chart_month").hide();
-				$("#curve_chart_day").show();
-			}
-		});
+						var sales3 = "<c:out value='${chartList[2].chartSales}' />" == "" ? 0
+								: "<c:out value='${chartList[2].chartSales}' />";
+						$("#sales3").val(sales3);
 
-		//날짜 초기화버튼
-		$("#resetButton").click(function() {
-			$("#s_startDate").val("");
-			$("#s_endDate").val("");
-		});
+						var sales4 = "<c:out value='${chartList[3].chartSales}' />" == "" ? 0
+								: "<c:out value='${chartList[3].chartSales}' />";
+						$("#sales4").val(sales4);
 
-		// 엑셀 파일 다운로드 처리
-		$("#excelButton").click(function() {
-			$("#f_search").attr({
-				"method" : "get",
-				"action" : "/manager/sales/salesExcel.do"
-			});
-			$("#f_search").submit();
-		});
-	});
+						var refund1 = "<c:out value='${chartList[0].chartRefund}' />" == "" ? 0
+								: "<c:out value='${chartList[0].chartRefund}' />";
+						$("#refund1").val(refund1);
+
+						var refund2 = "<c:out value='${chartList[1].chartRefund}' />" == "" ? 0
+								: "<c:out value='${chartList[1].chartRefund}' />";
+						$("#refund2").val(refund2);
+
+						var refund3 = "<c:out value='${chartList[2].chartRefund}' />" == "" ? 0
+								: "<c:out value='${chartList[2].chartRefund}' />";
+						$("#refund3").val(refund3);
+
+						var refund4 = "<c:out value='${chartList[3].chartRefund}' />" == "" ? 0
+								: "<c:out value='${chartList[3].chartRefund}' />";
+						$("#refund4").val(refund4);
+
+						/* alert($("#date1").val()); */
+
+						//매출 월간 차트
+						var monthDate1 = "<c:out value='${chartMonth[0].chartDate}' />" == "" ? "x"
+								: "<c:out value='${chartMonth[0].chartDate}' />";
+						$("#monthDate1").val(monthDate1);
+
+						var monthDate2 = "<c:out value='${chartMonth[1].chartDate}' />" == "" ? "x"
+								: "<c:out value='${chartMonth[1].chartDate}' />";
+						$("#monthDate2").val(monthDate2);
+
+						var monthDate3 = "<c:out value='${chartMonth[2].chartDate}' />" == "" ? "x"
+								: "<c:out value='${chartMonth[2].chartDate}' />";
+						$("#monthDate3").val(monthDate3);
+
+						var monthDate4 = "<c:out value='${chartMonth[3].chartDate}' />" == "" ? "x"
+								: "<c:out value='${chartMonth[3].chartDate}' />";
+						$("#monthDate4").val(monthDate4);
+
+						var monthSales1 = "<c:out value='${chartMonth[0].chartSales}' />" == "" ? 0
+								: "<c:out value='${chartMonth[0].chartSales}' />";
+						$("#monthSales1").val(monthSales1);
+
+						var monthSales2 = "<c:out value='${chartMonth[1].chartSales}' />" == "" ? 0
+								: "<c:out value='${chartMonth[1].chartSales}' />";
+						$("#monthSales2").val(monthSales2);
+
+						var monthSales3 = "<c:out value='${chartMonth[2].chartSales}' />" == "" ? 0
+								: "<c:out value='${chartMonth[2].chartSales}' />";
+						$("#monthSales3").val(monthSales3);
+
+						var monthSales4 = "<c:out value='${chartMonth[3].chartSales}' />" == "" ? 0
+								: "<c:out value='${chartMonth[3].chartSales}' />";
+						$("#monthSales4").val(monthSales4);
+
+						var monthRefund1 = "<c:out value='${chartMonth[0].chartRefund}' />" == "" ? 0
+								: "<c:out value='${chartMonth[0].chartRefund}' />";
+						$("#monthRefund1").val(monthRefund1);
+
+						var monthRefund2 = "<c:out value='${chartMonth[1].chartRefund}' />" == "" ? 0
+								: "<c:out value='${chartMonth[1].chartRefund}' />";
+						$("#monthRefund2").val(monthRefund2);
+
+						var monthRefund3 = "<c:out value='${chartMonth[2].chartRefund}' />" == "" ? 0
+								: "<c:out value='${chartMonth[2].chartRefund}' />";
+						$("#monthRefund3").val(monthRefund3);
+
+						var monthRefund4 = "<c:out value='${chartMonth[3].chartRefund}' />" == "" ? 0
+								: "<c:out value='${chartMonth[3].chartRefund}' />";
+						$("#monthRefund4").val(monthRefund4);
+
+						//검색어와 search값 초기화
+						if ("<c:out value='${data.keyword}' />" != "") {
+							$("#keyword").val(
+									"<c:out value='${data.keyword}' />");
+							$("#search")
+									.val("<c:out value='${data.search}' />");
+						}
+
+						//한페이지에 보여줄 레코드 수 조회후 값 유지
+						if ("<c:out value='${data.pageSize}' />" != "") {
+							$("#pageSize").val(
+									"<c:out value = '${data.pageSize}' />");
+						}
+
+						// 검색버튼 클릭시 
+						$("#search").change(function() {
+							if ($("#search").val() == "all") {
+								$("#keyword").val("매출 목록 전체");
+							} else if ($("#search").val() != "all") {
+								$("#keyword").val("");
+								$("#keyword").focus();
+							}
+						});
+
+						$("#searchButton").click(function() {
+							if ($("#search").val() != "all") {
+
+								if (!chkSubmit($("#keyword"), "검색어를 "))
+									return;
+							}
+							/* alert($("#s_startDate").val().substring(1, 5)); */
+
+							goPage(1);
+						});
+
+						//기본 월별 체크, 일자별은 숨겨놓음
+						$("#sales_month").attr("checked", true);
+						$("#curve_chart_day").hide();
+
+						//월별, 일자별 라디오버튼
+						$("#sales_month").click(function() {
+							if ($("#sales_month").val() == "월별") {
+								alert('월별로 확인합니다.');
+								$("#curve_chart_day").hide();
+								$("#curve_chart_month").show();
+							}
+						});
+
+						$("#sales_day").click(function() {
+							if ($("#sales_day").val() == "일자별") {
+								alert('일자별로 확인합니다.');
+								$("#curve_chart_month").hide();
+								$("#curve_chart_day").show();
+							}
+						});
+
+						//날짜 초기화버튼
+						$("#resetButton").click(function() {
+							$("#s_startDate").val("");
+							$("#s_endDate").val("");
+						});
+
+						// 엑셀 파일 다운로드 처리
+						$("#excelButton").click(function() {
+							$("#f_search").attr({
+								"method" : "get",
+								"action" : "/manager/sales/salesExcel.do"
+							});
+							$("#f_search").submit();
+						});
+					});
 
 	//검색과 한페이지에 보여줄 레코드수 처리 및 페이징을 위한 실질적인 처리함수
 	function goPage(page) {
@@ -121,28 +230,24 @@
 	google.charts.setOnLoadCallback(drawChartDay);
 
 	var date = new Date;
-	var refund = "<c:out value='${chartList[3].chartRefund}' />" ? "<c:out value='${chartList[3].chartRefund}' />"
+	/* var refund = "<c:out value='${chartList[3].chartRefund}' />" ? "<c:out value='${chartList[3].chartRefund}' />"
 			: 0;
+	alert(refund); */
 
 	function drawChartDay() {
-		var data = google.visualization
-				.arrayToDataTable([
-						[ 'day', '매출금액', '환불금액' ],
-						[ "<c:out value='${chartList[0].chartDate}' />",
-								<c:out value='${chartList[0].chartSales}' />,
-								<c:out value='${chartList[0].chartRefund}' /> ],
-						[ "<c:out value='${chartList[1].chartDate}' />",
-								<c:out value='${chartList[1].chartSales}' />,
-								<c:out value='${chartList[1].chartRefund}' /> ],
-						[ "<c:out value='${chartList[2].chartDate}' />",
-								<c:out value='${chartList[2].chartSales}' />,
-								<c:out value='${chartList[2].chartRefund}' /> ],
-						[ "<c:out value='${chartList[3].chartDate}' />",
-								<c:out value='${chartList[3].chartSales}' />,
-								refund ] ]);
+		var data = google.visualization.arrayToDataTable([
+				[ 'day', '매출금액', '환불금액' ],
+				[ $("#date1").val(), Number($("#sales1").val()),
+						Number($("#refund1").val()) ],
+				[ $("#date2").val(), Number($("#sales2").val()),
+						Number($("#refund2").val()) ],
+				[ $("#date3").val(), Number($("#sales3").val()),
+						Number($("#refund3").val()) ],
+				[ $("#date4").val(), Number($("#sales4").val()),
+						Number($("#refund4").val()) ] ]);
 
 		var options = {
-			title : 'Nike Shoes Shop Performance',
+			title : 'Nike Shoes Shop (최근 4일간 거래내역)',
 			curveType : 'function',
 			legend : {
 				position : 'bottom'
@@ -168,13 +273,17 @@
 	function drawChartMonth() {
 		var data = google.visualization.arrayToDataTable([
 				[ 'month', '매출금액', '환불금액' ],
-				[ (date.getUTCMonth() - 2) + '월', 100000, 40000 ],
-				[ (date.getUTCMonth() - 1) + '월', 117000, 46000 ],
-				[ date.getUTCMonth() + '월', 66000, 112000 ],
-				[ (date.getUTCMonth() + 1) + '월', 103000, 54000 ] ]);
+				[ $("#monthDate1").val(), Number($("#monthSales1").val()),
+						Number($("#monthRefund1").val()) ],
+				[ $("#monthDate2").val(), Number($("#monthSales2").val()),
+						Number($("#monthRefund2").val()) ],
+				[ $("#monthDate3").val(), Number($("#monthSales3").val()),
+						Number($("#monthRefund3").val()) ],
+				[ $("#monthDate4").val(), Number($("#monthSales4").val()),
+						Number($("#monthRefund4").val()) ] ]);
 
 		var options = {
-			title : 'Nike Shoes Shop Performance',
+			title : 'Nike Shoes Shop (월별 거래내역)',
 			curveType : 'function',
 			legend : {
 				position : 'bottom'
@@ -201,10 +310,45 @@
 	<!-- 상단 헤더 -->
 	<%@ include file="../header.jsp"%>
 
-	${chartList[0].chartRefund} ${chartList[1].chartSales}
-	${chartList[2].chartSales} ${chartList[3].chartSales}
+	${chartMonth[0].chartSales} ${chartMonth[1].chartSales}
+	${chartMonth[2].chartSales} ${chartMonth[3].chartSales}
+	${chartMonth[0].chartRefund} ${chartMonth[1].chartRefund}
+	${chartMonth[2].chartRefund} ${chartMonth[3].chartRefund}
 
-	<%
+	<!-- 매출 일간 -->
+	<input type="hidden" name="date1" id="date1">
+	<input type="hidden" name="date2" id="date2">
+	<input type="hidden" name="date3" id="date3">
+	<input type="hidden" name="date4" id="date4">
+
+	<input type="hidden" name="sales1" id="sales1">
+	<input type="hidden" name="sales2" id="sales2">
+	<input type="hidden" name="sales3" id="sales3">
+	<input type="hidden" name="sales4" id="sales4">
+
+	<input type="hidden" name="refund1" id="refund1">
+	<input type="hidden" name="refund2" id="refund2">
+	<input type="hidden" name="refund3" id="refund3">
+	<input type="hidden" name="refund4" id="refund4">
+
+	<!-- 매출 월간 -->
+	<input type="hidden" name="monthDate1" id="monthDate1">
+	<input type="hidden" name="monthDate2" id="monthDate2">
+	<input type="hidden" name="monthDate3" id="monthDate3">
+	<input type="hidden" name="monthDate4" id="monthDate4">
+
+	<input type="hidden" name="monthSales1" id="monthSales1">
+	<input type="hidden" name="monthSales2" id="monthSales2">
+	<input type="hidden" name="monthSales3" id="monthSales3">
+	<input type="hidden" name="monthSales4" id="monthSales4">
+
+	<input type="hidden" name="monthRefund1" id="monthRefund1">
+	<input type="hidden" name="monthRefund2" id="monthRefund2">
+	<input type="hidden" name="monthRefund3" id="monthRefund3">
+	<input type="hidden" name="monthRefund4" id="monthRefund4">
+
+
+	<%-- <%
 		Date date = new Date();
 		String chartDate = "${chartList[3].chartDate}";
 		if (chartDate == null) {
@@ -224,7 +368,7 @@
 			refund = "0";
 			chartRefund = Integer.parseInt(refund);
 		}
-	%>
+	%> --%>
 
 	<c:choose>
 		<c:when test="${not empty chartList}">
@@ -275,8 +419,8 @@
 				placeholder="상품명을 입력하세요."> <input type="button" value="검색"
 				id="searchButton">
 			<p>
-				<input type="text" name="s_startDate" id="s_startDate"
-					value="${data.s_startDate}"> - <input type="text"
+				<label for="s_startDate">달력</label> <input type="text" name="s_startDate" id="s_startDate"
+					value="${data.s_startDate}"> ~ <input type="text"
 					name="s_endDate" id="s_endDate" value="${data.s_endDate}">
 				<input type="button" value="초기화" id="resetButton">
 		</form>

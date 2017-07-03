@@ -43,6 +43,7 @@ public class SalesController {
 
 		List<OrderVO> salesList = salesService.salesList(ovo);
 		List<OrderVO> chartList = salesService.chartList(ovo);
+		List<OrderVO> chartMonth = salesService.chartMonth(ovo);
 
 		System.out.println("toString :" + chartList.toString());
 		System.out.println("시작날짜 : " + ovo.getS_startDate());
@@ -55,6 +56,7 @@ public class SalesController {
 		model.addAttribute("totalMoney", totalMoney);
 		model.addAttribute("refundMoney", refundMoney);
 		model.addAttribute("chartList", chartList);
+		model.addAttribute("chartMonth", chartMonth);
 		model.addAttribute("data", ovo);
 
 		System.out.println("salesList : " + salesList);
