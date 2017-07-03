@@ -13,6 +13,13 @@
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
 <script type="text/javascript">
 	$(document).ready(function() {
 		if ("<c:out value='${data.keyword}' />" != "") {
@@ -133,7 +140,8 @@
 	</div>
 	<!-- 리스트 시작 -->
 	<div id="customerList">
-		<table id="list_tb" cellspacing="0" cellpadding="0" summary="고객 리스트">
+		<!-- <table id="list_tb" cellspacing="0" cellpadding="0" summary="고객 리스트"> -->
+			<table class="table table-hover">
 			<thead>
 				<tr>
 					<th><marquee>회원번호</marquee></th>

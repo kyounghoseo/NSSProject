@@ -34,6 +34,8 @@
 </script>
 </head>
 <body>
+<!-- 상단 헤더 -->
+	<%@ include file="../header.jsp"%>
 	<form id="f_productForm" name="f_productForm" enctype="multipart/form-data">
 	<input type="hidden" name="productNo" id="productNo" value="${updateData.productNo }">
 	<input type="hidden" name="productMainImage" id="productMainImage" value="${updateData.productMainImage }" >

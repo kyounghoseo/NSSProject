@@ -26,7 +26,6 @@ public class OrderServiceImpl implements OrderService {
 	public int orderUpdate(OrderVO ovo) {
 		// TODO Auto-generated method stub
 		int result = 0;
-		System.out.println("서비스의넘버"+ovo.getOrderNO());
 		result = orderDao.orderUpdate(ovo);
 		System.out.println("result="+result);
 		return result;
