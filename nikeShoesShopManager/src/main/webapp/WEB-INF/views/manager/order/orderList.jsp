@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주문 관리</title>
 <script src="//code.jquery.com/jquery.min.js"></script>
 	<!-- 부트스트랩 -->
 <script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -51,8 +51,8 @@
 			 showButtonPanel: true, 
 			 closeText: '닫기',
 	         currentText: '오늘 날짜', 
-	         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-	         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+	         dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+	         dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
 	         monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 	         dateFormat : "yy-mm-dd",
 

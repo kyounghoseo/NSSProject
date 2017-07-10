@@ -6,14 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 글쓰기 화면</title>
+<title>공지사항 등록페이지</title>
 
 <script type="text/javascript" src="../resources/include/js/common.js"></script>
 <!-- 부트스트랩 -->
 <script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="../resources/css/booking2.css?var=25" />
 <link rel="stylesheet"
 	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
 <!-- 부트스트랩 -->
@@ -54,8 +53,7 @@
 				});
 				$("#f_writeForm").submit();
 
-			}
-			;
+			};
 		});
 
 		/* 목록 버튼 클릭시 */
@@ -103,10 +101,10 @@ input[type="text"]{
 							</tr>
 							<tr>
 								<td>제목</td>
-								<td><input type="text" name="noticeTitle" id="noticeTitle"></td>
+								<td><input type="text" size="70" name="noticeTitle" id="noticeTitle"></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="text-align: left; padding-left: 9.3%;">내용</td>
+								<td colspan="2" style="text-align: left; padding-left: 5.2%;">내용</td>
 							</tr>
 							<tr>
 								<td colspan="2"><textarea rows="10" cols="154"

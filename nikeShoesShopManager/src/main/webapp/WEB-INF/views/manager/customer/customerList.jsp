@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>고객 목록</title>
+<title>고객 관리</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
 <script type="text/javascript" src="../resources/include/js/common.js"></script>
@@ -136,6 +136,9 @@ margin-top: 3%;
 #customerList{
 margin-top: 1%;
 }
+#title{
+margin-bottom: 3%;
+}
 </style>
 </head>
 <body>
@@ -144,10 +147,7 @@ margin-top: 1%;
 	<%@ include file="../header.jsp"%>
 <div id="wrap">
 <div id="title">
-	
 	<h2>고객관리</h2>
-
-	
 	</div>
 	<!-- 상세페이지 이동을 위한 form -->
 	<form name="detailForm" id="detailForm">
@@ -161,7 +161,7 @@ margin-top: 1%;
 				<tr>
 					<td>전체 회원수</td>
 					<td style="color: blue;">[${totalCustomer}명]</td>
-					<td>오늘 가입회원</td>
+					<td>&nbsp;오늘 가입회원</td>
 					<td style="color: red;">[${todayCustomer}명]</td>
 				</tr>
 			</tbody>
@@ -220,7 +220,7 @@ margin-top: 1%;
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="8" class="tac">등록된 게시물이 존재하지 않습니다.</td>
+							<td colspan="8" class="tac">등록된 회원이 존재하지 않습니다.</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>

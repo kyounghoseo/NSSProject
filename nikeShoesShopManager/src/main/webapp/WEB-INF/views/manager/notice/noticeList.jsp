@@ -13,14 +13,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 목록</title>
+<title>공지사항</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
 	<!-- 부트스트랩 -->
 <script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="../resources/css/booking2.css?var=25" />
 <link rel="stylesheet"
 	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
 <!-- 부트스트랩 -->
