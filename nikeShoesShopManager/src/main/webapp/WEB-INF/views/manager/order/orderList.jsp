@@ -321,7 +321,7 @@ margin-top: 3%;
 	<div id="d_search" >
 		<form id="f_search">
 	<p style="float: left; font-family: initial; font-weight: bold;">날짜별 조회</p>
-		<div style="clear: both; float: left;  width: 70%;">
+		<div style="clear: both; float: left;  width: 80%;">
 		<input type="text" id="s_startDate" name="s_startDate" value="${data.s_startDate }"> ~
 			<input type="text" id="s_endDate" name="s_endDate" value="${data.s_endDate }">
 			<input type="button" id="search" value="조회">
