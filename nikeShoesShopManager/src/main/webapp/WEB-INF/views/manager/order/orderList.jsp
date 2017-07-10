@@ -218,7 +218,7 @@
 <style type="text/css">
 #d_search{
 float: left;
-width: 50%;
+width: 51%;
 }
 .ui-datepicker-trigger {
  width: 7%;

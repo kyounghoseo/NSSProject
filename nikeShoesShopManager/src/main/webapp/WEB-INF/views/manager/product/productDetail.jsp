@@ -34,7 +34,7 @@
 		});
 
 		$("#productListBtn").click(function() {
-			location.href = "/manager/product/productList.do";
+			location.href = "/manager/product/productList.do?page=${data.page}&pageSize=${data.pageSize}";
 
 		});
 

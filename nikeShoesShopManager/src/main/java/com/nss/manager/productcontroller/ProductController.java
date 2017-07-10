@@ -107,6 +107,7 @@ public class ProductController {
 		 */
 		model.addAttribute("color", color);
 		model.addAttribute("detail", detail);
+		model.addAttribute("data",pvo);
 
 		return "manager/product/productDetail";
 

@@ -49,8 +49,15 @@
 		productName like '%'||#{keyword}||'%'
 		]]>
 			</if>
+			<if test="category_check != '전체'">
+				<if test="category_check != null">
+				<![CDATA[
+					productCategory = #{category_check}
+				]]>
+				</if>
+			</if>
 		</trim>
-
+		
 		order by productno desc
 
 

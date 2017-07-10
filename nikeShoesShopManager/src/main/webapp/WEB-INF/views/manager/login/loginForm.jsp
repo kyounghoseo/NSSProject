@@ -154,7 +154,7 @@ label {
 .login-cont .login-input .btn-login {
     position: absolute;
     top: 0;
-    left: 66%;
+    left: 70%;
     width: 96px;
 }
 .login-cont .option label {

@@ -21,6 +21,8 @@ public class ProductVO extends PagingVO {
 
 	private String search = "";
 	private String keyword = "";
+	
+	private String category_check;
 
 	
 	private MultipartFile mainImage;
@@ -163,6 +165,14 @@ public class ProductVO extends PagingVO {
 
 	public void setFile(MultipartFile file) {
 		this.file = file;
+	}
+
+	public String getCategory_check() {
+		return category_check;
+	}
+
+	public void setCategory_check(String category_check) {
+		this.category_check = category_check;
 	}
 
 }

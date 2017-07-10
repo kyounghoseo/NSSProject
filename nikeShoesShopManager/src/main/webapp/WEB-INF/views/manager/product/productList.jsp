@@ -64,6 +64,16 @@
 			goPage(1);
 
 		});
+		
+		$("input[type='radio']").click(function() {
+
+			  var check = $("input:radio[name=category]:checked").val();
+			  $("#category_check").val(check);
+			
+
+			goPage(1);
+
+		}); 
 
 	});
 
@@ -102,6 +112,9 @@ text-align: center;
 td{
 vertical-align: inherit;
 }
+#d_radio{
+clear: both;
+}
 
 </style>
 </head>
@@ -118,6 +131,7 @@ vertical-align: inherit;
 	<div style="margin-top: 3%; clear: both;">
 
 		<form id="searchForm" style="float: left;" >
+		<input type="hidden" name="category_check" id="category_check">
 			<input type="hidden" name="page" id="page" value="${data.page }">
 			<input type="hidden" name="pageSize" id="pageSize"
 				value="${data.pageSize }"> <label for="keyword">검색어</label>
@@ -134,6 +148,7 @@ vertical-align: inherit;
 		<div style="float: right;">
 		<input type="button" value="상품등록" id="productInsert">
 	</div>
+	
 		<form name="detailForm" id="detailForm">
 			<input type="hidden" name="productNo" id="productNo"> <input
 				type="hidden" name="page" id="page" value="${data.page }"> <input
@@ -141,7 +156,21 @@ vertical-align: inherit;
 
 		</form>
 	</div>
-	<table class="table table-hover" style="margin-top: 6%;">
+	<div id="d_radio">
+			<form id="f_radio" name="f_radio">
+			<input type="radio" id="category_all" name="category" value="전체">전체 
+			<input type="radio" id="category_menAll" name="category" value="남성전체">전체M
+			 <input type="radio" id="category_womenAll" name="category" value="여성전체">전체W
+		    <input type="radio"	id="category_menRunning" name="category" value="런닝화M">런닝화M
+		    <input type="radio"	id="category_menLiftStyle" name="category" value="라이프스타일M">라이프스타일M
+		    <input type="radio"	id="category_menBasketBall" name="category" value="농구화M">농구화M
+		    <input type="radio"	id="category_menScoccer" name="category" value="축구화M">축구화M
+		    <input type="radio"	id="category_womenRunning" name="category" value="런닝화W">런닝화W
+		    <input type="radio"	id="category_womenLiftStyle" name="category" value="라이프스타일W">라이프스타일W
+		    
+		</form>
+	</div>
+	<table class="table table-hover" style="margin-top: 2%;">
 		<tbody>
 			<tr>
 				<th>상품번호</th>
