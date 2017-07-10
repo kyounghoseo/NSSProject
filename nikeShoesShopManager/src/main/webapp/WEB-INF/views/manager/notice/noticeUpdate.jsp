@@ -6,20 +6,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세페이지</title>
+<title>공지사항 수정페이지</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
 <script type="text/javascript" src="../resources/include/js/common.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
 <script type="text/javascript">
 	$(document)
 			.ready(
 					function() {
 						//이미지 호버 이벤트
 						var img = $("<img>");
-						$('#imgView').hover(function() {
-											img.attr({
+						$('#imgView')
+								.hover(
+										function() {
+											img
+													.attr({
 														src : "/manager/noticeStorage/${updateData.noticeFile}",
 														width : "450px",
 														height : "200px"
@@ -74,19 +84,24 @@
 										});
 					});
 </script>
+<style type="text/css">
+.contentContainer {
+	width: 80%;
+	margin-left: 10%;
+}
+</style>
 </head>
 <body>
 
 	<!-- 상단 헤더 -->
 	<%@ include file="../header.jsp"%>
 
-
 	<div class="contentContainer">
 		<div id="contentTit">
-			<h3>공지사항 글수정</h3>
+			<h2>공지사항 수정</h2>
 		</div>
 
-		<div class="contentTB">
+		<div class="contentTB" style="margin-top: 3%;">
 			<form id="f_writeForm" name="f_writeForm"
 				enctype="multipart/form-data">
 				<input type="hidden" id="noticeNo" name="noticeNo"
@@ -96,8 +111,7 @@
 					type="hidden" id="noticeFile" name="noticeFile"
 					value="${updateData.noticeFile}" />
 
-
-				<table>
+				<table class="table table-hover">
 					<colgroup>
 						<col width="17%" />
 						<col width="33%" />
@@ -106,7 +120,7 @@
 					</colgroup>
 					<tbody>
 						<tr>
-							<td class="ac">공지번호</td>
+							<td class="ac">번호</td>
 							<td>${updateData.noticeNo}</td>
 							<td class="ac">작성일</td>
 							<td>${updateData.noticeDate}</td>
@@ -117,13 +131,14 @@
 						</tr>
 						<tr>
 							<td class="ac">제목</td>
-							<td colspan="3"><input type="text" name="noticeTitle"
-								id="noticeTitle" value="${updateData.noticeTitle}" /></td>
+							<td colspan="3"><input type="text" size="155"
+								name="noticeTitle" id="noticeTitle"
+								value="${updateData.noticeTitle}" /></td>
 						</tr>
 						<tr>
 							<td class="ac vm">내용</td>
-							<td colspan="3"><textarea name="noticeContents"
-									id="noticeContents">${updateData.noticeContents}</textarea></td>
+							<td colspan="3"><textarea rows="10" cols="154"
+									name="noticeContents" id="noticeContents">${updateData.noticeContents}</textarea></td>
 						</tr>
 						<tr>
 							<td class="ac">이미지</td>

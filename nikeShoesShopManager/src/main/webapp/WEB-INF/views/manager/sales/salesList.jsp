@@ -15,13 +15,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>매출 목록</title>
+<title>매출 관리</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
 <script type="text/javascript" src="../resources/include/js/common.js"></script>
 
 <!-- DatePicker -->
 <script src="//code.jquery.com/jquery.min.js"></script>
+<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
+
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -315,51 +323,64 @@
 .ui-datepicker-trigger {
 	width: 1.7%;
 }
+
+#wrap {
+	width: 80%;
+	margin-left: 10%;
+}
+
+th {
+	text-align: center;
+}
+
+#title {
+	margin-bottom: 3%;
+}
 </style>
 </head>
 <body>
 	<!-- 상단 헤더 -->
 	<%@ include file="../header.jsp"%>
+	<div id="wrap">
+		<div id="title">
+			<h2>매출관리</h2>
+		</div>
+		<br>
 
-	<%-- ${chartMonth[0].chartSales} ${chartMonth[1].chartSales}
+		<%-- ${chartMonth[0].chartSales} ${chartMonth[1].chartSales}
 	${chartMonth[2].chartSales} ${chartMonth[3].chartSales}
 	${chartMonth[0].chartRefund} ${chartMonth[1].chartRefund}
 	${chartMonth[2].chartRefund} ${chartMonth[3].chartRefund} --%>
 
-	<!-- 매출 일간 -->
-	<input type="hidden" name="date1" id="date1">
-	<input type="hidden" name="date2" id="date2">
-	<input type="hidden" name="date3" id="date3">
-	<input type="hidden" name="date4" id="date4">
+		<!-- 매출 일간 -->
+		<input type="hidden" name="date1" id="date1"> <input
+			type="hidden" name="date2" id="date2"> <input type="hidden"
+			name="date3" id="date3"> <input type="hidden" name="date4"
+			id="date4"> <input type="hidden" name="sales1" id="sales1">
+		<input type="hidden" name="sales2" id="sales2"> <input
+			type="hidden" name="sales3" id="sales3"> <input type="hidden"
+			name="sales4" id="sales4"> <input type="hidden"
+			name="refund1" id="refund1"> <input type="hidden"
+			name="refund2" id="refund2"> <input type="hidden"
+			name="refund3" id="refund3"> <input type="hidden"
+			name="refund4" id="refund4">
 
-	<input type="hidden" name="sales1" id="sales1">
-	<input type="hidden" name="sales2" id="sales2">
-	<input type="hidden" name="sales3" id="sales3">
-	<input type="hidden" name="sales4" id="sales4">
-
-	<input type="hidden" name="refund1" id="refund1">
-	<input type="hidden" name="refund2" id="refund2">
-	<input type="hidden" name="refund3" id="refund3">
-	<input type="hidden" name="refund4" id="refund4">
-
-	<!-- 매출 월간 -->
-	<input type="hidden" name="monthDate1" id="monthDate1">
-	<input type="hidden" name="monthDate2" id="monthDate2">
-	<input type="hidden" name="monthDate3" id="monthDate3">
-	<input type="hidden" name="monthDate4" id="monthDate4">
-
-	<input type="hidden" name="monthSales1" id="monthSales1">
-	<input type="hidden" name="monthSales2" id="monthSales2">
-	<input type="hidden" name="monthSales3" id="monthSales3">
-	<input type="hidden" name="monthSales4" id="monthSales4">
-
-	<input type="hidden" name="monthRefund1" id="monthRefund1">
-	<input type="hidden" name="monthRefund2" id="monthRefund2">
-	<input type="hidden" name="monthRefund3" id="monthRefund3">
-	<input type="hidden" name="monthRefund4" id="monthRefund4">
+		<!-- 매출 월간 -->
+		<input type="hidden" name="monthDate1" id="monthDate1"> <input
+			type="hidden" name="monthDate2" id="monthDate2"> <input
+			type="hidden" name="monthDate3" id="monthDate3"> <input
+			type="hidden" name="monthDate4" id="monthDate4"> <input
+			type="hidden" name="monthSales1" id="monthSales1"> <input
+			type="hidden" name="monthSales2" id="monthSales2"> <input
+			type="hidden" name="monthSales3" id="monthSales3"> <input
+			type="hidden" name="monthSales4" id="monthSales4"> <input
+			type="hidden" name="monthRefund1" id="monthRefund1"> <input
+			type="hidden" name="monthRefund2" id="monthRefund2"> <input
+			type="hidden" name="monthRefund3" id="monthRefund3"> <input
+			type="hidden" name="monthRefund4" id="monthRefund4">
 
 
-	<%-- <%
+		<%-- <%
 		Date date = new Date();
 		String chartDate = "${chartList[3].chartDate}";
 		if (chartDate == null) {
@@ -381,7 +402,7 @@
 		}
 	%> --%>
 
-	<%-- <c:choose>
+		<%-- <c:choose>
 		<c:when test="${not empty chartList}">
 			<c:forEach var="chart" items="${chartList}" varStatus="status">
 				<table>
@@ -413,101 +434,103 @@
 	</c:if> --%>
 
 
-	<!-- 상세페이지 이동을 위한 form -->
-	<form name="detailForm" id="detailForm">
-		<input type="hidden" name="productNo" id="productNo"> <input
-			type="hidden" name="page" value="${data.page }"> <input
-			type="hidden" name="pageSize" value="${data.pageSize }">
-	</form>
-
-	<div id="salesSearch">
-		<form id="f_search" name="f_search">
-			<input type="hidden" id="page" name="page" value="${data.page}" /> <label
-				for="keyword">검색어</label> <select id="search" name="search">
-				<option value="all">전체</option>
-				<option value="productName">상품명</option>
-			</select> <input type="text" name="keyword" id="keyword"
-				placeholder="상품명을 입력하세요."> <input type="button" value="검색"
-				id="searchButton">
-			<p>
-				<input type="text" name="s_startDate" id="s_startDate"
-					value="${data.s_startDate}"> ~ <input type="text"
-					name="s_endDate" id="s_endDate" value="${data.s_endDate}">
-				<input type="button" value="초기화" id="resetButton">
+		<!-- 상세페이지 이동을 위한 form -->
+		<form name="detailForm" id="detailForm">
+			<input type="hidden" name="productNo" id="productNo"> <input
+				type="hidden" name="page" value="${data.page }"> <input
+				type="hidden" name="pageSize" value="${data.pageSize }">
 		</form>
-	</div>
-	<br>
-	<div>
-		<table>
-			<tbody>
-				<tr>
-					<td>매출현황</td>
-					<td><input type="button" id="excelButton" value="엑셀다운로드"></td>
-					<td>&nbsp;총 매출금액</td>
-					<td style="color: blue;">[<fmt:formatNumber
-							value="${totalMoney}" pattern="\#,###.##"></fmt:formatNumber>원]
-					</td>
-					<td>총 환불금액</td>
-					<td style="color: red;">[<fmt:formatNumber
-							value="${refundMoney}" pattern="\#,###.##"></fmt:formatNumber>원]
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<form id="f_radio" name="f_radio">
-			<input type="radio" id="sales_month" name="sales_check" value="월별">월별
-			<input type="radio" id="sales_day" name="sales_check" value="일자별">일자별
-		</form>
-	</div>
 
-
-	<div id="slaesList">
-		<div style="width: 70%; float: left;">
-			<table id="list_tb" cellspacing="0" cellpadding="0" summary="매출 목록">
-				<thead>
-					<tr>
-						<th><marquee>주문번호</marquee></th>
-						<th>상품명</th>
-						<th>수량</th>
-						<th>총 판매금액</th>
-						<th>주문상태</th>
-						<th class="borcle">배송날짜</th>
-					</tr>
-				</thead>
+		<div id="salesSearch">
+			<form id="f_search" name="f_search">
+				<input type="hidden" id="page" name="page" value="${data.page}" />
+				<label for="s_startDate">날짜별 조회</label> <input type="text"
+					name="s_startDate" id="s_startDate" value="${data.s_startDate}">
+				~ <input type="text" name="s_endDate" id="s_endDate"
+					value="${data.s_endDate}"> <input type="button" value="초기화"
+					id="resetButton"> &nbsp;&nbsp; <label for="keyword">검색어</label>
+				<select id="search" name="search">
+					<option value="all">전체</option>
+					<option value="productName">상품명</option>
+				</select> <input type="text" name="keyword" id="keyword"
+					placeholder="상품명을 입력하세요."> <input type="button" value="검색"
+					id="searchButton">
+			</form>
+		</div>
+		
+		<div style="margin-top: 5%;">
+			<table>
 				<tbody>
-					<c:choose>
-						<c:when test="${not empty salesList}">
-							<c:forEach var="sales" items="${salesList}" varStatus="status">
-								<tr data-num="${sales.orderNO}">
-									<td>${sales.orderNO}</td>
-									<td>${sales.orderPrname}</td>
-									<td>${sales.orderCount}</td>
-									<td>${sales.orderPrice}</td>
-									<td>${sales.orderStatus}</td>
-									<td>${fn:substring(sales.orderShipdate,0,10)}</td>
-								</tr>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<tr>
-								<td colspan="6" class="tac">등록된 게시물이 존재하지 않습니다.</td>
-							</tr>
-						</c:otherwise>
-					</c:choose>
+					<tr>
+						<td>매출현황</td>
+						<td><input type="button" id="excelButton" value="엑셀다운로드"></td>
+						<td>&nbsp;총 매출금액&nbsp;</td>
+						<td style="color: blue;">[<fmt:formatNumber
+								value="${totalMoney}" pattern="\#,###.##"></fmt:formatNumber>원]
+						</td>
+						<td>&nbsp;총 환불금액&nbsp;</td>
+						<td style="color: red;">[<fmt:formatNumber
+								value="${refundMoney}" pattern="\#,###.##"></fmt:formatNumber>원]
+						</td>
+					</tr>
 				</tbody>
 			</table>
+			<form id="f_radio" name="f_radio">
+				<input type="radio" id="sales_month" name="sales_check" value="월별">월별
+				<input type="radio" id="sales_day" name="sales_check" value="일자별">일자별
+			</form>
 		</div>
 
-		<div id="curve_chart_day"
-			style="width: 30%; float: right; margin-bottom: 30%;"></div>
-		<div id="curve_chart_month"
-			style="width: 30%; float: right; margin-bottom: 30%;"></div>
 
-	</div>
+		<div id="slaesList">
+			<div style="width: 70%; float: left;">
+				<!-- <table id="list_tb" cellspacing="0" cellpadding="0" summary="매출 목록"> -->
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th><marquee>주문번호</marquee></th>
+							<th>상품명</th>
+							<th>수량</th>
+							<th>총 판매금액</th>
+							<th>주문상태</th>
+							<th class="borcle">배송날짜</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${not empty salesList}">
+								<c:forEach var="sales" items="${salesList}" varStatus="status">
+									<tr data-num="${sales.orderNO}">
+										<td>${sales.orderNO}</td>
+										<td>${sales.orderPrname}</td>
+										<td>${sales.orderCount}</td>
+										<td>${sales.orderPrice}</td>
+										<td>${sales.orderStatus}</td>
+										<td>${fn:substring(sales.orderShipdate,0,10)}</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="6" class="tac">등록된 게시물이 존재하지 않습니다.</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
 
-	<div id="boardPage">
-		<tag:paging page="${param.page}" total="${total}"
-			list_size="${data.pageSize}"></tag:paging>
+			<div id="curve_chart_day"
+				style="width: 30%; float: right; margin-bottom: 30%;"></div>
+			<div id="curve_chart_month"
+				style="width: 30%; float: right; margin-bottom: 30%;"></div>
+
+		</div>
+
+		<div id="boardPage">
+			<tag:paging page="${param.page}" total="${total}"
+				list_size="${data.pageSize}"></tag:paging>
+		</div>
 	</div>
 </body>
 </html>

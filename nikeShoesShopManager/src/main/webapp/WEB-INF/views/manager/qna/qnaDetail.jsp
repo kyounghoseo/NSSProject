@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세페이지</title>
+<title>Q&A 상세페이지</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
 	<!-- 부트스트랩 -->

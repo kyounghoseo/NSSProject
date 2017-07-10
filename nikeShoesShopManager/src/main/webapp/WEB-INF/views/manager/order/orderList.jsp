@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주문 관리</title>
 <script src="//code.jquery.com/jquery.min.js"></script>
 	<!-- 부트스트랩 -->
 <script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
