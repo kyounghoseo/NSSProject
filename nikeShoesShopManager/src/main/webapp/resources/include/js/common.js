@@ -9,3 +9,15 @@ function chkSubmit(v_item, v_name) {
 		return true;
 	}
 }
+
+
+function chkCategory(v_item, v_name) {
+	   if (v_item.val().replace("- 카테고리선택 -", "") == "") {
+	      alert(v_name + "확인해 주세요.");
+	      v_item.val("- 카테고리선택 -");
+	      v_item.focus();
+	      return false;
+	   } else {
+	      return true;
+	   }
+	}

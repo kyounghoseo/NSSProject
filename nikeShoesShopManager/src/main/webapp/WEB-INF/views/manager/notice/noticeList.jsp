@@ -16,6 +16,14 @@
 <title>공지사항 목록</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
+	<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../resources/css/booking2.css?var=25" />
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
 <script type="text/javascript" src="../resources/include/js/common.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
@@ -51,7 +59,7 @@
 
 		//제목 클릭시 상세페이지 이동
 		$(".goDetail").click(function() {
-			var noticeNo = $(this).parents("tr").attr("data-num");
+			var noticeNo = $(this).attr("data-num");
 			$("#noticeNo").val(noticeNo);
 			console.log("글번호 : " + noticeNo);
 			//상세페이지로 이동하기위해 form 추가 (id : detailForm)
@@ -84,6 +92,18 @@
 
 	}
 </script>
+<style type="text/css">
+#wrap{
+width: 80%;
+margin-left: 10%;
+}
+#f_search{
+float: left;
+}
+th{
+text-align: center;
+}
+</style>
 </head>
 <body>
 	<%-- <%
@@ -94,7 +114,13 @@ session.setAttribute("id", id);
 	<!-- 상단 헤더 -->
 	<%@ include file="../header.jsp"%>
 
+<div id="wrap">
+<div id="title">
+	
+	<h2>공지사항</h2>
 
+	
+	</div>
 	<!-- 상세페이지 이동을 위한 form -->
 	<form name="detailForm" id="detailForm">
 		<input type="hidden" name="noticeNo" id="noticeNo"> <input
@@ -102,7 +128,7 @@ session.setAttribute("id", id);
 			type="hidden" name="pageSize" value="${data.pageSize }">
 	</form>
 
-	<div id="noticeSearch">
+	<div id="noticeSearch" style="margin-top: 3%;">
 		<form id="f_search" name="f_search">
 			<input type="hidden" id="page" name="page" value="${data.page}" /> <label
 				for="keyword">검색어</label> <select id="search" name="search">
@@ -112,17 +138,26 @@ session.setAttribute("id", id);
 				placeholder="제목을 입력하세요."> <input type="button" value="검색"
 				id="searchButton">
 		</form>
+		<form id="insert">
+			<input type="button" id="insertButton" value="공지등록">
+		</form>
 	</div>
 	<p>
 
 		<!-- 리스트 시작 -->
 	<div id="noticeList">
-		<table id="list_tb" cellspacing="0" cellpadding="0" summary="공지사항 목록">
+		<table class="table table-bordered" cellspacing="0" cellpadding="0" summary="공지사항 목록">
+		<colgroup>
+				<col width="10%" />
+				<col width="40%" />
+				<col width="15%" />
+				<col width="15%" />
+			</colgroup>
 			<thead>
 				<tr>
-					<th><marquee>공지번호</marquee></th>
-					<th>작성자</th>
+					<th>공지번호</th>
 					<th>제목</th>
+					<th>작성자</th>
 					<th class="borcle">등록날짜</th>
 				</tr>
 			</thead>
@@ -130,10 +165,10 @@ session.setAttribute("id", id);
 				<c:choose>
 					<c:when test="${not empty noticeList}">
 						<c:forEach var="notice" items="${noticeList}" varStatus="status">
-							<tr data-num="${notice.noticeNo}">
+							<tr data-num="${notice.noticeNo}" class="goDetail" style="cursor: pointer;">
 								<td>${notice.noticeNo}</td>
+								<td><span >${notice.noticeTitle}</span></td>
 								<td>${notice.noticeWriter}</td>
-								<td><span class="goDetail">${notice.noticeTitle}</span></td>
 								<td>${notice.noticeDate}</td>
 							</tr>
 						</c:forEach>
@@ -147,9 +182,7 @@ session.setAttribute("id", id);
 			</tbody>
 		</table>
 		<p>
-		<form id="insert">
-			<input type="button" id="insertButton" value="공지등록">
-		</form>
+		
 
 		<!-- 페이지 네비게이션 -->
 		<div id="boardPage">
@@ -157,6 +190,7 @@ session.setAttribute("id", id);
 				list_size="${data.pageSize}"></tag:paging>
 		</div>
 
+	</div>
 	</div>
 </body>
 </html>

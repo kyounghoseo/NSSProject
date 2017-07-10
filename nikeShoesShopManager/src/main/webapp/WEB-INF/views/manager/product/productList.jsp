@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tag" uri="/WEB-INF/tld/custom_tag.tld"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <c:if test="${empty sessionScope.managerid }">
  <script>
  alert("잘못된 접근경로입니다. 관리자 로그인페이지로 이동합니다.");
@@ -45,7 +47,7 @@
 			}
 		});
 		$(".goDetail").click(function() {
-			var productNo = $(this).parents("tr").attr("data-num");
+			var productNo = $(this).attr("data-num");
 			$("#productNo").val(productNo);
 
 			$("#detailForm").attr({
@@ -90,14 +92,32 @@ input[type="button"] {
 	font-size: 1em;
 	cursor: pointer;
 }
+#wrap{
+width: 80%;
+margin-left: 10%;
+}
+th{
+text-align: center;
+}
+td{
+vertical-align: inherit;
+}
+
 </style>
 </head>
 <body>
 	<!-- 상단 헤더 -->
 	<%@ include file="../header.jsp"%>
-	<div >
+	<div id="wrap">
+	<div id="title">
+	
+	<h2>상품관리</h2>
 
-		<form id="searchForm" >
+	
+	</div>
+	<div style="margin-top: 3%; clear: both;">
+
+		<form id="searchForm" style="float: left;" >
 			<input type="hidden" name="page" id="page" value="${data.page }">
 			<input type="hidden" name="pageSize" id="pageSize"
 				value="${data.pageSize }"> <label for="keyword">검색어</label>
@@ -108,8 +128,12 @@ input[type="button"] {
 			</select> <input type="text" id="keyword" name="keyword"
 				placeholder="검색어를 입력하세요"> <input type="button" value="검색"
 				id="searchData">
+				
 
 		</form>
+		<div style="float: right;">
+		<input type="button" value="상품등록" id="productInsert">
+	</div>
 		<form name="detailForm" id="detailForm">
 			<input type="hidden" name="productNo" id="productNo"> <input
 				type="hidden" name="page" id="page" value="${data.page }"> <input
@@ -117,7 +141,7 @@ input[type="button"] {
 
 		</form>
 	</div>
-	<table class="table table-hover">
+	<table class="table table-hover" style="margin-top: 6%;">
 		<tbody>
 			<tr>
 				<th>상품번호</th>
@@ -131,16 +155,16 @@ input[type="button"] {
 			<c:choose>
 				<c:when test="${not empty productList }">
 					<c:forEach var="product" items="${productList }" varStatus="status">
-						<tr data-num="${product.productNo }">
-							<td>${count-(status.count-1) }</td>
+						<tr data-num="${product.productNo }"  class="goDetail" style="cursor: pointer;">
+							<td style="vertical-align: inherit;">${count-(status.count-1) }</td>
 							<td width="20%"><img width="40%" id="mainImage"
 								src="/manager/uploadStorage/${product.productMainImage}"></td>
 
-							<td>${product.productCode }</td>
-							<td><span class="goDetail" style="cursor: pointer;">${product.productName }</span></td>
-							<td>${product.productColor }</td>
-							<td>${product.productCategory }</td>
-							<td>${product.productPrice }</td>
+							<td style="vertical-align: inherit;">${product.productCode }</td>
+							<td style="vertical-align: inherit;"><span>${product.productName }</span></td>
+							<td style="vertical-align: inherit;">${product.productColor }</td>
+							<td style="vertical-align: inherit;">${product.productCategory }</td>
+							<td style="vertical-align: inherit;"><fmt:formatNumber value="${product.productPrice }" pattern="#,###.##" />원</td>
 
 
 
@@ -165,12 +189,11 @@ input[type="button"] {
 
 		</tbody>
 	</table>
-	<div style="float: right;">
-		<input type="button" value="상품등록" id="productInsert">
-	</div>
+	
 	<div id="productPage">
 		<tag:paging page="${param.page }" total="${total }"
 			list_size="${data.pageSize }"></tag:paging>
+	</div>
 	</div>
 </body>
 </html>

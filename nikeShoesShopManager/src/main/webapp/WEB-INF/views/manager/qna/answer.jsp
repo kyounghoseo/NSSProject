@@ -271,16 +271,30 @@ function dataReset() {
 <div id="comment_write">
 <form id="comment_form">
 <div>
-<label for="answerWriter">작성자</label>
-<input type="text" name="answerWriter" id="answerWriter">
+<table class="table table-hover">
+						
+					
+						<tbody>
+									<tr>
+										<td class="ac">작성자</td>
+										<td colspan="3"><input type="text" name="answerWriter" id="answerWriter">
+										<input type="button" id="answerInsert" value="저장하기">
+										</td>
+									</tr>
+									<tr>
+										<td class="ac">작성일</td>
+										<td>${answer.answerDate}</td>
+									</tr>
+									<tr style="height: 100px;">
+										<td class="ac vm" >덧글 내용</td>
+										<td colspan="3"><textarea name="answerContents" id="answerContents"></textarea></td>
+									</tr>
+						</tbody>
+					</table>
 
-<input type="button" id="answerInsert" value="저장하기">
 
 </div>
-<div>
-<label for="answerContents">덧글 내용</label>
-<textarea name="answerContents" id="answerContents"></textarea>
-</div>
+
 
 </form>
 

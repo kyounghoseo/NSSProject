@@ -27,12 +27,15 @@
 <script type="text/javascript">
 	/* [로그인] 버튼 눌렀을때 처리 이벤트 */
 	$(document).ready(function() {
-
+		$(".txt1").hide();
+		if('${msg}'=='failure'){
+			$(".txt1").show();
+		}
 		$("#loginInsert").click(function() {
 
 			$("#loginForm").attr({
 				"method" : "POST",
-				"action" : "/manager/order/orderList.do" 
+				"action" : "/manager/login/loginCheck.do" 
 			});
 
 			$("#loginForm").submit();
@@ -40,7 +43,7 @@
 		
 		$("#home").click(function() {
 
-			location.href = '/customer';
+			location.href = '/customer/home.do';
 		});
 	});
 </script>

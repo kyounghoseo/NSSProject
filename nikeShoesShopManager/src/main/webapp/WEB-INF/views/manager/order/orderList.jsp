@@ -4,6 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tag" uri="/WEB-INF/tld/custom_tag.tld"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <c:if test="${empty sessionScope.managerid }">
  <script>
  alert("잘못된 접근경로입니다. 관리자 로그인페이지로 이동합니다.");
@@ -16,6 +18,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery.min.js"></script>
+	<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+   href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet"
+   href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
@@ -208,11 +217,11 @@
 	href="../resources/include/css/common.css">
 <style type="text/css">
 #d_search{
-float: right;
-
+float: left;
+width: 50%;
 }
 .ui-datepicker-trigger {
- width: 1.7%;
+ width: 7%;
  padding-bottom: 0;
  }
 input[type="button"] {
@@ -231,7 +240,6 @@ table.list {
     border-spacing: 1px;
     text-align: center;
     line-height: 1.5;
-    margin: 20px 10px;
 }
 table.list th {
     width: 155px;
@@ -250,6 +258,22 @@ table.list td {
     background: #eee;
      vertical-align: inherit;
 }
+th{
+text-align: center;
+}
+
+#wrap{
+width: 80%;
+margin-left: 10%;
+margin-top: 3%;
+}
+
+#d_radio{
+clear: both;
+}
+#d_control{
+margin-top: 3%;
+}
 </style>
 
 </head>
@@ -264,12 +288,15 @@ table.list td {
 	</form>
 	<!-- 상단 헤더 -->
 <%@ include file="../header.jsp"%>
-	<div>
+	<div id="wrap">
+	<div id="title">
+	
+	<h2>주문관리</h2>
 
 	
 	</div>
-		<table id="list_tb" style="height: 100%;"  width="100%" cellspacing="0"
-		cellpadding="0">
+ 	
+		<table class="table table-bordered" style="height: 100%; margin-top: 3%; "  cellspacing="0" cellpadding="0">
 		<tbody>
 			<tr>
 				<th>주문결제</th>
@@ -290,19 +317,21 @@ table.list td {
 
 		</tbody>
 	</table>
-	<Br><Br><br>
+	<div id="d_control">
 	<div id="d_search" >
 		<form id="f_search">
+	<p style="float: left; font-family: initial; font-weight: bold;">날짜별 조회</p>
+		<div style="clear: both; float: left;  width: 70%;">
 		<input type="text" id="s_startDate" name="s_startDate" value="${data.s_startDate }"> ~
 			<input type="text" id="s_endDate" name="s_endDate" value="${data.s_endDate }">
-			<input type="button" id="search" value="검색">
+			<input type="button" id="search" value="조회">
 		<input type="hidden" name="page" id="page" value="${data.page }"> 
 			<input type="hidden" name="pageSize" id="pageSize" value="${data.pageSize }">
 		<input type="hidden" name="order_check" class="order_check" value="${data.order_check }" >  
-			
+			</div>
 			</form>
-		</div>
-	<Br><Br><br>
+		</div> 
+	<div id="d_radio">
 			<form id="f_radio" name="f_radio">
 			<input type="radio" id="order_all" name="order" value="전체">전체 
 			<input type="radio" id="order_desposit" name="order" value="입금완료">입금완료
@@ -312,11 +341,9 @@ table.list td {
 		    <input type="radio"	id="order_return" name="order" value="주문반품">주문반품
 		    
 		</form>
-		<br>
-		
-		<br><br>
-	<table class="list"  style="height: 100%;" width="100%" cellspacing="0"
-		cellpadding="0">
+	</div>
+	</div>
+	<table class="list"  cellspacing="0" cellpadding="0">
 		<tbody>
 			<tr>
 				<th>번호</th>
@@ -341,13 +368,17 @@ table.list td {
 							<td class="group">${order.orderGroup }</td>
 							<td class="date">${fn:substring(order.orderDate,0,10) }</td>
  
-							<td>${order.orderShipno }</td>
+							<td>
+							<c:if test="${order.orderShipno != null}">
+							우체국 택배 <br>
+							</c:if>
+							${order.orderShipno }</td>
 							<td class="id">${order.orderCsid }</td>
 							<td>${order.orderPrname }</td>
 							<td>${order.orderColor }</td>
 							<td>${order.orderSize }</td>
 							<td>${order.orderCount }</td>
-							<td>${order.orderPrice }</td>
+							<td><fmt:formatNumber value="${order.orderPrice }" pattern="#,###.##" />원</td>
 							<td class="ad">${order.orderAddress }</td>
 							<td>${order.orderStatus }</td>
 							<td>${fn:substring(order.orderShipdate,0,10) }
@@ -370,7 +401,7 @@ table.list td {
 				<c:otherwise>
 
 					<tr>
-						<td colspan="12" class="tac">등록된 주문건이 존재하지 않습니다.</td>
+						<td colspan="13" class="tac">등록된 주문건이 존재하지 않습니다.</td>
 					</tr>
 
 				</c:otherwise>
@@ -379,7 +410,12 @@ table.list td {
 
 
 		</tbody>
+		
 	</table>
+	<div id="orderPage">
+		<tag:paging page="${param.page }" total="${total }"	list_size="${data.pageSize }"></tag:paging>
+	</div>
+	</div>
 	<div id="dialog" title="보내시는 운송장 번호를 입력해주세요.">
 		<form name="detailForm" id="detailForm">
 			<input type="hidden" name="orderGroup" id="orderGroup">
@@ -388,15 +424,20 @@ table.list td {
 			<input type="hidden" name="order_check" id="order_check" value="${data.order_check }" >
 			<input type="hidden" name="page" id="page" value="${data.page }"> 
 			<input type="hidden" name="pageSize" value="${data.pageSize }">
+			<label>택배회사</label>
+							<select name="ship" id="ship">
+									<option>- 택배사선택 -</option>
+									<option value="우체국택배">우체국택배</option>
+									
+							</select>
 			<input type="text" id="orderShipno" name="orderShipno"> 
+			<div>
 			<input type="button" id="shipInsert" name="shipInsert" value="확인"> 
 			<input type="button" id="cancle" value="취소">
-			
+			</div>
 		</form>
 
 	</div>
-	<div id="orderPage">
-		<tag:paging page="${param.page }" total="${total }"	list_size="${data.pageSize }"></tag:paging>
-	</div>
+	
 </body>
 </html>
