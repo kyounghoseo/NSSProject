@@ -301,19 +301,30 @@
 	//DatePicker
 	$(function() {
 		$("#s_startDate,#s_endDate").datepicker({
-			dateFormat : "yy-mm-dd"
+			showOn : "both",
+			buttonImage : "../resources/images/calendar-symbol.png",
+			buttonImageOnly : true,
+			showButtonPanel : true,
+			changeMonth : true,
+			changeYear : true,
+			dateFormat : "yy-mm-dd",
 		});
 	});
 </script>
+<style type="text/css">
+.ui-datepicker-trigger {
+	width: 1.7%;
+}
+</style>
 </head>
 <body>
 	<!-- 상단 헤더 -->
 	<%@ include file="../header.jsp"%>
 
-	${chartMonth[0].chartSales} ${chartMonth[1].chartSales}
+	<%-- ${chartMonth[0].chartSales} ${chartMonth[1].chartSales}
 	${chartMonth[2].chartSales} ${chartMonth[3].chartSales}
 	${chartMonth[0].chartRefund} ${chartMonth[1].chartRefund}
-	${chartMonth[2].chartRefund} ${chartMonth[3].chartRefund}
+	${chartMonth[2].chartRefund} ${chartMonth[3].chartRefund} --%>
 
 	<!-- 매출 일간 -->
 	<input type="hidden" name="date1" id="date1">
@@ -370,7 +381,7 @@
 		}
 	%> --%>
 
-	<c:choose>
+	<%-- <c:choose>
 		<c:when test="${not empty chartList}">
 			<c:forEach var="chart" items="${chartList}" varStatus="status">
 				<table>
@@ -399,7 +410,7 @@
 
 	<c:if test="${status.count} != 4">
 		<input type="hidden" id="status4" value="0">
-	</c:if>
+	</c:if> --%>
 
 
 	<!-- 상세페이지 이동을 위한 form -->
@@ -419,13 +430,13 @@
 				placeholder="상품명을 입력하세요."> <input type="button" value="검색"
 				id="searchButton">
 			<p>
-				<label for="s_startDate">달력</label> <input type="text" name="s_startDate" id="s_startDate"
+				<input type="text" name="s_startDate" id="s_startDate"
 					value="${data.s_startDate}"> ~ <input type="text"
 					name="s_endDate" id="s_endDate" value="${data.s_endDate}">
 				<input type="button" value="초기화" id="resetButton">
 		</form>
 	</div>
-	<p>
+	<br>
 	<div>
 		<table>
 			<tbody>
