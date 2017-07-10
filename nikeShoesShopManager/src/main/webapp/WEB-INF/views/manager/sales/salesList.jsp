@@ -19,7 +19,14 @@
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
 <script type="text/javascript" src="../resources/include/js/common.js"></script>
-
+<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../resources/css/booking2.css?var=25" />
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
 <!-- DatePicker -->
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>

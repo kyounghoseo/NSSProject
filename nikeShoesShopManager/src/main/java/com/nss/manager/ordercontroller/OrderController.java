@@ -4,7 +4,6 @@ package com.nss.manager.ordercontroller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nss.manager.common.Paging;
 import com.nss.manager.common.Util;
-import com.nss.manager.loginservice.LoginService;
-import com.nss.manager.loginvo.LoginVO;
 import com.nss.manager.orderservice.OrderService;
 import com.nss.manager.ordervo.OrderVO;
 
@@ -25,23 +22,10 @@ public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
-	@Autowired
-	private LoginService loginService;
+
 
 	@RequestMapping(value="/orderList")
-	public String orderList(@ModelAttribute LoginVO lvo , @ModelAttribute OrderVO ovo, Model model,HttpSession session ){
-		System.out.println("로그인아이디"+lvo.getLoginManagerID());
-		System.out.println("로그인패스워드"+lvo.getLoginManagerPW());
-		LoginVO login = new LoginVO();
-		if(lvo.getLoginManagerID()!=null ){
-			System.out.println("로그인서비스들어가낭");
-			login = loginService.loginConfirm(lvo);
-			
-			if(login.getManagerPW().equals(lvo.getLoginManagerPW())){
-				System.out.println("패스워드"+login.getManagerPW());
-				session.setAttribute("managerid", login.getManagerID());
-			}
-		}
+	public String orderList( @ModelAttribute OrderVO ovo, Model model ){
 		
 		
 		System.out.println(ovo.getS_startDate()+"스타트");

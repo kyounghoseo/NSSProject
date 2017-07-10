@@ -7,9 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 글쓰기 화면</title>
-<link rel="stylesheet" type="text/css"
-	href="../resources/include/css/common.css">
+
 <script type="text/javascript" src="../resources/include/js/common.js"></script>
+<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../resources/css/booking2.css?var=25" />
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
@@ -57,6 +64,15 @@
 		});
 	});
 </script>
+<style type="text/css">
+.contentContainer {
+	width: 80%;
+	margin-left: 10%;
+}
+input[type="text"]{
+    float: left;
+}
+</style>
 </head>
 <body>
 
@@ -64,41 +80,52 @@
 	<%@ include file="../header.jsp"%>
 
 	<div class="contentContainer">
-		<div id="contentTit">
-			<h3>공지사항 글작성</h3>
+		<div id="title">
+
+			<h2>공지등록</h2>
+
+
 		</div>
 
-		<div class="contentTB">
+		<div style="margin-top: 3%; ">
 			<form id="f_writeForm" name="f_writeForm"
 				enctype="multipart/form-data">
 				<input type="hidden" name="csrf" value="${csrf_token}"> <input
 					type="hidden" name="managerNo" id="managerNo">
-				<table id="boardWrite">
-					<colgroup>
-						<col width="17%" />
-						<col width="83%" />
-					</colgroup>
-					<tr>
-						<td>작성자</td>
-						<td><input type="text" name="noticeWriter" id="noticeWriter"></td>
-					</tr>
-					<tr>
-						<td>제목</td>
-						<td><input type="text" name="noticeTitle" id="noticeTitle"></td>
-					</tr>
-					<tr>
-						<td>내용</td>
-						<td><textarea name="noticeContents" id="noticeContents"></textarea></td>
-					</tr>
-					<tr>
-						<td class="ac">첨부파일</td>
-						<td><input type="file" name="file" id="file"></td>
-					</tr>
-				</table>
-				<%-- <c:if test="noticeWriter == '관리자'">
-					<input type="hidden" name="managerNo" value="1">
-				</c:if> --%>
+				<div>
+					<table class="table table-hover">
+
+						<tbody class="trEdit">
+							<tr>
+								<td>작성자</td>
+								<td><input type="text" name="noticeWriter"
+									id="noticeWriter"></td>
+							</tr>
+							<tr>
+								<td>제목</td>
+								<td><input type="text" name="noticeTitle" id="noticeTitle"></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align: left; padding-left: 9.3%;">내용</td>
+							</tr>
+							<tr>
+								<td colspan="2"><textarea rows="10" cols="154"
+										id="noticeContents" name="noticeContents"></textarea></td>
+							</tr>
+							<tr>
+								<td class="ac">첨부파일</td>
+								<td><input type="file" name="file" id="file"></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+
 			</form>
+
+
+
+
 		</div>
 
 		<div id="contentBut">

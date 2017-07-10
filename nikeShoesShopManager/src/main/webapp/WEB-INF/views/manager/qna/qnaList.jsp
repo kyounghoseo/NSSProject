@@ -16,6 +16,14 @@
 <title>공지사항 목록</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
+	<!-- 부트스트랩 -->
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../resources/css/booking2.css?var=25" />
+<link rel="stylesheet"
+	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<!-- 부트스트랩 -->
 <script type="text/javascript" src="../resources/include/js/common.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
@@ -79,7 +87,7 @@
 
 						//제목 클릭시 상세페이지 이동
 						$(".goDetail").click(function() {
-							var qnaNO = $(this).parents("tr").attr("data-num");
+							var qnaNO = $(this).attr("data-num");
 							$("#qnaNO").val(qnaNO);
 							console.log("글번호 : " + qnaNO);
 							//상세페이지로 이동하기위해 form 추가 (id : detailForm)
@@ -108,21 +116,45 @@
 
 	}
 </script>
+<style type="text/css">
+#wrap{
+width: 80%;
+margin-left: 10%;
+}
+#d_Search{
+float: left;
+}
+#d_control{
+margin-top: 3%;
+}
+th{
+text-align: center;
+}
+#qnaList{
+margin-top: 1%;
+}
+</style>
 </head>
 <body>
 
 	<!-- 상단 헤더 -->
 	<%@ include file="../header.jsp"%>
 
+<div id="wrap">
+<div id="title">
+	
+	<h2>Q&A</h2>
 
+	
+	</div>
 	<!-- 상세페이지 이동을 위한 form -->
 	<form name="detailForm" id="detailForm">
 		<input type="hidden" name="qnaNO" id="qnaNO"> <input
 			type="hidden" name="page" value="${datad.page }"> <input
 			type="hidden" name="pageSize" value="${datad.pageSize }">
 	</form>
-
-	<div id="qnaSearch">
+	<div id="d_control">
+	<div id="d_Search">
 		<form id="f_search" name="f_search">
 			<input type="hidden" id="qna_check" name="qna_check"
 				value="${data.qna_check }"> <input type="hidden" id="page"
@@ -136,29 +168,31 @@
 				id="searchButton">
 		</form>
 	</div>
+	<div id="d_radio">
 	<form id="f_radio" name="f_radio">
 		<input type="radio" id="qna_all" name="qna" value="전체">전체 <input
 			type="radio" id="qna_noanswer" name="qna" value="미답변">미답변 <input
 			type="radio" id="qna_answer" name="qna" value="답변완료">답변완료
 
 	</form>
-
+	</div>
+</div>
 	<!-- 리스트 시작 -->
 	<div id="qnaList">
-		<table id="list_tb" cellspacing="0" cellpadding="0" summary="공지사항 목록">
+		<table class="table table-bordered" cellspacing="0" cellpadding="0" summary="공지사항 목록">
 			<colgroup>
 				<col width="10%" />
+				<col width="45%" />
+				<col width="10%" />
 				<col width="15%" />
-				<col width="15%" />
-				<col width="40%" />
 				<col width="20%" />
 			</colgroup>
 			<thead>
 				<tr>
-					<th><marquee>QnA번호</marquee></th>
+					<th>QnA번호</th>
+					<th>제목</th>
 					<th>작성자</th>
 					<th>아이디</th>
-					<th>제목</th>
 					<th class="borcle">등록날짜</th>
 				</tr>
 			</thead>
@@ -166,15 +200,15 @@
 				<c:choose>
 					<c:when test="${not empty qnaList}">
 						<c:forEach var="qna" items="${qnaList}" varStatus="status">
-							<tr data-num="${qna.qnaNO}">
+							<tr data-num="${qna.qnaNO}" class="goDetail" style="cursor: pointer;">
 								<td>${qna.qnaNO }</td>
-
-								<td>${qna.qnaWriter}</td>
-								<td>${qna.qnaCsid}</td>
-								<td><span class="goDetail">${qna.qnaTitle} <c:if
+								<td><span >${qna.qnaTitle} <c:if
 											test="${qna.qnaAnswer eq '답변완료'}">
 											<span style="color: red;"><small> [답변완료]</small></span>
 										</c:if></span></td>
+
+								<td>${qna.qnaWriter}</td>
+								<td>${qna.qnaCsid}</td>
 								<td>${qna.qnaDate}</td>
 							</tr>
 						</c:forEach>
@@ -195,6 +229,7 @@
 	<div id="qnaPage">
 		<tag:paging page="${param.page}" total="${total}"
 			list_size="${data.pageSize}"></tag:paging>
+	</div>
 	</div>
 </body>
 </html>

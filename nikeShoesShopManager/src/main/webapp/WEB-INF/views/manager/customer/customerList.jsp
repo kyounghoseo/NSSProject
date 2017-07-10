@@ -119,28 +119,42 @@
 
 	}
 </script>
+<style type="text/css">
+#wrap{
+width: 80%;
+margin-left: 10%; 
+}
+th{
+text-align: center;
+}
+#f_search{
+float: left;
+}
+#customerSearch{
+margin-top: 3%;
+}
+#customerList{
+margin-top: 1%;
+}
+</style>
 </head>
 <body>
 
 	<!-- 상단 헤더 -->
 	<%@ include file="../header.jsp"%>
+<div id="wrap">
+<div id="title">
+	
+	<h2>고객관리</h2>
 
+	
+	</div>
 	<!-- 상세페이지 이동을 위한 form -->
 	<form name="detailForm" id="detailForm">
 		<input type="hidden" name="customerNo" id="customerNo">
 	</form>
 
-	<div id="customerSearch">
-		<form id="f_search" name="f_search">
-			<input type="hidden" id="page" name="page" value="${data.page}" /> <label
-				for="keyword">검색어</label> <select id="search" name="search">
-				<option value="all">전체</option>
-				<option value="name">이름</option>
-			</select> <input type="text" name="keyword" id="keyword"
-				placeholder="이름을 입력하세요."> <input type="button" value="검색"
-				id="searchButton">
-		</form>
-	</div>
+	
 	<div>
 		<table>
 			<tbody>
@@ -152,6 +166,18 @@
 				</tr>
 			</tbody>
 		</table>
+		
+	</div>
+	<div id="customerSearch">
+		<form id="f_search" name="f_search">
+			<input type="hidden" id="page" name="page" value="${data.page}" /> <label
+				for="keyword">검색어</label> <select id="search" name="search">
+				<option value="all">전체</option>
+				<option value="name">이름</option>
+			</select> <input type="text" name="keyword" id="keyword"
+				placeholder="이름을 입력하세요."> <input type="button" value="검색"
+				id="searchButton">
+		</form>
 		<form id="f_radio" name="f_radio">
 			<input type="radio" id="customer_all" name="customer_check"
 				value="전체">전체 <input type="radio" id="customer_normal"
@@ -208,6 +234,7 @@
 				list_size="${data.pageSize}"></tag:paging>
 		</div>
 
+	</div>
 	</div>
 </body>
 </html>

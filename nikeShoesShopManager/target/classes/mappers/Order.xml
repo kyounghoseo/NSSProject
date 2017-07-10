@@ -10,13 +10,13 @@
 		SELECT
 		orderno,ordergroup,productno,customerno,ordercsid,orderprname,ordercount,orderprice,ordersize,ordercolor,ordercsname,
 		ordercellphone,orderaddress,orderstatus,orderpayment,to_char(orderdate,'YYYY-MM-DD
-		hh24') as orderdate,ordershipno,ordershipdate,ROW_NUMBER()OVER(ORDER BY orderGroup DESC) AS ROW_NUM , COUNT(*)OVER(PARTITION BY orderGroup) AS PARTCNT
+		hh24') as orderdate,ordershipno,ordershipdate
 		from(select lst.*, rownum
 		as rnum from(SELECT
 
 		orderno,ordergroup,productno,customerno,ordercsid,orderprname,ordercount,orderprice,ordersize,ordercolor,ordercsname,
 		ordercellphone,orderaddress,orderstatus,orderpayment,
-		orderdate,ordershipno,ordershipdate,ROW_NUMBER()OVER(ORDER BY orderGroup DESC) AS ROW_NUM , COUNT(*)OVER(PARTITION BY orderGroup) AS PARTCNT
+		orderdate,ordershipno,ordershipdate
 		from
 		order_tb
 
@@ -30,19 +30,19 @@
 			</if>
 		</trim>
 
-		order by orderno desc
+	
 
 
-
-		) lst)
+order by orderno desc
+		) lst 	order by orderno desc)
 
 		<where>
-			<if test="start_row!=null and start_row!=''">
+			 <if test="start_row!=null and start_row!=''">
 				<if test="end_row!=null and end_row!=''">
 					rnum between #{start_row} and #{end_row}
 				</if>
 
-			</if>
+			</if> 
 			<if test="s_startDate!=null and s_startDate!=''">
 				<if test="s_endDate!=null and s_endDate!=''">
 					and orderdate between to_date(#{s_startDate}, 'YYYY-MM-DD') and
@@ -51,7 +51,7 @@
 
 			</if>
 		</where>
-
+order by orderno desc
 	</select>
 
 	<select id="orderCount" parameterType="com.nss.manager.ordervo.OrderVO"
