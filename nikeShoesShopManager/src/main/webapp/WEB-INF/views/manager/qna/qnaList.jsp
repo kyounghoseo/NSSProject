@@ -16,16 +16,16 @@
 <title>Q&A</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
-	<!-- 부트스트랩 -->
+<script type="text/javascript" src="../resources/include/js/common.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- 부트스트랩 -->
 <script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
 <link rel="stylesheet"
 	href="../resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
 <!-- 부트스트랩 -->
-<script type="text/javascript" src="../resources/include/js/common.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -116,21 +116,25 @@
 	}
 </script>
 <style type="text/css">
-#wrap{
-width: 80%;
-margin-left: 10%;
+#wrap {
+	width: 80%;
+	margin-left: 10%;
 }
-#d_Search{
-float: left;
+
+#d_Search {
+	float: left;
 }
-#d_control{
-margin-top: 3%;
+
+#d_control {
+	margin-top: 3%;
 }
-th{
-text-align: center;
+
+th {
+	text-align: center;
 }
-#qnaList{
-margin-top: 1%;
+
+#qnaList {
+	margin-top: 1%;
 }
 </style>
 </head>
@@ -139,96 +143,98 @@ margin-top: 1%;
 	<!-- 상단 헤더 -->
 	<%@ include file="../header.jsp"%>
 
-<div id="wrap">
-<div id="title">
-	
-	<h2>Q&A</h2>
+	<div id="wrap">
+		<div id="title">
 
-	
-	</div>
-	<!-- 상세페이지 이동을 위한 form -->
-	<form name="detailForm" id="detailForm">
-		<input type="hidden" name="qnaNO" id="qnaNO"> <input
-			type="hidden" name="page" value="${datad.page }"> <input
-			type="hidden" name="pageSize" value="${datad.pageSize }">
-	</form>
-	<div id="d_control">
-	<div id="d_Search">
-		<form id="f_search" name="f_search">
-			<input type="hidden" id="qna_check" name="qna_check"
-				value="${data.qna_check }"> <input type="hidden" id="page"
-				name="page" value="${datsa.page}" /> <label for="keyword">검색어</label>
-			<select id="search" name="search">
-				<option value="all">전체</option>
-				<option value="title">제목</option>
-				<option value="id">아이디</option>
-			</select> <input type="text" name="keyword" id="keyword"
-				placeholder="검색어를 입력하세요."> <input type="button" value="검색"
-				id="searchButton">
+			<h2>Q&A</h2>
+
+
+		</div>
+		<!-- 상세페이지 이동을 위한 form -->
+		<form name="detailForm" id="detailForm">
+			<input type="hidden" name="qnaNO" id="qnaNO"> <input
+				type="hidden" name="page" value="${datad.page }"> <input
+				type="hidden" name="pageSize" value="${datad.pageSize }">
 		</form>
-	</div>
-	<div id="d_radio">
-	<form id="f_radio" name="f_radio">
-		<input type="radio" id="qna_all" name="qna" value="전체">전체 <input
-			type="radio" id="qna_noanswer" name="qna" value="미답변">미답변 <input
-			type="radio" id="qna_answer" name="qna" value="답변완료">답변완료
+		<div id="d_control">
+			<div id="d_Search">
+				<form id="f_search" name="f_search">
+					<input type="hidden" id="qna_check" name="qna_check"
+						value="${data.qna_check }"> <input type="hidden" id="page"
+						name="page" value="${datsa.page}" /> <label for="keyword">검색어</label>
+					<select id="search" name="search">
+						<option value="all">전체</option>
+						<option value="title">제목</option>
+						<option value="id">아이디</option>
+					</select> <input type="text" name="keyword" id="keyword"
+						placeholder="검색어를 입력하세요."> <input type="button" value="검색"
+						id="searchButton">
+				</form>
+			</div>
+			<div id="d_radio">
+				<form id="f_radio" name="f_radio">
+					<input type="radio" id="qna_all" name="qna" value="전체">전체 <input
+						type="radio" id="qna_noanswer" name="qna" value="미답변">미답변
+					<input type="radio" id="qna_answer" name="qna" value="답변완료">답변완료
 
-	</form>
-	</div>
-</div>
-	<!-- 리스트 시작 -->
-	<div id="qnaList">
-		<table class="table table-bordered" cellspacing="0" cellpadding="0" summary="공지사항 목록">
-			<colgroup>
-				<col width="10%" />
-				<col width="45%" />
-				<col width="10%" />
-				<col width="15%" />
-				<col width="20%" />
-			</colgroup>
-			<thead>
-				<tr>
-					<th>QnA번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>아이디</th>
-					<th class="borcle">등록날짜</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:choose>
-					<c:when test="${not empty qnaList}">
-						<c:forEach var="qna" items="${qnaList}" varStatus="status">
-							<tr data-num="${qna.qnaNO}" class="goDetail" style="cursor: pointer;">
-								<td>${qna.qnaNO }</td>
-								<td><span >${qna.qnaTitle} <c:if
-											test="${qna.qnaAnswer eq '답변완료'}">
-											<span style="color: red;"><small> [답변완료]</small></span>
-										</c:if></span></td>
+				</form>
+			</div>
+		</div>
+		<!-- 리스트 시작 -->
+		<div id="qnaList">
+			<table class="table table-bordered" cellspacing="0" cellpadding="0"
+				summary="공지사항 목록">
+				<colgroup>
+					<col width="10%" />
+					<col width="45%" />
+					<col width="10%" />
+					<col width="15%" />
+					<col width="20%" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th>QnA번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>아이디</th>
+						<th class="borcle">등록날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:choose>
+						<c:when test="${not empty qnaList}">
+							<c:forEach var="qna" items="${qnaList}" varStatus="status">
+								<tr data-num="${qna.qnaNO}" class="goDetail"
+									style="cursor: pointer;">
+									<td>${qna.qnaNO }</td>
+									<td><span>${qna.qnaTitle} <c:if
+												test="${qna.qnaAnswer eq '답변완료'}">
+												<span style="color: red;"><small> [답변완료]</small></span>
+											</c:if></span></td>
 
-								<td>${qna.qnaWriter}</td>
-								<td>${qna.qnaCsid}</td>
-								<td>${qna.qnaDate}</td>
+									<td>${qna.qnaWriter}</td>
+									<td>${qna.qnaCsid}</td>
+									<td>${qna.qnaDate}</td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="5" class="tac">등록된 게시물이 존재하지 않습니다.</td>
 							</tr>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td colspan="5" class="tac">등록된 게시물이 존재하지 않습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
-	</div>
-	<p>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+		</div>
+		<p>
 
 
-		<!-- 페이지 네비게이션 -->
-	<div id="qnaPage">
-		<tag:paging page="${param.page}" total="${total}"
-			list_size="${data.pageSize}"></tag:paging>
-	</div>
+			<!-- 페이지 네비게이션 -->
+		<div id="qnaPage">
+			<tag:paging page="${param.page}" total="${total}"
+				list_size="${data.pageSize}"></tag:paging>
+		</div>
 	</div>
 </body>
 </html>

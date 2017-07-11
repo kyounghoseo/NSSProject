@@ -488,7 +488,7 @@ th {
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th><marquee>주문번호</marquee></th>
+							<th>주문번호</th>
 							<th>상품명</th>
 							<th>수량</th>
 							<th>총 판매금액</th>
