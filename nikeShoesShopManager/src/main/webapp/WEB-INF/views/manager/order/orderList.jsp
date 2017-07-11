@@ -125,7 +125,7 @@
 
 		
 		
-		$(".list").rowspan(1); 
+		$(".table").rowspan(1); 
 	
 		
 		
@@ -274,6 +274,9 @@ clear: both;
 #d_control{
 margin-top: 3%;
 }
+td{
+border-right: 1px solid #eeeeee;
+}
 </style>
 
 </head>
@@ -297,6 +300,23 @@ margin-top: 3%;
 	</div>
  	
 		<table class="table table-bordered" style="height: 100%; margin-top: 3%; "  cellspacing="0" cellpadding="0">
+		<colgroup>
+		
+		<col width="5%" />
+		<col width="5%" />
+		<col width="5%" />
+		<col width="10%" />
+		<col width="5%" />
+		<col width="10%" />
+		<col width="35%" />
+		<col width="10%" />
+		<col width="10%" />
+		<col width="25%" />		
+		<col width="10%" />
+		<col width="10%" />
+		<col width="25%" />				
+		
+		</colgroup>
 		<tbody>
 			<tr>
 				<th>주문결제</th>
@@ -338,12 +358,12 @@ margin-top: 3%;
 		    <input type="radio"	id="order_ship" name="order" value="배송중">배송중
 		    <input type="radio"	id="order_shipcomple" name="order" value="배송완료">배송완료
 		    <input type="radio"	id="order_cancle" name="order" value="주문취소">주문취소
-		    <input type="radio"	id="order_return" name="order" value="주문반품">주문반품
+		    <input type="radio"	id="order_return" name="order" value="반품">주문반품
 		    
 		</form>
 	</div>
 	</div>
-	<table class="list"  cellspacing="0" cellpadding="0">
+	<table class="table table-bordered"  cellspacing="0" cellpadding="0">
 		<tbody>
 			<tr>
 				<th>번호</th>

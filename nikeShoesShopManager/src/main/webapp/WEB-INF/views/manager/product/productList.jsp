@@ -28,6 +28,19 @@
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		if(!$("#category_check").val()){
+			$("#category_check").val('전체');
+			$(".category_check").val('전체');
+		}
+		if($("#category_check").val()){
+			var check = $("#category_check").val();
+			
+		 	$('input:radio[name=category]:input[value=' + check + ']').attr("checked", true); 
+		}
+		
+		
+		
+		
 		if ("<c:out value='${data.keyword}' />" != "") {
 			$("#keyword").val("<c:out value='${data.keyword}' />");
 			$("#search").val("<c:out value='${data.search}' />");
@@ -131,7 +144,7 @@ clear: both;
 	<div style="margin-top: 3%; clear: both;">
 
 		<form id="searchForm" style="float: left;" >
-		<input type="hidden" name="category_check" id="category_check">
+		<input type="hidden" name="category_check" id="category_check" value="${data.category_check }">
 			<input type="hidden" name="page" id="page" value="${data.page }">
 			<input type="hidden" name="pageSize" id="pageSize"
 				value="${data.pageSize }"> <label for="keyword">검색어</label>
@@ -153,14 +166,15 @@ clear: both;
 			<input type="hidden" name="productNo" id="productNo"> <input
 				type="hidden" name="page" id="page" value="${data.page }"> <input
 				type="hidden" name="pageSize" value="${data.pageSize }">
+				<input type="hidden" name="category_check" class="category_check" value="${data.category_check}">
 
 		</form>
 	</div>
 	<div id="d_radio">
 			<form id="f_radio" name="f_radio">
 			<input type="radio" id="category_all" name="category" value="전체">전체 
-			<input type="radio" id="category_menAll" name="category" value="남성전체">전체M
-			 <input type="radio" id="category_womenAll" name="category" value="여성전체">전체W
+			<input type="radio" id="category_menAll" name="category" value="전체M">전체M
+			 <input type="radio" id="category_womenAll" name="category" value="전체W">전체W
 		    <input type="radio"	id="category_menRunning" name="category" value="런닝화M">런닝화M
 		    <input type="radio"	id="category_menLiftStyle" name="category" value="라이프스타일M">라이프스타일M
 		    <input type="radio"	id="category_menBasketBall" name="category" value="농구화M">농구화M

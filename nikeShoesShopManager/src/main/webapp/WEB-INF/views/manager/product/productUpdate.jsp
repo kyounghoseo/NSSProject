@@ -23,19 +23,18 @@
 <!-- 부트스트랩 -->
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		$("#productCategory").val('${updateData.productCategory }').attr("selected", true);
 		$("#productUpdateBtn").click(function() {
-
 			$("#f_productForm").attr("method", "POST");
 			$("#f_productForm").attr("action", "/manager/product/productUpdate.do");
 			$("#f_productForm").submit();
 		});
 
 		$("#productListBtn").click(function() {
-			location.href = "/manager/product/productList.do";
+			location.href = "/manager/product/productList.do?category_check=${data.category_check}&page=${data.page}&pageSize=${data.pageSize}";
 
 		});
-		$("#productCategory").val('${updateData.productCategory }').attr("selected", true);
+	
 		
 	});
 </script>
@@ -86,6 +85,10 @@ input[type="text"]{
 	<input type="hidden" name="productDetailImage1" id="productDetailImage1" value="${updateData.productDetailImage1 }" >
 	<input type="hidden" name="productDetailImage2" id="productDetailImage2" value="${updateData.productDetailImage2 }" >
 	<input type="hidden" name="productFile" id="productFile" value="${updateData.productFile }" >
+	<input type="hidden" name="page" id="page" value="${data.page }"> 
+	<input type="hidden" name="pageSize" value="${data.pageSize }">
+	<input type="hidden" name="category_check" value="${data.category_check}">
+	
 	
 		<table class="table table-bordered" style="height: 200px;" width="100%" border="1">
 
@@ -103,7 +106,7 @@ input[type="text"]{
 									<option value="축구화M">축구화M</option>
 									<option value="라이프스타일M">라이프스타일M</option>
 									<option value="런닝화W">런닝화W</option>
-									<option value="라이프스타일M">라이프스타일W</option>
+									<option value="라이프스타일W">라이프스타일W</option>
 							
 									
 							</select></td>

@@ -28,13 +28,13 @@
 		
 		$("#productUpdateBtn").click(function() {
 
-			$("#updateForm").attr("method", "POST");
+			$("#updateForm").attr("method", "GET");
 			$("#updateForm").attr("action", "/manager/product/updateForm.do");
 			$("#updateForm").submit();
 		});
 
 		$("#productListBtn").click(function() {
-			location.href = "/manager/product/productList.do?page=${data.page}&pageSize=${data.pageSize}";
+			location.href = "/manager/product/productList.do?category_check=${data.category_check}&page=${data.page}&pageSize=${data.pageSize}";
 
 		});
 
@@ -107,6 +107,11 @@ width: 15%;
 	<form name="updateForm" id="updateForm">
 			<input type="hidden" value="${detail.productNo }" id="productNo"
 				name="productNo">
+				<input
+				type="hidden" name="page" id="page" value="${data.page }"> <input
+				type="hidden" name="pageSize" value="${data.pageSize }">
+				<input type="hidden" name="category_check" value="${data.category_check}">
+
 
 		</form>
 	

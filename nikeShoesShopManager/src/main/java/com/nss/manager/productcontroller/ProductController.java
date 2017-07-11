@@ -113,7 +113,7 @@ public class ProductController {
 
 	}
 
-	@RequestMapping(value = "/updateForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateForm", method = RequestMethod.GET)
 	public String updateForm(@ModelAttribute ProductVO pvo, Model model) {
 		System.out.println("updateForm 드러오니");
 		System.out.println(pvo.getProductNo());
@@ -121,16 +121,16 @@ public class ProductController {
 		updateData = productService.productDetail(pvo);
 		System.out.println(updateData.getProductName());
 		model.addAttribute("updateData", updateData);
+		model.addAttribute("data",pvo);
 		return "manager/product/productUpdate";
 
 	}
 
 	@RequestMapping(value = "/productUpdate", method = RequestMethod.POST)
-	public String boardUpdate(@ModelAttribute ProductVO pvo, HttpServletRequest request)
+	public String boardUpdate(@ModelAttribute ProductVO pvo, HttpServletRequest request ,Model model)
 			throws IllegalStateException, IOException {
-
 		System.out.println("productUpdate 드러오니");
-
+		System.out.println("productCategory="+pvo.getProductCategory());
 		int result = 0;
 		String url = "";
 		System.out.println("파일" + pvo.getProductFile());
@@ -175,8 +175,9 @@ public class ProductController {
 		result = productService.productUpdate(pvo);
 		System.out.println(result);
 		if (result == 1) {
-
-			url = "/product/productDetail.do?productNo=" + pvo.getProductNo();
+			model.addAttribute("category_check",pvo.getCategory_check());
+			url = "/product/productDetail.do?productNo=" + pvo.getProductNo()+"&page="+pvo.getPage()
+			+"&pageSize="+pvo.getPageSize();
 
 		}
 		return "redirect:" + url;
