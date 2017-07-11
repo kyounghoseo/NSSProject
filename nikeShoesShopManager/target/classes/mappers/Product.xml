@@ -48,14 +48,64 @@
 		<![CDATA[
 		productName like '%'||#{keyword}||'%'
 		]]>
-			</if>
-			<if test="category_check != '전체'">
+		
+		<if test="category_check != '전체' ">
+			<if test="category_check != '전체M' ">
+			<if test="category_check != '전체W' ">
 				<if test="category_check != null">
+				
+				<![CDATA[
+				and	productCategory = #{category_check}
+				]]>
+				</if>
+				</if>
+				</if>
+			</if>
+			<if test="category_check == '전체M'">
+				<![CDATA[
+				and	productCategory IN('런닝화M','라이프스타일M','농구화M','축구화M')
+				]]>
+				</if>
+				
+			<if test="category_check == '전체W'">
+				<![CDATA[
+				and	productCategory IN('런닝화W','라이프스타일W')
+				]]>
+				</if>	
+			</if>
+			
+			
+
+			
+			
+			
+			
+			<if test="search != 'productName'">
+			<if test="category_check != '전체' ">
+			<if test="category_check != '전체M' ">
+			<if test="category_check != '전체W' ">
+				<if test="category_check != null">
+				
 				<![CDATA[
 					productCategory = #{category_check}
 				]]>
 				</if>
+				</if>
+				</if>
 			</if>
+			<if test="category_check == '전체M'">
+				<![CDATA[
+					productCategory IN('런닝화M','라이프스타일M','농구화M','축구화M')
+				]]>
+				</if>
+				
+			<if test="category_check == '전체W'">
+				<![CDATA[
+					productCategory IN('런닝화W','라이프스타일W')
+				]]>
+				</if>	
+				</if>
+			
 		</trim>
 		
 		order by productno desc
@@ -98,7 +148,29 @@
 		productName like '%'||#{keyword}||'%'
 		]]>
 			</if>
-
+<if test="category_check != '전체' ">
+			<if test="category_check != '전체M' ">
+			<if test="category_check != '전체W' ">
+				<if test="category_check != null">
+				
+				<![CDATA[
+					productCategory = #{category_check}
+				]]>
+				</if>
+				</if>
+				</if>
+			</if>
+			<if test="category_check == '전체M'">
+				<![CDATA[
+					productCategory IN('런닝화M','라이프스타일M','농구화M','축구화M')
+				]]>
+				</if>
+				
+			<if test="category_check == '전체W'">
+				<![CDATA[
+					productCategory IN('런닝화W','라이프스타일W')
+				]]>
+				</if>	
 		</trim>
 
 
