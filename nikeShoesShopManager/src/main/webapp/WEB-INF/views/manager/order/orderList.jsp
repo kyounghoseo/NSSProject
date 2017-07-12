@@ -354,7 +354,7 @@ td {
 					<input type="radio" id="order_ship" name="order" value="배송중">배송중
 					<input type="radio" id="order_shipcomple" name="order" value="배송완료">배송완료
 					<input type="radio" id="order_cancle" name="order" value="주문취소">주문취소
-					<input type="radio" id="order_return" name="order" value="반품">주문반품
+					<input type="radio" id="order_return" name="order" value="상품반품">상품반품
 
 				</form>
 			</div>
