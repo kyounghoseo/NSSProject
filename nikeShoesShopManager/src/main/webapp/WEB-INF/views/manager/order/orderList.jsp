@@ -291,6 +291,9 @@ td {
 	border-right: 1px solid #eeeeee;
 	vertical-align: middle !important;
 }
+.ui-dialog{
+width: 350px !important;
+}
 </style>
 
 </head>
@@ -457,13 +460,15 @@ td {
 			<input type="hidden" name="order_check" id="order_check"
 				value="${data.order_check }"> <input type="hidden"
 				name="page" id="page" value="${data.page }"> <input
-				type="hidden" name="pageSize" value="${data.pageSize }"> <label>택배회사</label>
+				type="hidden" name="pageSize" value="${data.pageSize }"> <label style="margin-left: -12%;">택배회사</label>
 			<select name="ship" id="ship">
 				<option>- 택배사선택 -</option>
 				<option value="우체국택배">우체국택배</option>
 
-			</select> <input type="text" id="orderShipno" name="orderShipno">
-			<div>
+			</select>
+			<br>
+			<label style="float: left; margin-left: 10%;">운송장번호</label> <input type="text" id="orderShipno" name="orderShipno">
+			<div style="margin-top: 3%;  margin-left: -4%;">
 				<input type="button" id="shipInsert" name="shipInsert" value="확인">
 				<input type="button" id="cancle" value="취소">
 			</div>

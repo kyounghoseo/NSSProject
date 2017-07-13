@@ -210,8 +210,6 @@ clear: both;
 
 
 
-
-
 						</tr>
 
 					</c:forEach>

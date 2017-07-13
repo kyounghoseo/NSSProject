@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<jsp:useBean id="toDay" class="java.util.Date" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,11 +113,11 @@ $(function() {
 	
 	$(document).on("click",".update_form", function() {
 		$(".reset_btn").click();
-		var conText = $(this).parents("li").children().eq(1).html();
+		var conText = $(this).parents("tr").children().eq(1).html();
 		console.log("context:"+conText);
-		$(this).parents("li").find("input[type='button']").hide();
-		$(this).parents("li").children().eq(0).html();
-		var conArea = $(this).parents("li").children().eq(1);
+		$(this).parents("tr").find("input[type='button']").hide();
+		$(this).parents("tr").children().eq(0).html();
+		var conArea = $(this).parents("tr").children().eq(1);
 		
 		conArea.html("");
 		var data= "<textarea name='content' id='content'>"+conText+"</textarea>";
@@ -130,7 +133,7 @@ $(function() {
 	
 	$(document).on("click",".update_btn", function() {
 		
-		var answerNO = $(this).parents("li").attr("data-num");
+		var answerNO = $(this).parents("tr").attr("data-num");
 		var answerContents = $("#content").val();
 		if(!chkSubmit($("#content"),"댓글 내용을"))
 			return;
@@ -165,10 +168,10 @@ $(function() {
 	
 	$(document).on("click",".delete_btn", function() {
 		
-		var answerNO = $(this).parents("li").attr("data-num");
+		var answerNO = $(this).parents("tr").attr("data-num");
 		console.log("answerNO:"+answerNO);
 		
-		if(confirm("선택하신 댓글을 삭제하시겠습니까?")){
+		if(confirm("선택하신 답변을 삭제하시겠습니까?")){
 			$.ajax({
 				type :'delete',
 				url :'/manager/answer/'+answerNO+".do",
@@ -222,25 +225,35 @@ function listAll(qnaNO) {
 }
 
 function addNewItem(answerNO,answerWriter,answerContents,answerDate) {
-	var new_li = $("<li>");
-	new_li.attr("data-num",answerNO);
-	new_li.addClass("comment_item");
-	
-	var writer_p = $("<p>");
-	writer_p.addClass("writer");
-	
-	var name_span = $("<span>");
-	name_span.addClass("name");
-	name_span.html("작성자  "+answerWriter+"님");
-	
-	var date_span = $("<span>");
-	date_span.html("<br>등록일  "+answerDate+" ");
+	var new_li = $("<tr>");
 	
 	
 	
-	var content_p =$("<p>");
-	content_p.addClass("con");
-	content_p.html(answerContents);
+	var new_td = $("<td>");
+	new_td.html("작성자");
+	
+	var new_td1 = $("<td>");
+	new_td1.html(answerWriter+"님");
+	
+	var new_tr2= $("<tr>");
+	
+	var new_td2 = $("<td>");
+	new_td2.html("등록일");
+	
+	var new_td3 = $("<td>");
+	new_td3.html(answerDate);
+	
+	
+	var new_tr = $("<tr>");
+	new_tr.attr("data-num",answerNO);
+	new_tr.addClass("comment_item");
+
+	var add_td = $("<td>");
+	add_td.html("답변내용");
+	
+	var add_td1 = $("<td>");
+	add_td1.html(answerContents);
+	
 	
 	var up_input=$("<input>");
 	up_input.attr({"type":"button","value":"수정"});
@@ -250,9 +263,10 @@ function addNewItem(answerNO,answerWriter,answerContents,answerDate) {
 	del_input.attr({"type":"button","value":"삭제"});
 	del_input.addClass("delete_btn");
 	
-	writer_p.append(name_span).append(date_span)
-	new_li.append(writer_p).append(content_p).append(up_input).append(del_input);
-	$("#comment_list").append(new_li);
+	new_tr.append(add_td).append(add_td1).append(up_input).append(del_input);
+	new_li.append(new_td).append(new_td1)
+	new_tr2.append(new_td2).append(new_td3)
+	$("#comment_list").append(new_li).append(new_tr2).append(new_tr);
 		
 }
 function dataReset() {
@@ -277,21 +291,22 @@ function dataReset() {
 						<tbody>
 									<tr>
 										<td class="ac">작성자</td>
-										<td colspan="3"><input type="text" name="answerWriter" id="answerWriter">
-										<input type="button" id="answerInsert" value="저장하기">
+										<td colspan="3"><input type="text" name="answerWriter" id="answerWriter" style="float: left;">
+										
 										</td>
 									</tr>
 									<tr>
 										<td class="ac">작성일</td>
-										<td>${answer.answerDate}</td>
+										<td><span style="float: left;"><fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd" /></span></td>
 									</tr>
 									<tr style="height: 100px;">
-										<td class="ac vm" >덧글 내용</td>
-										<td colspan="3"><textarea name="answerContents" id="answerContents"></textarea></td>
+										<td class="ac vm" >답변 내용</td>
+										<td colspan="3"><textarea  style="float: left; height: 150px !important;" name="answerContents" id="answerContents"></textarea></td>
 									</tr>
 						</tbody>
+						
 					</table>
-
+<input type="button" id="answerInsert" value="저장하기" style="margin-left: 38%;">
 
 </div>
 
@@ -299,7 +314,7 @@ function dataReset() {
 </form>
 
 </div>
-<ul id="comment_list"></ul>
+<table id="comment_list" class="table table-hover"></table>
 
 </div>
 
