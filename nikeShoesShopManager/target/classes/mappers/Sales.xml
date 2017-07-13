@@ -18,9 +18,9 @@
 			<if test="search=='productName'">
 		<![CDATA[orderPrname LIKE '%'||#{keyword}||'%']]>
 			</if>
-			<!-- <if test="customer_check=='일반회원'"> <![CDATA[CUSTOMERCHECK = '일반회원']]> 
-				</if> <if test="customer_check=='탈퇴회원'"> <![CDATA[CUSTOMERCHECK = '탈퇴회원']]> 
-				</if> -->
+			<if test="search=='orderStatus'">
+		<![CDATA[orderStatus LIKE '%'||#{keyword}||'%']]>
+			</if>
 		</trim>
 		<if test="s_startDate != null and s_startDate != ''">
 			<if test="s_endDate != null and s_endDate != ''">
@@ -53,6 +53,9 @@
 			<if test="search=='productName'">
 		<![CDATA[orderPrname LIKE '%'||#{keyword}||'%']]>
 			</if>
+			<if test="search=='orderStatus'">
+		<![CDATA[orderStatus LIKE '%'||#{keyword}||'%']]>
+			</if>
 		</trim>
 		order by orderNo desc)list
 		)
@@ -60,7 +63,8 @@
 			<if test="s_startDate != null and s_startDate != ''">
 				<if test="s_endDate != null and s_endDate != ''">
 					orderDate between to_date(#{s_startDate},
-					'YYYY-MM-DD') and
+					'YYYY-MM-DD')
+					and
 					to_date(#{s_endDate}, 'YYYY-MM-DD') + 1
 				</if>
 			</if>
@@ -76,6 +80,9 @@
 		<trim prefix="and">
 			<if test="search=='productName'">
 		<![CDATA[orderPrname LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test="search=='orderStatus'">
+		<![CDATA[orderStatus LIKE '%'||#{keyword}||'%']]>
 			</if>
 		</trim>
 		<if test="s_startDate != null and s_startDate != ''">
@@ -100,6 +107,9 @@
 		<trim prefix="and">
 			<if test="search=='productName'">
 		<![CDATA[orderPrname LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test="search=='orderStatus'">
+		<![CDATA[orderStatus LIKE '%'||#{keyword}||'%']]>
 			</if>
 		</trim>
 		<if test="s_startDate != null and s_startDate != ''">
@@ -134,7 +144,8 @@
 	<select id="chartMonth" parameterType="com.nss.manager.ordervo.OrderVO"
 		resultType="com.nss.manager.ordervo.OrderVO">
 		select to_char(orderDate, 'YYYY-MM') as chartDate,
-		sum(case when
+		sum(case
+		when
 		orderStatus ='배송완료' THEN orderprice else '0' end) as
 		chartSales,
 		sum(case when orderStatus in ('주문취소','주문반품') THEN
@@ -142,13 +153,16 @@
 		end) as chartRefund
 		from order_tb where
 		to_char(orderDate,
-		'YYYY-MM-DD') between
+		'YYYY-MM-DD')
+		between
 		TO_CHAR(ADD_MONTHS(sysdate, -3), 'YYYY-MM') ||
 		'-01'
-		and to_char(sysdate, 'YYYY-MM-DD')
+		and
+		to_char(sysdate, 'YYYY-MM-DD')
 		group by
 		to_char(orderDate,
-		'YYYY-MM') order by chartdate
+		'YYYY-MM')
+		order by chartdate
 	</select>
 
 </mapper>

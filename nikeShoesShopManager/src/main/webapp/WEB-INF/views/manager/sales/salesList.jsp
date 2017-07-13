@@ -452,6 +452,7 @@ th {
 				<select id="search" name="search">
 					<option value="all">전체</option>
 					<option value="productName">상품명</option>
+					<option value="orderStatus">주문상태</option>
 				</select> <input type="text" name="keyword" id="keyword"
 					placeholder="상품명을 입력하세요."> <input type="button" value="검색"
 					id="searchButton">
@@ -512,7 +513,7 @@ th {
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td colspan="6" class="tac">등록된 게시물이 존재하지 않습니다.</td>
+									<td colspan="6" class="tac">등록된 매출이 존재하지 않습니다.</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
