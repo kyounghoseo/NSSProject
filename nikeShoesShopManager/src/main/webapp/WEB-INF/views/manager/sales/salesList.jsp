@@ -255,7 +255,7 @@
 						Number($("#refund4").val()) ] ]);
 
 		var options = {
-			title : 'Nike Shoes Shop (최근 4일간 거래내역)',
+			title : 'Nike Shoes Shop (최근 4일간 일별 매출)',
 			curveType : 'function',
 			legend : {
 				position : 'bottom'
@@ -291,7 +291,7 @@
 						Number($("#monthRefund4").val()) ] ]);
 
 		var options = {
-			title : 'Nike Shoes Shop (월별 거래내역)',
+			title : 'Nike Shoes Shop (월별 매출)',
 			curveType : 'function',
 			legend : {
 				position : 'bottom'
