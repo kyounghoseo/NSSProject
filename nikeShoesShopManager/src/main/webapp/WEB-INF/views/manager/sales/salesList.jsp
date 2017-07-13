@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>매출 관리</title>
+<title>매출 관리.</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/include/css/common.css">
 <script type="text/javascript" src="../resources/include/js/common.js"></script>
