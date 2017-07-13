@@ -493,7 +493,7 @@ th {
 							<th>수량</th>
 							<th>총 판매금액</th>
 							<th>주문상태</th>
-							<th class="borcle">배송날짜</th>
+							<th class="borcle">주문날짜</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -506,7 +506,7 @@ th {
 										<td>${sales.orderCount}</td>
 										<td>${sales.orderPrice}</td>
 										<td>${sales.orderStatus}</td>
-										<td>${fn:substring(sales.orderShipdate,0,10)}</td>
+										<td>${fn:substring(sales.orderDate,0,10)}</td>
 									</tr>
 								</c:forEach>
 							</c:when>
