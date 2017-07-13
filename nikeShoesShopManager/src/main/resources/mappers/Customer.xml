@@ -19,6 +19,9 @@
 			<if test="search=='name'">
 		<![CDATA[customerName LIKE '%'||#{keyword}||'%']]>
 			</if>
+			<if test="search=='id'">
+		<![CDATA[customerId LIKE '%'||#{keyword}||'%']]>
+			</if>
 			<if test="customer_check=='일반회원'">
 		<![CDATA[CUSTOMERCHECK = '일반회원']]>
 			</if>
@@ -50,6 +53,9 @@
 		<trim prefix="where">
 			<if test="search=='name'">
 		<![CDATA[customerName LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test="search=='id'">
+		<![CDATA[customerId LIKE '%'||#{keyword}||'%']]>
 			</if>
 			<if test="customer_check=='일반회원'">
 		<![CDATA[CUSTOMERCHECK = '일반회원']]>

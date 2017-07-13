@@ -174,6 +174,7 @@ margin-bottom: 3%;
 				for="keyword">검색어</label> <select id="search" name="search">
 				<option value="all">전체</option>
 				<option value="name">이름</option>
+				<option value="id">아이디</option>
 			</select> <input type="text" name="keyword" id="keyword"
 				placeholder="이름을 입력하세요."> <input type="button" value="검색"
 				id="searchButton">
