@@ -135,6 +135,7 @@ session.setAttribute("id", id);
 				<label for="keyword">검색어</label> <select id="search" name="search">
 					<option value="all">전체</option>
 					<option value="title">제목</option>
+					<option value="content">내용</option>
 				</select> <input type="text" name="keyword" id="keyword"
 					placeholder="제목을 입력하세요."> <input type="button" value="검색"
 					id="searchButton">
