@@ -5,14 +5,19 @@
 <mapper namespace="com.nss.manager.noticedao.NoticeDao">
 
 	<select id="noticeList" parameterType="Notice" resultType="Notice">
-		select noticeNo, noticeDate, noticeTitle, noticeWriter from
+		select noticeNo, noticeDate, noticeTitle, noticeWriter, noticeContents
+		from
 		(select
-		list.*, rownum as rnum from(SELECT noticeNo, noticeDate, noticeTitle,
-		noticeWriter
+		list.*, rownum as rnum from(SELECT noticeNo, noticeDate,
+		noticeTitle,
+		noticeWriter, noticeContents
 		FROM notice_tb
 		<trim prefix="where">
 			<if test="search=='title'">
 		<![CDATA[noticeTitle LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test="search=='content'">
+		<![CDATA[noticeContents LIKE '%'||#{keyword}||'%']]>
 			</if>
 		</trim>
 		order by noticeNo desc)list
@@ -29,11 +34,14 @@
 	<select id="noticeListCnt" parameterType="Notice" resultType="int">
 		select nvl(count(1),0) FROM (select list.*, rownum as rnum from
 		(SELECT noticeNo, noticeDate, noticeTitle,
-		noticeWriter
+		noticeWriter, noticeContents
 		FROM notice_tb
 		<trim prefix="where">
 			<if test="search=='title'">
 		<![CDATA[noticeTitle LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test="search=='content'">
+		<![CDATA[noticeContents LIKE '%'||#{keyword}||'%']]>
 			</if>
 		</trim>
 		order by noticeNo desc)list
